@@ -58,6 +58,7 @@ class FieldValidationOutcome(str, Enum):
     UNSUPPORTED = "unsupported"
     CONFLICTING = "conflicting"
     NOT_FOUND = "not_found"
+    NOT_STATED = "not_stated"
     NEEDS_REVIEW = "needs_review"
 
 
@@ -131,6 +132,7 @@ class ValidationSummary(BaseModel):
     unsupported: int = Field(ge=0)
     conflicting: int = Field(ge=0)
     not_found: int = Field(ge=0)
+    not_stated: int = Field(default=0, ge=0)
     needs_review: int = Field(ge=0)
     high_confidence: int = Field(ge=0)
     medium_confidence: int = Field(ge=0)

@@ -59,6 +59,26 @@ def test_critical_conflict_routes_even_with_high_confidence_and_optional_missing
     assert items[0]["severity"] == "critical"
 
 
+def test_not_stated_creates_a_review_item_only_for_critical_fields():
+    state = _review_state()
+    state["validation_findings"] = [
+        {
+            "field_name": name,
+            "extracted_value": "Not specified in the bid documents",
+            "validation_status": "not_stated",
+            "confidence_score": None,
+            "supporting_citations": [],
+            "contradicting_citations": [],
+            "validation_reasons": ["no statement found"],
+        }
+        for name in ("Due Date", "Bid Bond Requirement")
+    ]
+    items = review_candidates(state, confidence_threshold=0.55, critical_fields={"Due Date"})
+    assert [item["field_name"] for item in items] == ["Due Date"]
+    assert items[0]["category"] == "incomplete_profile"
+    assert items[0]["severity"] == "critical"
+
+
 def test_invalid_agent_citation_is_always_reviewed():
     state = _review_state()
     state["validation_findings"] = []

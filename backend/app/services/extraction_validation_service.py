@@ -23,7 +23,7 @@ from app.db.models.document import Document
 from app.db.models.extraction import ExtractedField, ExtractionRun
 from app.db.models.validation import FieldValidationRecord, ValidationRun
 from app.schemas.citation import Citation
-from app.schemas.extraction import ASSIGNMENT_FIELD_NAMES
+from app.schemas.extraction import ASSIGNMENT_FIELD_NAMES, FieldValidationStatus
 from app.schemas.validation import (
     AddendumCheckStatus,
     ConfidenceCategory,
@@ -117,6 +117,8 @@ class StoredField:
     field_name: str
     value: Any
     citations: list[dict[str, Any]]
+    extraction_status: str | None = None
+    notes: str | None = None
 
 
 @dataclass(frozen=True)
@@ -195,7 +197,13 @@ class SqlValidationStore:
             run_id=run.id,
             bid_id=run.bid_id,
             fields=tuple(
-                StoredField(row.field_name, row.value, list(row.citations or []))
+                StoredField(
+                    row.field_name,
+                    row.value,
+                    list(row.citations or []),
+                    row.validation_status,
+                    row.notes,
+                )
                 for row in rows
             ),
         )
@@ -483,6 +491,13 @@ class ExtractionValidationService:
                 validation_run_id,
                 "Extracted value is null; no factual claim was available to validate.",
             )
+        if stored.extraction_status == FieldValidationStatus.NOT_STATED.value:
+            examined = [
+                citation
+                for citation in parse_citations(stored.citations)
+                if citation_matches(citation, authoritative.get(citation.chunk_id), snapshot.bid_id)
+            ]
+            return _not_stated_record(stored, examined, snapshot.run_id, validation_run_id)
         claimed = parse_citations(stored.citations)
         malformed = len(stored.citations) - len(claimed)
         valid = [
@@ -590,6 +605,7 @@ class ExtractionValidationService:
                     FieldValidationOutcome.CONFLICTING: 0.0,
                     FieldValidationOutcome.UNSUPPORTED: 0.0,
                     FieldValidationOutcome.NOT_FOUND: 0.0,
+                    FieldValidationOutcome.NOT_STATED: 0.0,
                 }[verdict.status]
                 score = _score(
                     integrity, verdict.directness, verdict.completeness, agreement
@@ -835,6 +851,33 @@ def _missing_record(
     )
 
 
+def _not_stated_record(
+    stored: StoredField,
+    examined: list[Citation],
+    extraction_run_id: UUID,
+    validation_run_id: UUID,
+) -> ValidatedField:
+    return ValidatedField(
+        field_name=stored.field_name,
+        extracted_value=stored.value,
+        validation_status=FieldValidationOutcome.NOT_STATED,
+        confidence_score=None,
+        confidence_category=ConfidenceCategory.UNAVAILABLE,
+        supporting_citations=examined,
+        validation_reasons=[
+            stored.notes
+            or "A keyword search of the bid documents found no statement of this field."
+        ],
+        recommended_action=(
+            "No action: the bid documents do not state this field. "
+            "Ask the issuer if the field matters for the response."
+        ),
+        extraction_run_id=extraction_run_id,
+        validation_run_id=validation_run_id,
+        deterministic_checks={"not_stated": True, "examined_citations": len(examined)},
+    )
+
+
 def _action(outcome: FieldValidationOutcome) -> str:
     if outcome == FieldValidationOutcome.VALIDATED:
         return "Eligible for routine downstream use, subject to the documented heuristic limits."
@@ -876,6 +919,7 @@ def _summary(fields: dict[str, ValidatedField]) -> ValidationSummary:
         unsupported=status_counts[FieldValidationOutcome.UNSUPPORTED],
         conflicting=status_counts[FieldValidationOutcome.CONFLICTING],
         not_found=status_counts[FieldValidationOutcome.NOT_FOUND],
+        not_stated=status_counts[FieldValidationOutcome.NOT_STATED],
         needs_review=status_counts[FieldValidationOutcome.NEEDS_REVIEW],
         high_confidence=category_counts[ConfidenceCategory.HIGH],
         medium_confidence=category_counts[ConfidenceCategory.MEDIUM],

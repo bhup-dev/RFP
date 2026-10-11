@@ -16,6 +16,7 @@ class ProfileFieldStatus(str, Enum):
     UNSUPPORTED = "unsupported"
     CONFLICTING = "conflicting"
     NOT_FOUND = "not_found"
+    NOT_STATED = "not_stated"
     NEEDS_REVIEW = "needs_review"
     UNVALIDATED = "unvalidated"
 

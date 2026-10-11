@@ -484,7 +484,13 @@ Task 3.1 extracts the assignment's 20 fields from an ingested bid through:
 3. one structured call per group through the existing `LLMService`, run concurrently, asking only for that group's fields; a group with no evidence gets `missing` fields without a model call
 4. per-field Pydantic validation; if a group's claims break the field contract, that group is retried once with the errors listed, and any claim that still breaks it is stored as `unsupported` with the reason, without failing the other 19 fields
 5. authoritative PostgreSQL resolution of every claimed chunk id, accepted only if the chunk was supplied to that field's group
-6. an append-only `extraction_runs` record and 20 `extracted_fields` records
+6. a gap check for every field still without a value. A case-insensitive regular expression from `FIELD_ABSENCE_TERMS` runs over the text of every chunk of the bid's eligible documents.
+   - No match: the field becomes `not_stated` with the value "Not specified in the bid documents", and no model call is made.
+   - Matches: at most `MAX_GAP_CHUNKS` (15) matching chunks go to one model call for that field. The model returns a cited value, or `not_stated` citing the passages it examined.
+   - An invalid answer is retried once; if it is still invalid, the field keeps its earlier result.
+7. an append-only `extraction_runs` record and 20 `extracted_fields` records
+
+Validation passes `not_stated` through as its own outcome without a semantic check. It is counted in `summary.not_stated`, and it creates a review item only for critical fields.
 
 A response that is not JSON, or that omits one of the group's field names, is still a malformed response and fails the run.
 
@@ -496,7 +502,7 @@ Apply migrations before calling the endpoint. Revision `5f33c9a2d410` adds JSONB
 alembic upgrade head
 ```
 
-All fields are returned under their exact assignment names. Missing evidence is represented by a null value and `missing`; conflicts retain separately traceable citations. Repeating the request creates a new historical run and does not overwrite earlier results.
+All fields are returned under their exact assignment names. Missing evidence is represented by a null value and `missing`. A field that the gap check confirmed the documents do not state has the value "Not specified in the bid documents" and the status `not_stated`. Conflicts retain separately traceable citations. Repeating the request creates a new historical run and does not overwrite earlier results.
 
 ```bash
 curl -s -X POST \

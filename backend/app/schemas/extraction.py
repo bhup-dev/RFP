@@ -40,15 +40,24 @@ class FieldValidationStatus(str, Enum):
     CONFLICTING = "conflicting"
     MISSING = "missing"
     AMBIGUOUS = "ambiguous"
+    NOT_STATED = "not_stated"
+
+
+NOT_STATED_ANSWER = "Not specified in the bid documents"
 
 
 class LLMFieldStatus(str, Enum):
-    """Statuses accepted from the bounded structured extraction prompt."""
+    """Statuses accepted from the bounded structured extraction prompt.
+
+    not_found means the supplied evidence did not answer the field; not_stated is only produced by the
+    gap check after the documents' text was searched for the field and judged not to state it.
+    """
 
     EXTRACTED = "extracted"
     NOT_FOUND = "not_found"
     AMBIGUOUS = "ambiguous"
     CONFLICTING = "conflicting"
+    NOT_STATED = "not_stated"
 
 
 class ExtractionRunStatus(str, Enum):
@@ -124,6 +133,9 @@ class LLMExtractedField(BaseModel):
                 raise ValueError("not_found fields must have a null value")
             if self.chunk_ids:
                 raise ValueError("not_found fields must not cite chunks")
+        elif self.status == LLMFieldStatus.NOT_STATED:
+            if self.value is not None:
+                raise ValueError("not_stated fields must have a null value")
         elif self.status == LLMFieldStatus.EXTRACTED:
             if self.value is None:
                 raise ValueError("extracted fields must have a non-null value")

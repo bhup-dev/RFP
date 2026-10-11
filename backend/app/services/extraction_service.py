@@ -12,7 +12,7 @@ from typing import Any, Protocol
 from uuid import UUID
 
 from pydantic import ValidationError
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.context import bind_operation_id, reset_operation_id
@@ -25,6 +25,7 @@ from app.db.models.extraction import ExtractionRun
 from app.schemas.citation import Citation
 from app.schemas.extraction import (
     ASSIGNMENT_FIELD_NAMES,
+    NOT_STATED_ANSWER,
     BidExtraction,
     ExtractedField,
     ExtractionResponse,
@@ -82,6 +83,7 @@ FIELD_GROUPS: tuple[FieldGroup, ...] = (
         ("Delivery Date", "Installation"),
         (
             "delivery deadline or delivery timeframe after award",
+            "question and answer about when the devices need to be delivered",
             "installation, deployment, configuration, imaging or white glove services",
         ),
     ),
@@ -91,6 +93,7 @@ FIELD_GROUPS: tuple[FieldGroup, ...] = (
         (
             "required forms, affidavits, certifications and documents to submit with the response",
             "manufacturer registration, authorized reseller or manufacturer certification requirement",
+            "manufacturer or authorized reseller qualifications and letter of authorization",
         ),
     ),
     FieldGroup(
@@ -112,6 +115,32 @@ FIELD_GROUPS: tuple[FieldGroup, ...] = (
     ),
 )
 
+# PostgreSQL case-insensitive regular expressions (\y is a word boundary) run over every chunk of the bid
+# when a field is still missing after grouped extraction.
+FIELD_ABSENCE_TERMS: dict[str, str] = {
+    "Bid Number": r"solicitation\s*(no|number|#)|bid\s*(no|number|#)|rfp\s*(no|number|#)|\yporfp\y|sourcing\s*#",
+    "Title": r"request for proposals?|invitation (for|to) bid|request for quot|\ytitle\y",
+    "Due Date": r"due date|closing date|deadline|proposals? (are |is )?due|responses? (are |is )?due",
+    "Bid Submission Type": r"submit(ted)? (via|through|electronically|online|to)|submission (method|instructions)|\ysealed\y|\yportal\y",
+    "Term of Bid": r"term of (the |this )?(contract|agreement|proposal)|renewal|extension|valid for",
+    "Pre Bid Meeting": r"pre-?bid|pre-?proposal|pre-?submission|conference|site visit|walk-?through",
+    "Installation": r"\yinstall|\ydeploy|\yimaging\y|white glove|set-?up services|asset tag",
+    "Bid Bond Requirement": r"bid bond|bid security|bid guarantee|proposal guarantee|\ysurety\y|performance bond|payment bond",
+    "Delivery Date": r"deliver(y|ed)? (by|within|date|schedule|time|no later)|delivered by|days (after|of) (award|receipt|order)",
+    "Payment Terms": r"payment terms?|\ynet ?\d+\y|net thirty|prompt payment|paid within|payment (will|shall) be",
+    "Additional Documentation Required": r"affidavit|certificat|\yform\y|must (submit|provide|include)|attach(ed|ment)",
+    "MFG for Registration": r"authori[sz]ed (reseller|dealer|distributor|partner)|letter of authori[sz]ation|manufacturer.{0,40}(authori|certif|regist|qualif)|\yoem\y",
+    "Contract or Cooperative to use": r"cooperative|interlocal|master contract|purchasing alliance|contract\s*(no|number|#)",
+    "Model_no": r"model\s*(no|number|#)|\ymodel\y",
+    "Part_no": r"part\s*(no|number|#)|\ysku\y|mfr\.? part",
+    "Product": r"\yproduct|\yitem|quantity|\yqty\y",
+    "contact_info": r"contact|\ybuyer\y|procurement officer|e-?mail|phone",
+    "company_name": r"district|agency|department|\yoffice\y|county|state of|city of",
+    "Bid Summary": r"\yscope\y|purpose|background|overview|seeking",
+    "Product Specification": r"specification|minimum|processor|memory|display|warranty",
+}
+MAX_GAP_CHUNKS = 15
+
 SYSTEM_PROMPT = UNTRUSTED_DOCUMENT_POLICY + """You extract structured procurement data only from supplied evidence.
 Return one JSON object with exactly the requested field names and no other keys.
 Each field value must be an object with exactly: value, confidence, chunk_ids, notes, status.
@@ -130,10 +159,17 @@ Rules:
 - Payment Terms are when and how the buyer pays the vendor (for example net 30 or payment after
   acceptance). Invoicing instructions alone and prime-to-subcontractor payment obligations are not
   payment terms.
+- Bid Bond Requirement is a specific bond, bid security, or guarantee the bidder must provide. A
+  generic clause to comply with any bond requirements "noted elsewhere" is not a requirement by itself.
 - Distinguish delivery, installation, deployment, and configuration.
+- Installation is installation, deployment, imaging, or configuration the buyer requires. Factory
+  installation listed only in a vendor quote, without a buyer requirement, is ambiguous.
 - Delivery Date is when goods must be delivered, either a date or a period such as "within 45 days of award".
   Never reuse the proposal due date as the delivery date. When a line-item table date and a delivery
   clause both give delivery timing, report both with their citations and use status ambiguous.
+  A buyer's answer in an addendum about when delivery is needed counts as the delivery timing.
+- MFG for Registration is any requirement that the bidder be the manufacturer or an authorized reseller,
+  hold manufacturer authorization or a letter of authorization, or that warranties come from the OEM.
 - Distinguish mandatory documents from optional or informational attachments.
 - Additional Documentation Required lists every form, affidavit, certificate, or document the bidder
   must submit or provide, including items due at award, each as a separate entry.
@@ -227,6 +263,16 @@ class ExtractionStore(Protocol):
     ) -> None: ...
 
     async def fail_run(self, run_id: UUID, detail: str, completed_at: datetime) -> None: ...
+
+    async def search_chunk_text(
+        self,
+        bid_id: UUID,
+        document_ids: tuple[UUID, ...],
+        pattern: str,
+        limit: int,
+    ) -> tuple[list[RetrievedChunk], int]:
+        """Return up to ``limit`` chunks whose text matches ``pattern`` and the number of chunks searched."""
+        ...
 
 
 class SqlExtractionStore:
@@ -353,6 +399,44 @@ class SqlExtractionStore:
         run.error_message = detail[:2000]
         await self._session.commit()
 
+    async def search_chunk_text(
+        self,
+        bid_id: UUID,
+        document_ids: tuple[UUID, ...],
+        pattern: str,
+        limit: int,
+    ) -> tuple[list[RetrievedChunk], int]:
+        scope = (Document.bid_id == bid_id, Document.id.in_(document_ids))
+        searched = await self._session.scalar(
+            select(func.count(DocumentChunk.id))
+            .join(Document, Document.id == DocumentChunk.document_id)
+            .where(*scope)
+        )
+        rows = (
+            await self._session.execute(
+                select(DocumentChunk, Document)
+                .join(Document, Document.id == DocumentChunk.document_id)
+                .where(*scope, DocumentChunk.text.op("~*")(pattern))
+                .order_by(Document.created_at, Document.id, DocumentChunk.chunk_index)
+                .limit(limit)
+            )
+        ).all()
+        matches = [
+            RetrievedChunk(
+                bid_id=document.bid_id,
+                document_id=document.id,
+                chunk_id=chunk.id,
+                file_name=document.file_name,
+                text=chunk.text,
+                page_number=chunk.page_number,
+                section_title=chunk.section_title,
+                chunk_type=chunk.chunk_type,
+            )
+            for chunk, document in rows
+            if chunk.text
+        ]
+        return matches, int(searched or 0)
+
 
 class ExtractionService:
     """Retrieve field-group evidence, validate model claims, and persist a run."""
@@ -404,6 +488,7 @@ class ExtractionService:
                 if not evidence
                 else await self._extract_fields(context, evidence_by_group)
             )
+            fields = await self._fill_gaps(context, fields)
             status = (
                 ExtractionRunStatus.PARTIAL
                 if _contains_unsupported(fields)
@@ -516,9 +601,9 @@ class ExtractionService:
                 rejected[name] = sorted({error["msg"] for error in exc.errors()})[:3]
         if rejected:
             logger.warning(
-                "Extraction rejected invalid field claims bid_id=%s fields=%s",
+                "Extraction rejected invalid field claims bid_id=%s problems=%s",
                 context.id,
-                sorted(rejected),
+                rejected,
             )
 
         requested_ids = {
@@ -592,6 +677,132 @@ class ExtractionService:
             )
         return {name: body[name] for name in group.fields}
 
+    async def _fill_gaps(self, context: EligibleBid, fields: BidExtraction) -> BidExtraction:
+        """Re-check each field left without a value against every chunk matching the field's terms.
+
+        No matching text means the documents do not state the field. Matching text goes to one
+        model call for that field, which either extracts a cited value or judges the passages to
+        not state it. An invalid answer leaves the field as it was.
+        """
+        current = fields.model_dump(by_alias=True)
+        missing = [
+            name
+            for name in ASSIGNMENT_FIELD_NAMES
+            if current[name]["value"] is None
+            and current[name]["validation_status"]
+            in {FieldValidationStatus.MISSING, FieldValidationStatus.UNSUPPORTED}
+            and name in FIELD_ABSENCE_TERMS
+        ]
+        if not missing:
+            return fields
+        searches = {}
+        for name in missing:
+            searches[name] = await self._store.search_chunk_text(
+                context.id, context.document_ids, FIELD_ABSENCE_TERMS[name], MAX_GAP_CHUNKS
+            )
+        checked = [name for name in missing if searches[name][1] > 0]
+        to_ask = [name for name in checked if searches[name][0]]
+        answers = await asyncio.gather(
+            *[self._check_gap(context, name, searches[name][0]) for name in to_ask]
+        )
+        updates: dict[str, ExtractedField] = {}
+        for name in checked:
+            if not searches[name][0]:
+                updates[name] = ExtractedField(
+                    value=NOT_STATED_ANSWER,
+                    confidence=None,
+                    citations=[],
+                    notes=(
+                        f"No passage in the {searches[name][1]} chunks of the bid documents "
+                        f"matches this field's search terms ({FIELD_ABSENCE_TERMS[name]})."
+                    ),
+                    validation_status=FieldValidationStatus.NOT_STATED,
+                )
+        for name, answer in zip(to_ask, answers, strict=True):
+            if answer is not None:
+                updates[name] = answer
+        if updates:
+            logger.info(
+                "Extraction gap check bid_id=%s checked=%s not_stated=%s recovered=%s",
+                context.id,
+                len(checked),
+                sum(item.validation_status == FieldValidationStatus.NOT_STATED for item in updates.values()),
+                sum(item.validation_status != FieldValidationStatus.NOT_STATED for item in updates.values()),
+            )
+        current.update(updates)
+        return BidExtraction.model_validate(current)
+
+    async def _check_gap(
+        self, context: EligibleBid, name: str, matches: list[RetrievedChunk]
+    ) -> ExtractedField | None:
+        prompt = (
+            _build_prompt(matches, (name,))
+            + "\nThe earlier extraction did not find this field. These are passages from the bid "
+            "documents whose text matches the field's search terms. If they state the field, extract "
+            "it with status extracted, ambiguous, or conflicting. If they only mention the terms "
+            "generically, in another context, or by reference to a requirement that is not given, "
+            "return status not_stated with value null, cite the chunk_ids you examined, and explain "
+            "briefly in notes.\nAnswer with exactly this shape: "
+            + json.dumps(
+                {
+                    name: {
+                        "value": "... or null",
+                        "confidence": 0.9,
+                        "chunk_ids": ["chunk_id"],
+                        "notes": "...",
+                        "status": "extracted | ambiguous | conflicting | not_stated",
+                    }
+                },
+                ensure_ascii=False,
+            )
+        )
+        claim, problems = await self._request_gap_claim(prompt, name)
+        if claim is None:
+            claim, problems = await self._request_gap_claim(
+                prompt
+                + "\nYour previous answer broke the output contract: "
+                + json.dumps(problems, ensure_ascii=False)
+                + "\nReturn the JSON object again with the field corrected.",
+                name,
+            )
+        if claim is None:
+            logger.warning(
+                "Extraction gap check returned an invalid claim field=%s problems=%s", name, problems
+            )
+            return None
+        if claim.status == LLMFieldStatus.NOT_FOUND:
+            claim = claim.model_copy(update={"status": LLMFieldStatus.NOT_STATED})
+        evidence_ids = {item.chunk_id for item in matches}
+        authoritative = await self._store.resolve_citations(
+            context.id,
+            context.document_ids,
+            {chunk_id for chunk_id in claim.chunk_ids if chunk_id in evidence_ids},
+        )
+        return _normalize_claim(claim, evidence_ids=evidence_ids, authoritative=authoritative)
+
+    async def _request_gap_claim(
+        self, prompt: str, name: str
+    ) -> tuple[LLMExtractedField | None, list[str]]:
+        raw = await self._llm.generate_response(
+            prompt,
+            system=SYSTEM_PROMPT,
+            temperature=0.0,
+            max_output_tokens=self._max_output_tokens,
+        )
+        try:
+            body = json.loads(_strip_json_fence(raw))
+        except ValueError:
+            return None, ["the response was not valid JSON"]
+        if not isinstance(body, dict) or name not in body:
+            return None, [f"the response must be an object with the key {name!r}"]
+        claim = body[name]
+        if isinstance(claim, dict) and claim.get("status") == LLMFieldStatus.NOT_FOUND.value:
+            claim = {**claim, "status": LLMFieldStatus.NOT_STATED.value}
+        errors = _contract_errors({name: claim})
+        if errors:
+            return None, errors[name]
+        return LLMExtractedField.model_validate(claim), []
+
 
 def _contract_errors(claims: dict[str, Any]) -> dict[str, list[str]]:
     errors: dict[str, list[str]] = {}
@@ -658,6 +869,18 @@ def _normalize_claim(
             citations=[],
             notes=claim.notes,
             validation_status=FieldValidationStatus.MISSING,
+        )
+    if claim.status == LLMFieldStatus.NOT_STATED:
+        return ExtractedField(
+            value=NOT_STATED_ANSWER,
+            confidence=claim.confidence,
+            citations=[
+                authoritative[chunk_id]
+                for chunk_id in claim.chunk_ids
+                if chunk_id in evidence_ids and chunk_id in authoritative
+            ],
+            notes=claim.notes,
+            validation_status=FieldValidationStatus.NOT_STATED,
         )
 
     invalid = [

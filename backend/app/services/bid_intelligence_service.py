@@ -539,6 +539,7 @@ def _profile_status(
             ProfileFieldStatus.UNSUPPORTED,
             ProfileFieldStatus.CONFLICTING,
             ProfileFieldStatus.NOT_FOUND,
+            ProfileFieldStatus.NOT_STATED,
             ProfileFieldStatus.NEEDS_REVIEW,
             ProfileFieldStatus.UNVALIDATED,
         }

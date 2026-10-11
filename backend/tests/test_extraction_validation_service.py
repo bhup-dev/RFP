@@ -109,6 +109,34 @@ def test_all_twenty_fields_and_exact_identifier_are_validated() -> None:
     assert report.warnings
 
 
+def test_not_stated_field_is_a_verified_answer_without_review_or_model_call() -> None:
+    bid_id, run_id, citation, snapshot = _fixture()
+    fields = list(snapshot.fields)
+    index = ASSIGNMENT_FIELD_NAMES.index("Bid Bond Requirement")
+    fields[index] = StoredField(
+        "Bid Bond Requirement",
+        "Not specified in the bid documents",
+        [citation.model_dump(mode="json")],
+        "not_stated",
+        "Only a generic reference to bond requirements noted elsewhere.",
+    )
+    llm = LLM(AssertionError("semantic check must not run for not_stated"))
+    report = asyncio.run(
+        _service(
+            Store(ExtractionSnapshot(run_id, bid_id, tuple(fields)), [citation]),
+            llm,
+            semantic_enabled=True,
+        ).validate(bid_id, run_id)
+    )
+    field = report.fields["Bid Bond Requirement"]
+    assert field.validation_status == FieldValidationOutcome.NOT_STATED
+    assert [item.chunk_id for item in field.supporting_citations] == [citation.chunk_id]
+    assert field.validation_reasons == ["Only a generic reference to bond requirements noted elsewhere."]
+    assert report.summary.not_stated == 1
+    assert "Bid Bond Requirement" not in report.summary.fields_recommended_for_review
+    assert not any("Bid Bond Requirement" in prompt for prompt, _ in llm.calls)
+
+
 def test_invalid_cross_document_citation_never_receives_high_confidence() -> None:
     bid_id, run_id, citation, snapshot = _fixture()
     bad = citation.model_copy(update={"document_id": uuid4()})

@@ -547,16 +547,32 @@ class AddendumAnalysisService:
             },
             ensure_ascii=False,
         )
+        raw = await self._llm.generate_response(
+            prompt,
+            system=DISCOVERY_SYSTEM_PROMPT,
+            temperature=0.0,
+            max_output_tokens=self._max_output_tokens,
+        )
         try:
-            raw = await self._llm.generate_response(
-                prompt,
-                system=DISCOVERY_SYSTEM_PROMPT,
-                temperature=0.0,
-                max_output_tokens=self._max_output_tokens,
-            )
-            return LLMAddendumTopics.model_validate_json(
-                _strip_json_fence(raw)
-            ).topics
+            return LLMAddendumTopics.model_validate_json(_strip_json_fence(raw)).topics
+        except ValidationError as exc:
+            problems = sorted(
+                {f"{'.'.join(map(str, error['loc']))}: {error['msg']}" for error in exc.errors()}
+            )[:5]
+        except ValueError:
+            problems = ["the response was not valid JSON"]
+        logger.warning("Addendum topic discovery retried problems=%s", problems)
+        raw = await self._llm.generate_response(
+            prompt
+            + "\nYour previous answer broke the output contract: "
+            + json.dumps(problems, ensure_ascii=False)
+            + "\nReturn the complete JSON object again within the stated limits.",
+            system=DISCOVERY_SYSTEM_PROMPT,
+            temperature=0.0,
+            max_output_tokens=self._max_output_tokens,
+        )
+        try:
+            return LLMAddendumTopics.model_validate_json(_strip_json_fence(raw)).topics
         except (ValidationError, ValueError) as exc:
             raise InvalidAddendumResponse(
                 "LLM returned malformed addendum topic data"

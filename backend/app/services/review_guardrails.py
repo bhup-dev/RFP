@@ -19,7 +19,7 @@ def review_candidates(
         name = str(field["field_name"])
         status = str(field["validation_status"])
         confidence = field.get("confidence_score")
-        if status == "not_found" and name not in critical_fields:
+        if status in {"not_found", "not_stated"} and name not in critical_fields:
             continue
         category = _field_category(name, status)
         low_confidence = (
@@ -33,6 +33,7 @@ def review_candidates(
                 "conflicting",
                 "needs_review",
                 "not_found",
+                "not_stated",
             }
             and not low_confidence
         ):
@@ -167,7 +168,7 @@ def _field_category(name: str, status: str) -> ReviewCategory:
         )
     if name in {"Product", "Model_no", "Part_no", "Product Specification"}:
         return ReviewCategory.UNCERTAIN_PRODUCT_SPECIFICATION
-    if status == "not_found":
+    if status in {"not_found", "not_stated"}:
         return ReviewCategory.INCOMPLETE_PROFILE
     return ReviewCategory.OTHER
 
@@ -175,7 +176,12 @@ def _field_category(name: str, status: str) -> ReviewCategory:
 def _severity(
     name: str, status: str, critical_fields: set[str]
 ) -> ReviewSeverity:
-    if name in critical_fields and status in {"conflicting", "unsupported", "not_found"}:
+    if name in critical_fields and status in {
+        "conflicting",
+        "unsupported",
+        "not_found",
+        "not_stated",
+    }:
         return ReviewSeverity.CRITICAL
     if status in {"conflicting", "unsupported"}:
         return ReviewSeverity.HIGH

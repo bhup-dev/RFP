@@ -10,11 +10,13 @@ import pytest
 from app.schemas.citation import Citation
 from app.schemas.extraction import (
     ASSIGNMENT_FIELD_NAMES,
+    NOT_STATED_ANSWER,
     ExtractionRunStatus,
     FieldValidationStatus,
 )
 from app.schemas.retrieval import RetrievalResponse, RetrievedChunk
 from app.services.extraction_service import (
+    FIELD_ABSENCE_TERMS,
     FIELD_GROUPS,
     BidNotFound,
     BidNotReady,
@@ -27,12 +29,27 @@ from app.services.extraction_service import (
 
 
 class Store:
-    def __init__(self, context: EligibleBid | None, citations: list[Citation] = ()) -> None:
+    def __init__(
+        self,
+        context: EligibleBid | None,
+        citations: list[Citation] = (),
+        *,
+        searched_chunks: int = 0,
+        text_hits: dict[str, list[RetrievedChunk]] | None = None,
+    ) -> None:
         self.context = context
         self.citations = {item.chunk_id: item for item in citations}
+        self.searched_chunks = searched_chunks
+        self.text_hits = text_hits or {}
+        self.text_searches = []
         self.started: list[RunHandle] = []
         self.completed = []
         self.failed = []
+
+    async def search_chunk_text(self, _bid_id, _document_ids, pattern, limit):
+        self.text_searches.append(pattern)
+        field = next(name for name, terms in FIELD_ABSENCE_TERMS.items() if terms == pattern)
+        return self.text_hits.get(field, [])[:limit], self.searched_chunks
 
     async def load_eligible_bid(self, _bid_id):
         return self.context
@@ -426,3 +443,195 @@ def test_no_retrieved_evidence_persists_twenty_missing_fields_without_llm() -> N
     assert all(item["value"] is None for item in fields.values())
     assert all(item["validation_status"] == "missing" for item in fields.values())
     assert llm.calls == []
+
+
+class GapLLM(LLM):
+    """Answers grouped prompts with all fields not found and gap prompts with ``gap_claim``."""
+
+    def __init__(self, gap_claim: dict) -> None:
+        super().__init__("")
+        self.gap_claim = gap_claim
+
+    async def generate_response(self, prompt, **kwargs):
+        self.calls.append((prompt, kwargs))
+        if "earlier extraction did not find" in prompt:
+            return json.dumps({"MFG for Registration": self.gap_claim})
+        return _payload()
+
+
+def _gap_prompts(llm: LLM) -> list[str]:
+    return [prompt for prompt, _ in llm.calls if "earlier extraction did not find" in prompt]
+
+
+def test_gap_check_without_matching_text_answers_not_stated_without_model_call() -> None:
+    context, result, citation = _fixture()
+    store = Store(context, [citation], searched_chunks=42)
+    llm = GapLLM(_claim())
+
+    output = asyncio.run(_service(store, Retriever([result]), llm).extract(context.id))
+
+    assert _gap_prompts(llm) == []
+    assert len(store.text_searches) == 20
+    field = output.fields.bid_bond_requirement
+    assert field.value == NOT_STATED_ANSWER
+    assert field.validation_status == FieldValidationStatus.NOT_STATED
+    assert field.citations == []
+    assert "42 chunks" in field.notes
+    assert output.status == ExtractionRunStatus.COMPLETED
+
+
+def test_gap_check_recovers_a_stated_value_from_matching_text() -> None:
+    context, result, citation = _fixture()
+    hit = result.model_copy(
+        update={"chunk_id": uuid4(), "text": "The Master Contractor must be an authorized reseller for Dell."}
+    )
+    hit_citation = citation.model_copy(update={"chunk_id": hit.chunk_id, "excerpt": hit.text})
+    store = Store(
+        context,
+        [citation, hit_citation],
+        searched_chunks=42,
+        text_hits={"MFG for Registration": [hit]},
+    )
+    llm = GapLLM(
+        _claim(
+            value="Must be an authorized reseller for Dell",
+            confidence=0.9,
+            chunk_ids=(hit.chunk_id,),
+            status="extracted",
+        )
+    )
+
+    output = asyncio.run(_service(store, Retriever([result]), llm).extract(context.id))
+
+    assert len(_gap_prompts(llm)) == 1
+    assert hit.text in _gap_prompts(llm)[0]
+    field = output.fields.mfg_for_registration
+    assert field.value == "Must be an authorized reseller for Dell"
+    assert field.validation_status == FieldValidationStatus.SUPPORTED
+    assert [item.chunk_id for item in field.citations] == [hit.chunk_id]
+    assert output.fields.bid_bond_requirement.validation_status == FieldValidationStatus.NOT_STATED
+
+
+def test_gap_check_judges_generic_mentions_as_not_stated_and_cites_them() -> None:
+    context, result, citation = _fixture()
+    hit = result.model_copy(
+        update={"chunk_id": uuid4(), "text": "Resellers must meet manufacturer qualifications noted elsewhere."}
+    )
+    hit_citation = citation.model_copy(update={"chunk_id": hit.chunk_id, "excerpt": hit.text})
+    store = Store(
+        context,
+        [citation, hit_citation],
+        searched_chunks=42,
+        text_hits={"MFG for Registration": [hit]},
+    )
+    llm = GapLLM(
+        _claim(
+            chunk_ids=(hit.chunk_id,),
+            notes="Only a generic reference; no requirement is given.",
+            status="not_stated",
+        )
+    )
+
+    output = asyncio.run(_service(store, Retriever([result]), llm).extract(context.id))
+
+    field = output.fields.mfg_for_registration
+    assert field.value == NOT_STATED_ANSWER
+    assert field.validation_status == FieldValidationStatus.NOT_STATED
+    assert [item.chunk_id for item in field.citations] == [hit.chunk_id]
+
+
+def test_gap_check_reads_not_found_with_examined_chunks_as_not_stated() -> None:
+    context, result, citation = _fixture()
+    hit = result.model_copy(update={"chunk_id": uuid4(), "text": "Comply with any bond noted elsewhere."})
+    hit_citation = citation.model_copy(update={"chunk_id": hit.chunk_id, "excerpt": hit.text})
+    store = Store(
+        context,
+        [citation, hit_citation],
+        searched_chunks=42,
+        text_hits={"MFG for Registration": [hit]},
+    )
+    llm = GapLLM(_claim(chunk_ids=(hit.chunk_id,), notes="Generic only.", status="not_found"))
+
+    output = asyncio.run(_service(store, Retriever([result]), llm).extract(context.id))
+
+    assert len(_gap_prompts(llm)) == 1
+    field = output.fields.mfg_for_registration
+    assert field.validation_status == FieldValidationStatus.NOT_STATED
+    assert [item.chunk_id for item in field.citations] == [hit.chunk_id]
+
+
+def test_field_rejected_by_the_contract_is_gap_checked() -> None:
+    context, result, citation = _fixture()
+    hit = result.model_copy(update={"chunk_id": uuid4(), "text": "Must be an authorized reseller."})
+    hit_citation = citation.model_copy(update={"chunk_id": hit.chunk_id, "excerpt": hit.text})
+    store = Store(
+        context,
+        [citation, hit_citation],
+        searched_chunks=42,
+        text_hits={"MFG for Registration": [hit]},
+    )
+
+    class ContractBreakingLLM(GapLLM):
+        async def generate_response(self, prompt, **kwargs):
+            if "earlier extraction did not find" in prompt:
+                return await super().generate_response(prompt, **kwargs)
+            self.calls.append((prompt, kwargs))
+            return _payload(**{"MFG for Registration": {"value": "x", "status": "extracted"}})
+
+    llm = ContractBreakingLLM(
+        _claim(
+            value="Authorized reseller",
+            confidence=0.9,
+            chunk_ids=(hit.chunk_id,),
+            status="extracted",
+        )
+    )
+
+    output = asyncio.run(_service(store, Retriever([result]), llm).extract(context.id))
+
+    field = output.fields.mfg_for_registration
+    assert field.value == "Authorized reseller"
+    assert field.validation_status == FieldValidationStatus.SUPPORTED
+
+
+def test_gap_check_rejects_citations_outside_the_matched_chunks() -> None:
+    context, result, citation = _fixture()
+    hit = result.model_copy(update={"chunk_id": uuid4(), "text": "Authorized reseller required."})
+    hit_citation = citation.model_copy(update={"chunk_id": hit.chunk_id, "excerpt": hit.text})
+    store = Store(
+        context,
+        [citation, hit_citation],
+        searched_chunks=42,
+        text_hits={"MFG for Registration": [hit]},
+    )
+    llm = GapLLM(
+        _claim(
+            value="Authorized reseller",
+            confidence=0.9,
+            chunk_ids=(result.chunk_id,),
+            status="extracted",
+        )
+    )
+
+    output = asyncio.run(_service(store, Retriever([result]), llm).extract(context.id))
+
+    field = output.fields.mfg_for_registration
+    assert field.value is None
+    assert field.validation_status == FieldValidationStatus.UNSUPPORTED
+    assert output.status == ExtractionRunStatus.PARTIAL
+
+
+def test_gap_check_keeps_field_missing_when_the_model_answer_is_invalid() -> None:
+    context, result, citation = _fixture()
+    hit = result.model_copy(update={"chunk_id": uuid4(), "text": "Authorized reseller required."})
+    store = Store(
+        context,
+        [citation],
+        searched_chunks=42,
+        text_hits={"MFG for Registration": [hit]},
+    )
+    llm = GapLLM({"value": "x", "status": "extracted"})
+
+    output = asyncio.run(_service(store, Retriever([result]), llm).extract(context.id))
+
+    assert output.fields.mfg_for_registration.validation_status == FieldValidationStatus.MISSING

@@ -343,7 +343,8 @@ class BidComparisonGraph:
                     ]
                     if (
                         value.original_value is not None
-                        and value.field_status not in {"not_found", "unvalidated"}
+                        and value.field_status
+                        not in {"not_found", "not_stated", "unvalidated"}
                         and not supporting
                     ):
                         invalid_row = review = True
