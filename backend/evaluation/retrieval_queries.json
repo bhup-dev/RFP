@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "status": "ground_truth_unavailable",
+  "matching": {
+    "preferred": "chunk_id",
+    "stable_fallback": ["file_name", "page_number", "section_title"]
+  },
+  "comparison_configurations": [
+    {"name": "baseline", "rewriting": false, "reranking": false},
+    {"name": "rewriting_only", "rewriting": true, "reranking": false},
+    {"name": "reranking_only", "rewriting": false, "reranking": true},
+    {"name": "rewriting_and_reranking", "rewriting": true, "reranking": true}
+  ],
+  "queries": [],
+  "notes": [
+    "No Bid1 or Bid2 source documents, registered documents, or persisted chunks were present when Task 2.5 was implemented.",
+    "Queries and relevance labels must be derived from source documents before an evaluation score is reported.",
+    "Unknown ground truth is excluded from Recall@K, Precision@K, MRR, and Hit Rate@K."
+  ]
+}

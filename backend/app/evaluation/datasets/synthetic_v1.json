@@ -1,0 +1,140 @@
+{
+  "dataset_name": "rfp-intelligence-synthetic-regression",
+  "version": "1.0.0",
+  "description": "Independently authored synthetic source labels for deterministic regression checks. These are not Bid1/Bid2 or real-world accuracy measurements.",
+  "cases": [
+    {
+      "case_id": "extract-identifiers-deadline",
+      "fixture_identifier": "synthetic-network-procurement",
+      "task": "extraction",
+      "source_references": ["synthetic/network-rfp.txt#submission"],
+      "input": {"fields": ["Bid Number", "Due Date"]},
+      "expected": {"fields": {"Bid Number": "SYN-NET-104", "Due Date": "2027-01-15T14:00:00-05:00"}},
+      "mock_output": {"fields": {"Bid Number": "SYN-NET-104", "Due Date": "2027-01-15T19:00:00Z"}},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "The source fixture explicitly states the identifier and an EST deadline."
+    },
+    {
+      "case_id": "extract-product-identifiers",
+      "fixture_identifier": "synthetic-hardware-package",
+      "task": "extraction",
+      "source_references": ["synthetic/hardware-rfp.txt#products"],
+      "input": {"fields": ["Model_no", "Part_no", "Product"]},
+      "expected": {"fields": {"Model_no": "RX-100/A", "Part_no": "PN-0042", "Product": "Router X"}},
+      "mock_output": {"fields": {"Model_no": "RX-100/A", "Part_no": "PN-0042", "Product": "Router X"}},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "Exact identifiers were manually copied from the synthetic source text."
+    },
+    {
+      "case_id": "extract-explicit-missing-payment",
+      "fixture_identifier": "synthetic-missing-terms",
+      "task": "extraction",
+      "source_references": ["synthetic/missing-terms.txt"],
+      "input": {"fields": ["Payment Terms"]},
+      "expected": {"fields": {"Payment Terms": null}},
+      "mock_output": {"fields": {"Payment Terms": null}},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "The fixture intentionally contains no payment terms."
+    },
+    {
+      "case_id": "citation-valid-and-supported",
+      "fixture_identifier": "synthetic-citation-lineage",
+      "task": "citation",
+      "source_references": ["synthetic/citations.txt#chunk-1"],
+      "input": {},
+      "expected": {"claim": "Bid bond is five percent"},
+      "mock_output": {"records": [{"material_claim": true, "has_citation": true, "valid": true, "bid_matches": true, "document_matches": true, "supports_claim": true}]},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "The cited synthetic excerpt directly contains the five-percent bond statement."
+    },
+    {
+      "case_id": "citation-valid-but-unsupported",
+      "fixture_identifier": "synthetic-unsupported-claim",
+      "task": "citation",
+      "source_references": ["synthetic/citations.txt#chunk-2"],
+      "input": {},
+      "expected": {"claim": "Warranty is five years"},
+      "mock_output": {"records": [{"material_claim": true, "has_citation": true, "valid": true, "bid_matches": true, "document_matches": true, "supports_claim": false}]},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "The chunk exists but discusses delivery rather than warranty, separating validity from support."
+    },
+    {
+      "case_id": "citation-cross-bid-rejected",
+      "fixture_identifier": "synthetic-cross-bid-citation",
+      "task": "citation",
+      "source_references": ["synthetic/other-bid.txt#chunk-7"],
+      "input": {},
+      "expected": {"rejection_reason": "cross_bid"},
+      "mock_output": {"records": [{"material_claim": true, "has_citation": true, "valid": false, "bid_matches": false, "document_matches": true, "supports_claim": false, "rejected": true}]},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "A chunk from another synthetic bid must be rejected rather than attached to the claim."
+    },
+    {
+      "case_id": "addendum-conflict-and-clarification",
+      "fixture_identifier": "synthetic-two-addenda",
+      "task": "addendum",
+      "source_references": ["synthetic/base.txt#deadline", "synthetic/addendum-1.txt#deadline", "synthetic/addendum-2.txt#delivery"],
+      "input": {},
+      "expected": {"labels": ["conflict", "clarification", "modified_requirement"]},
+      "mock_output": {"labels": ["conflict", "clarification", "modified_requirement"]},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "Labels were assigned from explicit source relationships, not generated model output."
+    },
+    {
+      "case_id": "specialized-product-evidence",
+      "fixture_identifier": "synthetic-product-agent",
+      "task": "specialized_agent",
+      "source_references": ["synthetic/products.txt#router-x"],
+      "input": {},
+      "expected": {"finding_ids": ["product:router-x"]},
+      "mock_output": {"finding_ids": ["product:router-x"], "records": [{"material_claim": true, "has_citation": true, "valid": true, "bid_matches": true, "document_matches": true, "supports_claim": true}]},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "The finding preserves the product/model/quantity association from one source table."
+    },
+    {
+      "case_id": "comparison-different-equivalent-missing",
+      "fixture_identifier": "synthetic-comparison-pair",
+      "task": "comparison",
+      "source_references": ["synthetic/profile-a.json", "synthetic/profile-b.json"],
+      "input": {},
+      "expected": {"classifications": ["different", "equivalent", "missing", "not_comparable"]},
+      "mock_output": {"classifications": ["different", "equivalent", "missing", "not_comparable"]},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "Expected row labels follow explicit model, term, missing-payment, and unrelated-product values."
+    },
+    {
+      "case_id": "retrieval-deadline-ranking",
+      "fixture_identifier": "synthetic-retrieval",
+      "task": "retrieval",
+      "source_references": ["synthetic/deadline.txt#chunk-2"],
+      "input": {"query": "When is the response due?", "k": 2},
+      "expected": {"relevant_chunk_ids": ["00000000-0000-0000-0000-000000000002"]},
+      "mock_output": {"retrieved_chunk_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"]},
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "Reuses the Task 2 retrieval evaluator with a known relevant chunk ranked second."
+    },
+    {
+      "case_id": "workflow-reliability-sample",
+      "fixture_identifier": "synthetic-workflow-observations",
+      "task": "workflow",
+      "source_references": [],
+      "input": {},
+      "expected": {},
+      "mock_output": {
+        "executions": [
+          {"status": "completed", "duration_ms": 120.0, "profile_generated": true, "requires_human_review": false, "error_category": null},
+          {"status": "failed", "duration_ms": 300.0, "profile_generated": false, "requires_human_review": true, "error_category": "timeout"},
+          {"status": "needs_review", "duration_ms": 180.0, "profile_generated": true, "requires_human_review": true, "error_category": null}
+        ],
+        "node_observations": [
+          {"node_name": "requirements_agent", "status": "completed", "duration_ms": 40.0},
+          {"node_name": "requirements_agent", "status": "completed", "duration_ms": 60.0},
+          {"node_name": "product_specification_agent", "status": "completed", "duration_ms": 70.0},
+          {"node_name": "product_specification_agent", "status": "failed", "duration_ms": 90.0}
+        ]
+      },
+      "ground_truth_origin": "synthetic_source_authored",
+      "notes": "Synthetic observations verify reliability denominators, median, p95, timeout, and review rates."
+    }
+  ]
+}

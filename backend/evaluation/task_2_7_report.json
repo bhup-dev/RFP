@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-10-10",
+  "quality_evaluation": {
+    "status": "unavailable",
+    "blockers": [
+      "No verified Bid1 or Bid2 source documents or ground-truth labels are present.",
+      "The optional sentence-transformers reranker runtime and model files are not installed."
+    ],
+    "configurations": [
+      {"name": "baseline", "recall_at_k": null, "precision_at_k": null, "mrr": null, "hit_rate_at_k": null, "ndcg_at_k": null},
+      {"name": "rewriting_only", "recall_at_k": null, "precision_at_k": null, "mrr": null, "hit_rate_at_k": null, "ndcg_at_k": null},
+      {"name": "reranking_only", "recall_at_k": null, "precision_at_k": null, "mrr": null, "hit_rate_at_k": null, "ndcg_at_k": null},
+      {"name": "rewriting_and_reranking", "recall_at_k": null, "precision_at_k": null, "mrr": null, "hit_rate_at_k": null, "ndcg_at_k": null}
+    ]
+  },
+  "live_generated_document_validation": {
+    "services": ["postgresql", "openai_embeddings", "qdrant"],
+    "documents_processed": 1,
+    "chunks_indexed": 1,
+    "indexing_failures": 0,
+    "citation_failures": 0,
+    "retrieval_mode": "hybrid",
+    "top_k": 3,
+    "rewriting": false,
+    "reranking": false,
+    "search_latency_ms": 1001.538,
+    "result": "passed"
+  },
+  "notes": [
+    "The live validation used a generated PDF and an isolated temporary Qdrant collection.",
+    "The temporary PostgreSQL bid and Qdrant collection were removed after the run.",
+    "The latency is one measured query and is not a benchmark."
+  ]
+}
