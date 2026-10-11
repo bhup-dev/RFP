@@ -1,0 +1,1180 @@
+{
+  "version": 2,
+  "status": "labelled",
+  "labelled_by": "Cursor agent (AI assistant), by reading stored chunk text in PostgreSQL",
+  "method": [
+    "Each question was written after reading the bid's source documents (as stored chunk text).",
+    "Each answer pattern is the wording in the source that answers the question. Every chunk whose text matches it is labelled relevant, with the matched text stored as evidence.",
+    "Grade 2: the chunk states the answer. Grade 1: the chunk is related context that partly answers the question.",
+    "Text and table chunks of the same page are both labelled when both contain the answer.",
+    "Labels were not taken from the search engine under evaluation."
+  ],
+  "bids": {
+    "Bid1": {
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "title": "Dallas ISD RFP JA-207652 Student and Staff Computing Devices"
+    },
+    "Bid2": {
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "title": "Maryland State Treasurer PORFP #E20P4600040 Dell Laptops w/Extended Warranty"
+    }
+  },
+  "matching": {
+    "preferred": "chunk_id"
+  },
+  "queries": [
+    {
+      "query_id": "Bid1-01",
+      "query": "Which organization issued this RFP?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "b687ccd6-cda4-5cd9-bdf9-90461d1449d5",
+          "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Reference Number 00004079100 Issuing Organization Dallas Independent School District Solicitation Type RFP - Request for Proposal (Informal) Solicitation Number JA-"
+        },
+        {
+          "chunk_id": "589808bf-011a-5285-a4df-de9b02020f25",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 1,
+          "evidence": "es not to exceed five (5) years total. SCOPE AND SPECIFICATIONS OF THE PROPOSAL The Dallas Independent School District (Dallas ISD or District) is soliciting offers for the goods and/or services specified in this document. 1. Questions c"
+        },
+        {
+          "chunk_id": "6ad8d684-87c7-5396-a56e-05fe59348d7d",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 2,
+          "chunk_type": "table",
+          "grade": 1,
+          "evidence": "ot to exceed five (5) years total. | SCOPE AND SPECIFICATIONS OF THE PROPOSAL | The Dallas Independent School District (Dallas ISD or District) is soliciting offers for the goods and/or services specified in this document. 1. Questions c"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-02",
+      "query": "What was the original solicitation due date?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "d987d55d-f82a-57fb-9ac7-53a7d81a882f",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": " 11-JUN-2024 16:00:00 Questions Response from the District 13-JUN-2024 18:00:00 Solicitation Due 27-JUN-2024 14:00:00 Anticipated Evaluation & Sel 11-JUL-2024 14:00:00 Anticipated Approval"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-03",
+      "query": "What new due date does Addendum 2 set?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "8b6d4aca-b0fa-53c0-b7c3-3d544776a979",
+          "file_name": "b884a54f_Addendum 2 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Devices The Purpose of this Addendum is to extend the due date of this RFP. The new due date for this RFP will be July 9, 2024 at 2:00 PM CST. The information in this Addendum is hereby incorporated and mad"
+        },
+        {
+          "chunk_id": "8a12d7a6-c1f2-54c2-b25f-dcd91bc2b99c",
+          "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 1,
+          "evidence": "Publication 05/29/2024 11:16 AM EDT Closing Date 07/09/2024 03:00 PM EDT Prebid Conference 06/10/2024 03:00 PM EDT Questions Due By 06/11/2"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-04",
+      "query": "How must manual submissions be delivered?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "6fd27054-7191-5fe3-9a4e-b77189c77097",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 9,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "y. Manual submissions must be delivered to the Procurement Services Department, in a sealed envelope by the date and time stated. No fax or email submissions will be accepted."
+        },
+        {
+          "chunk_id": "03143832-d0e9-5ada-b611-b8248b42217c",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 9,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "be delivered to the Procurement Services Department, in a sealed envelope by the date and time stated. No fax or email submissions will be accepted. Only one format is needed. The m"
+        },
+        {
+          "chunk_id": "bf71ed97-bb8d-5305-a019-0d61a88902b5",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 9,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "y. Manual submissions must be delivered to the Procurement Services Department, in a sealed envelope by the date and time stated. No fax or email submissions will be accepted. Only one format is needed. The m"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-05",
+      "query": "What is the contract term and how many renewals are allowed?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "589808bf-011a-5285-a4df-de9b02020f25",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "te 1.3 Requirements LENGTH OF CONTRACT The term of this proposal shall be for a three (3) year agreement with two (2) successive one (1) year extensions based on the long-range needs of the District and mutual consent of both partie"
+        },
+        {
+          "chunk_id": "6ad8d684-87c7-5396-a56e-05fe59348d7d",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 2,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "LENGTH OF CONTRACT | The term of this proposal shall be for a three (3) year agreement with two (2) successive one (1) year extensions based on the long-range needs of the District and mutual consent of both partie"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-06",
+      "query": "When is the pre-bid conference?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "8a12d7a6-c1f2-54c2-b25f-dcd91bc2b99c",
+          "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Publication 05/29/2024 11:16 AM EDT Closing Date 07/09/2024 03:00 PM EDT Prebid Conference 06/10/2024 03:00 PM EDT Questions Due By 06/11/2024 05:00 PM EDT"
+        },
+        {
+          "chunk_id": "a00c8049-ce6a-59d8-af55-9dbc8d9cc706",
+          "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "- Event Type Prebid Conference Attendance N/A Event date 06/10/2024 03:00 PM EDT - Event Type Questions Due By"
+        },
+        {
+          "chunk_id": "d987d55d-f82a-57fb-9ac7-53a7d81a882f",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "/Issue Date 26-MAY-2024 08:00:00 Second Advertisement Date 02-JUN-2024 08:00:00 Pre-Proposal Meeting 10-JUN-2024 14:00:00 Questions Deadline 11-JUN-2024 16:00:00 Questions Response from the Di"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-07",
+      "query": "What is the minimum warranty for student Chromebooks?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "51cb8f1a-1ca5-5d00-b3d0-b462dab39cea",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": " costs per option? Answer: As a minimum requirement, Dallas ISD is asking for a one-year warranty for student Chromebooks and three years for student and staff Windows laptops. The system will only tak"
+        },
+        {
+          "chunk_id": "402fe4ca-501b-5804-a129-1f840ffc06df",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": " defined schedule. Answer: As a minimum requirement, Dallas ISD is asking for a one-year warranty for student Chromebooks and three years for student and staff Windows laptops. Additional programs can "
+        },
+        {
+          "chunk_id": "142dce6c-ce86-5e23-8ae9-d24238bff741",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 4,
+          "chunk_type": "text",
+          "grade": 1,
+          "evidence": "Minimum 2 USB 3.0; type C; 1 headphone/microphone combo • Storage: 64 GB eMMC • Chrome O/S License Required • Warranty: 1-year minimum Tier 2 Large Student Chromebook Laptop Minimum Requirements • Enterprise Manage"
+        },
+        {
+          "chunk_id": "385ae6b8-6443-58c2-977c-fdda13d5007f",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 4,
+          "chunk_type": "text",
+          "grade": 1,
+          "evidence": "SB 3.0; 1 Type C; 65HDMI; 1 headphone/microphone combo • Storage: 128 GB eMMC • Chrome O/S License Required • Warranty: 1-year minimum Tier 3 Student Windows Laptop Minimum Requirements • Enterprise Management Read"
+        },
+        {
+          "chunk_id": "67f152d0-7fc0-53f5-a98c-b5666bd58432",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 4,
+          "chunk_type": "table",
+          "grade": 1,
+          "evidence": "Minimum 2 USB 3.0; type C; 1 headphone/microphone combo • Storage: 64 GB eMMC • Chrome O/S License Required • Warranty: 1-year minimum Tier 2 Large Student Chromebook Laptop Minimum Requirements • Enterprise Manage"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-08",
+      "query": "Is accidental damage protection required for the Chromebooks?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "83fa5fac-0f43-5f51-8325-533895ac94a4",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "all warranties to be made by OEM. 9. The base request for Chrome from Dallas is without Accidental Damage Protection. When DISD does have this type of damage, does Dallas choose to replace those u"
+        },
+        {
+          "chunk_id": "51cb8f1a-1ca5-5d00-b3d0-b462dab39cea",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 1,
+          "evidence": "could expand these options for this product alone to: Two year onsite, Two-year ADP (accidental damage protection), Two year onsite and ADP then three-year, four year and five years. How would D"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-09",
+      "query": "What enrollment is required for Windows devices?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "000cd6ea-4047-5d00-9a1f-52daf2b4665f",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 4,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "require for the software installation requirement? Answer: For Windows devices, autopilot is required. For Chromebooks, enrollment in Google Management is required. 34. Deployment: "
+        },
+        {
+          "chunk_id": "385ae6b8-6443-58c2-977c-fdda13d5007f",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 4,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": " 3 Student Windows Laptop Minimum Requirements • Enterprise Management Ready w/ Autopilot Enrollment • Intel i5 13th Gen or equivalent • Display: Minimum 13\" diagonal • Integrated "
+        },
+        {
+          "chunk_id": "67f152d0-7fc0-53f5-a98c-b5666bd58432",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 4,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": " 3 Student Windows Laptop Minimum Requirements • Enterprise Management Ready w/ Autopilot Enrollment • Intel i5 13th Gen or equivalent • Display: Minimum 13\" diagonal • Integrated "
+        },
+        {
+          "chunk_id": "4469b5e3-3f9e-5627-bfb8-a2fcb9551ed1",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 5,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "f Windows Basic Desktop Minimum Requirements • Enterprise Management Ready with Autopilot Enrollment • Processor: Intel i5 Processor, 14th Gen or equivalent • Display: Minimum 23.8"
+        },
+        {
+          "chunk_id": "af19cfb7-24e1-513c-9acd-787ce8adfa31",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 5,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "f Windows Basic Desktop Minimum Requirements • Enterprise Management Ready with Autopilot Enrollment • Processor: Intel i5 Processor, 14th Gen or equivalent • Display: Minimum 23.8"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-10",
+      "query": "How must Chromebooks be enrolled for management?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "000cd6ea-4047-5d00-9a1f-52daf2b4665f",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 4,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "quirement? Answer: For Windows devices, autopilot is required. For Chromebooks, enrollment in Google Management is required. 34. Deployment: Does Dallas ISD have a deployment schedule? Number of devices "
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-11",
+      "query": "What is Form 1295 and must it be submitted with the response?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "06453109-4c62-551f-9f2e-afc6bb352ddb",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 4,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Page 4 | 5 ADDENDUM No. 1 RFP JA-207652 Student and Staff Computing Devices 31. FORM 1295 - CERTIFICATE OF INTERESTED PARTIES: The RFP states that \"This form must then be signed and attached to the Respons"
+        },
+        {
+          "chunk_id": "cac889b1-f9aa-53b3-ad4b-28eb3eac1d70",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 14,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "ponse a basis for non-award and/or cancellation and/or termination of any award FORM 1295 - CERTIFICATE OF INTERESTED PARTIES Pursuant HB 1295 (2015), the addition of section 2252.908 of the Government Cod"
+        },
+        {
+          "chunk_id": "9940b3d1-fbda-5f1f-a9ad-0849e90e367f",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 14,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "nse a basis for non-award and/or cancellation and/or termination of any award | FORM 1295 - CERTIFICATE OF INTERESTED PARTIES Pursuant HB 1295 (2015), the addition of section 2252.908 of the Government Cod"
+        },
+        {
+          "chunk_id": "110ddc8c-70f4-56c1-a3ab-bc446237f7bd",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 14,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "me as a description of goods or services. Box 6: Please complete and sign, then attach the completed 1295 form with the bid response. Please acknowledge that you have read and understood tha"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-12",
+      "query": "How many evaluation points are given for M/WBE participation?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "aa9fe4b5-f6ad-5907-a995-ae710bab5e0d",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 30,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "ct to comply with laws and rules relating to MWBE. This will be applied to your MWBE Participation and is worth 20 points broken down as follows: 6a. Offeror demonstrated a commitment to the district's"
+        },
+        {
+          "chunk_id": "4ffd03af-7e21-5853-a6a8-400abf2e7ff7",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 30,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "ct to comply with laws and rules relating to MWBE. This will be applied to your MWBE Participation and is worth 20 points broken down as follows: 6a. Offeror demonstrated a commitment to the district's"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-13",
+      "query": "Does the vendor have to certify Buy America compliance?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "99c51f56-68c3-5134-91d1-0e743dc2c167",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 28,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "EMENTS (EDGAR) and/or termination of any award CERTIFICATION OF COMPLIANCE WITH BUY AMERICA PROVISIONS Vendor certifies that Vendor is in compliance with all applicable provisions of"
+        },
+        {
+          "chunk_id": "3c17f9d3-984d-55d3-94c1-f5da0f4da935",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 28,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "TS (EDGAR) | and/or termination of any award | CERTIFICATION OF COMPLIANCE WITH BUY AMERICA PROVISIONS Vendor certifies that Vendor is in compliance with all applicable provisions of"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-14",
+      "query": "What does the RFP ask about hot swap replacement devices?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "40418095-1f65-5ff7-ae6b-e6a1227f6d6d",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "ubmitted as an attachment. 18. On page 9, question #11 of the RFP, the document asks about hot swap stock."
+        },
+        {
+          "chunk_id": "9ce1e010-797e-5a2f-80a9-4a9207440d5a",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "ubmitted as an attachment. 18. On page 9, question #11 of the RFP, the document asks about hot swap stock. Is this stock solely for in-warranty OEM repairs or will the awarded vendor be"
+        },
+        {
+          "chunk_id": "36e1eef0-dcf4-5025-9cdf-619b0efb3110",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 9,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "your company's process for maintaining an inventory of temporary replacement or \"hot swap\" devices for use by Dallas ISD while our devices are being repaired. -----------------------------------------"
+        },
+        {
+          "chunk_id": "bf71ed97-bb8d-5305-a019-0d61a88902b5",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 9,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "your company's process for maintaining an inventory of temporary replacement or \"hot swap\" devices for use by Dallas ISD while our devices are being repaired. -----------------------------------------"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-15",
+      "query": "Which USB port is required on the display monitor?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "b9cdcf85-7233-5242-b691-2ba9cb7bfb53",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "ou are asking for 3.1 USB port. Are you ok with 3.0 or do you need 3.1? Answer: USB 3.1 is a minimum requirement. 2. Are you ok with 3.2 USB port on the display? Answer: A higher specification"
+        },
+        {
+          "chunk_id": "fd71d66f-8856-5ab3-8f5a-403dbbb2ced1",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 6,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "splay Monitor - Touch • Minimum 24\" diagonal screen • Resolution: 1920 X 1080 • Port: USB 3.1 Hub • Aspect Ratio: 16:9 • Contrast: 3000:1 • Warranty: 3-year minimum Display Moni"
+        },
+        {
+          "chunk_id": "60c10f46-9681-5c9f-b189-aae9d3034cab",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 6,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "splay Monitor - Touch • Minimum 24\" diagonal screen • Resolution: 1920 X 1080 • Port: USB 3.1 Hub • Aspect Ratio: 16:9 • Contrast: 3000:1 • Warranty: 3-year minimum Display Moni"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-16",
+      "query": "Do references have to be located in the Dallas/Fort Worth area?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "9ce1e010-797e-5a2f-80a9-4a9207440d5a",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "ge 12, of the RFP, it asks for references within the Dallas/Ft Worth Area. What proximity/mileage range should be considered? Answer: References do not solely need to come from "
+        },
+        {
+          "chunk_id": "9d20c7a2-8f1a-50f3-a0e9-f53fc02bd3e9",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "to come from districts/companies within the Dallas/Fort Worth Area; there is no proximity/mileage that needs to be considered. 21. Are stated quantities one-time buys or spread "
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-17",
+      "query": "Which cooperative purchasing alliance is Dallas ISD a member of?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "9c022012-ae59-5bb9-bb80-a3a0009654fe",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 20,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "……………………………………………………………………….. Circle one from the response values below: Yes No CENTRAL TEXAS PURCHASING ALLIANCE (CTPA) Interlocal Agreement - Cooperative Dallas ISD is a member of the Central Texas "
+        },
+        {
+          "chunk_id": "8ecd53a3-2955-53ff-b06e-cb1b02355942",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 20,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "………………………………………………………………….. Circle one from the response values below: Yes No | CENTRAL TEXAS PURCHASING ALLIANCE (CTPA) Interlocal Agreement - Cooperative Dallas ISD is a member of the Central Texas "
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-18",
+      "query": "What services must be included with deliveries and deployments?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "d9f9261a-3cc6-552a-80d6-2dcfc23e3d7b",
+          "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "ily be using bond-funded money to purchase devices. 6. Reference Page 3/40: All deliveries and deployments must incorporate white glove services, which include asset decaling, asset reporting, etching, and delivery to varied"
+        },
+        {
+          "chunk_id": "69e891fe-51c2-5af6-a2ee-43ba80143eb5",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "turer's recommendations or standard industry practices. Deployment Services All deliveries and deployments must incorporate white glove services, which include asset decaling, asset reporting, etching, and delivery to varied"
+        },
+        {
+          "chunk_id": "5b6c7c5c-163b-5019-a280-bf64a4e1e4f7",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 3,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "turer's recommendations or standard industry practices. Deployment Services All deliveries and deployments must incorporate white glove services, which include asset decaling, asset reporting, etching, and delivery to varied"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-19",
+      "query": "Who is the buyer for this RFP and what is the buyer's email?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "d987d55d-f82a-57fb-9ac7-53a7d81a882f",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "4 JA-207652 Student and Staff Computing Devices Dallas ISD rev 2.0 Page 2 of 40 Buyer ALZATE, JASMINE Email JALZATE@dallasisd.org 1 Header Information 1.1 General Information First "
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-20",
+      "query": "What are the minimum requirements for the student Windows laptop?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "385ae6b8-6443-58c2-977c-fdda13d5007f",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 4,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "GB eMMC • Chrome O/S License Required • Warranty: 1-year minimum Tier 3 Student Windows Laptop Minimum Requirements • Enterprise Management Ready w/ Autopilot Enrollment • Intel i5 13th Gen or eq"
+        },
+        {
+          "chunk_id": "67f152d0-7fc0-53f5-a98c-b5666bd58432",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 4,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "GB eMMC • Chrome O/S License Required • Warranty: 1-year minimum Tier 3 Student Windows Laptop Minimum Requirements • Enterprise Management Ready w/ Autopilot Enrollment • Intel i5 13th Gen or eq"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid1-21",
+      "query": "What is the deadline for submitting questions?",
+      "bid_identifier": "Bid1",
+      "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+      "relevant": [
+        {
+          "chunk_id": "8a12d7a6-c1f2-54c2-b25f-dcd91bc2b99c",
+          "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": " Closing Date 07/09/2024 03:00 PM EDT Prebid Conference 06/10/2024 03:00 PM EDT Questions Due By 06/11/2024 05:00 PM EDT"
+        },
+        {
+          "chunk_id": "d987d55d-f82a-57fb-9ac7-53a7d81a882f",
+          "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "vertisement Date 02-JUN-2024 08:00:00 Pre-Proposal Meeting 10-JUN-2024 14:00:00 Questions Deadline 11-JUN-2024 16:00:00 Questions Response from the District 13-JUN-2024 18:00:00 Solicitation"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-01",
+      "query": "What is the PORFP number?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "5dbd4b0e-9ab6-5ea8-a541-ecbcf806f99d",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "for Proposals (PORFP) Hardware Master Contract 1 Section 1 –General Information PORFP Number: #E20P4600040 eMMA Project Number: BPM044557 PORFP Type: Fixed Price Functional Area/s (FA) f"
+        },
+        {
+          "chunk_id": "d36036d6-d7dd-5591-9547-d6f9a092d2c7",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": " | | | | | | | | Section 1 –General Information | | | | | | | | | | | | | | | | PORFP Number: | | #E20P4600040 eMMA Project Number: BPM044557 | | | | | | | | | | | | | | PORFP Type: | | Fixe"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-02",
+      "query": "Which organization issued this solicitation?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "b190aba7-399e-5382-80be-8da38e877a80",
+          "file_name": "53c991c7_Dell Laptops w_Extended Warranty - Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Reference Number 00004079359 Issuing Organization State of Maryland Treasurer's Office Solicitation Type RFP - Request for Proposal (Informal) Solicitation Number BPM"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-03",
+      "query": "What is the closing date for proposals?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "29f9e202-a79d-5d7a-a40a-e6411104f7c0",
+          "file_name": "53c991c7_Dell Laptops w_Extended Warranty - Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Publication 05/28/2024 11:47 AM EDT Closing Date 06/10/2024 02:00 PM EDT"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-04",
+      "query": "When are questions due?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "88c2ed2c-46c9-57ae-b89c-7ab124c5b661",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Purchase Order Request for Proposals (PORFP) Hardware Master Contract 2 Questions Due (Closing) Date and Time: 06/01/2024 at 2:00 PM EDT Questions must be submitted in writing to thawkins@treasurer.sta"
+        },
+        {
+          "chunk_id": "d8c131c8-4443-561a-a193-2c36f1a2a679",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "| | Questions Due (Closing) Date and Time: 06/01/2024 at 2:00 PM EDT Questions must be submitted in writing to thawkins@treasurer.sta"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-05",
+      "query": "What is the delivery requirement after award?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "e81b8f57-324d-5cb3-ab66-fa73de19ea75",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": ".maryland.gov/contracts/Documents/hardware_co ntract/hwmercury_affidavit.pdf 9. Delivery within 45 days of Award. Invoicing Instructions: 1. Email invoices to: STOaccountspayable@treasurer.sta"
+        },
+        {
+          "chunk_id": "d8c131c8-4443-561a-a193-2c36f1a2a679",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "yland.gov/contracts/Documents/hardware co _ ntract/hwmercury affidavit.pdf _ 9. Delivery within 45 days of Award. | Invoicing Instructions: | | 1. Email invoices to: STOaccountspayable@treasur"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-06",
+      "query": "How long is the extended warranty on the laptops?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "346089c6-c0e1-5a1c-a04c-1806f6e10357",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "les Start Date mm/dd/yyyy End Date mm/dd/yyyy 1. Dell Limited Hardware Warranty Extended for all machines purchased - 3 Years Warranty certificate or Affidavit to be presented upon award Date of Delivery 3"
+        },
+        {
+          "chunk_id": "a6fe0f8a-2891-5a99-82b7-6500f3a1d018",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "| | | | mm/dd/yyyy | | | | | mm/dd/yyyy | | | 1. Dell Limited Hardware Warranty Extended for all machines purchased - 3 Years | | | | | | Warranty certificate or Affidavit to be presented upon award | | | "
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-07",
+      "query": "Which laptop model is requested and in what quantity?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "2b9a1ba5-d998-50e7-a77c-3c3fb443aef5",
+          "file_name": "53c991c7_Dell Laptops w_Extended Warranty - Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "533 Thawkins@treasurer.state.md.us Description 1. SI# CC7802 Dell Latitude 5550 SI# CC7802 Dell Latitude 5550 *Laptops must be Microsoft Copilot ready* SI# CC7802 30 06/10/2024 2. Dell Thunderbolt 4 Dock – WD22TB4 Dell Thunderbolt "
+        },
+        {
+          "chunk_id": "d804d2b4-5e0f-50c8-85ce-2cfc97445a0e",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "ct Description Model # Qty Due Date mm/dd/yyyy 1. SI# CC7802 Dell Latitude 5550 SI# CC7802 Dell Latitude 5550 *Laptops must be Microsoft Copilot ready* SI# CC7802 30 06/10/2024 2."
+        },
+        {
+          "chunk_id": "346089c6-c0e1-5a1c-a04c-1806f6e10357",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "yy 1. SI# CC7802 Dell Latitude 5550 SI# CC7802 Dell Latitude 5550 *Laptops must be Microsoft Copilot ready* SI# CC7802 30 06/10/2024 2. Dell Thunderbolt 4 Dock – WD22TB4 Dell Thunderbolt "
+        },
+        {
+          "chunk_id": "a6fe0f8a-2891-5a99-82b7-6500f3a1d018",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "| | | | | | | | | | | | | | | mm/dd/yyyy | 1. SI# CC7802 Dell Latitude 5550 | | SI# CC7802 Dell Latitude 5550 *Laptops must be Microsoft Copilot ready* | | | | | SI# CC7802 | | | | | 30 | | | | | 06/10/2024 | | 2. Dell Thunderbolt "
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-08",
+      "query": "Which docking station is requested?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "2b9a1ba5-d998-50e7-a77c-3c3fb443aef5",
+          "file_name": "53c991c7_Dell Laptops w_Extended Warranty - Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "tude 5550 *Laptops must be Microsoft Copilot ready* SI# CC7802 30 06/10/2024 2. Dell Thunderbolt 4 Dock – WD22TB4 Dell Thunderbolt 4 Dock – WD22TB4 WD22TB4 30 06/10/2024 See more For more infor"
+        },
+        {
+          "chunk_id": "346089c6-c0e1-5a1c-a04c-1806f6e10357",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "tude 5550 *Laptops must be Microsoft Copilot ready* SI# CC7802 30 06/10/2024 2. Dell Thunderbolt 4 Dock – WD22TB4 Dell Thunderbolt 4 Dock – WD22TB4 WD22TB4 30 06/10/2024 FA V - Manufacturer’s E"
+        },
+        {
+          "chunk_id": "a6fe0f8a-2891-5a99-82b7-6500f3a1d018",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "ft Copilot ready* | | | | | SI# CC7802 | | | | | 30 | | | | | 06/10/2024 | | 2. Dell Thunderbolt 4 Dock – WD22TB4 | | Dell Thunderbolt 4 Dock – WD22TB4 | | | | | WD22TB4 | | | | | 30 | | | | | "
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-09",
+      "query": "What processor does the quoted Latitude 5550 have?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "85fb2882-8f02-5157-bef2-75e8b48289dd",
+          "file_name": "9b90fb02_Dell_Laptop_Specs.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "379-BDZB SI# CC7802 Dell Latitude 5550 Description Dell Latitude 5550 XCTO Base Intel Core Ultra 5 125U processor (12 MB cache, 12 cores, 14 threads, up to 4.3 GHz Turbo) Windows 11 Pro, Englis"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-10",
+      "query": "How much memory does the quoted laptop configuration include?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "85fb2882-8f02-5157-bef2-75e8b48289dd",
+          "file_name": "9b90fb02_Dell_Laptop_Specs.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "r, MTL U15 Intel Rapid Storage Technology Driver Intel vPro Management Disabled 16 GB: 2 x 8 GB, DDR5, 5600 MT/s (5200 MT/s with 13th Gen Intel Core processors) 256 GB, M.2 2230, TL"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-11",
+      "query": "Is a Mercury Affidavit required?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "e81b8f57-324d-5cb3-ab66-fa73de19ea75",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "rect product shipped. 7. ENERGY STAR certified product 8. The Master Contractor must provide a Mercury Affidavit: https://doit.maryland.gov/contracts/Documents/hardware_co ntract/hwmercury_aff"
+        },
+        {
+          "chunk_id": "d8c131c8-4443-561a-a193-2c36f1a2a679",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "rect product shipped. 7. ENERGY STAR certified product 8. The Master Contractor must provide a Mercury Affidavit: https://doit.maryland.gov/contracts/Documents/hardware co _ ntract/hwmercury a"
+        },
+        {
+          "chunk_id": "3fbb8962-8e3f-5f76-80df-b6cd84d058f7",
+          "file_name": "38823520_Mercury_Affidavit.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 1,
+          "evidence": "MERCURY AFFIDAVIT AUTHORIZED REPRESENTATIVE THEREBY AFFIRM THAT: I am the _________________ (Titl"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-12",
+      "query": "When must invoices be submitted?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "e81b8f57-324d-5cb3-ab66-fa73de19ea75",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Instructions: 1. Email invoices to: STOaccountspayable@treasurer.state.md.us 2. Invoice(s) shall be submitted within 10 days of delivering the equipment and shall include at a minimum the following: • Contractor name, mailing addres"
+        },
+        {
+          "chunk_id": "d8c131c8-4443-561a-a193-2c36f1a2a679",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "ructions: | | 1. Email invoices to: STOaccountspayable@treasurer.state.md.us 2. Invoice(s) shall be submitted within 10 days of delivering the equipment and shall include at a minimum the following: • Contractor name, mailing addres"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-13",
+      "query": "Where should invoices be emailed?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "e81b8f57-324d-5cb3-ab66-fa73de19ea75",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "y_affidavit.pdf 9. Delivery within 45 days of Award. Invoicing Instructions: 1. Email invoices to: STOaccountspayable@treasurer.state.md.us 2. Invoice(s) shall be submitted within 10 days of delivering the e"
+        },
+        {
+          "chunk_id": "d8c131c8-4443-561a-a193-2c36f1a2a679",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "vit.pdf _ 9. Delivery within 45 days of Award. | Invoicing Instructions: | | 1. Email invoices to: STOaccountspayable@treasurer.state.md.us 2. Invoice(s) shall be submitted within 10 days of delivering the e"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-14",
+      "query": "What is the agency point of contact's phone number?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "2b9a1ba5-d998-50e7-a77c-3c3fb443aef5",
+          "file_name": "53c991c7_Dell Laptops w_Extended Warranty - Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Tamaira Hawkins 410-260-7533 Thawkins@treasurer.state.md.us Description 1. SI# CC7802 Dell Latitude 5550 SI#"
+        },
+        {
+          "chunk_id": "86052c39-f07f-50f4-a8f8-6ede914c8dd1",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "r Proposals (PORFP) Hardware Master Contract 3 Agency POC Name: Tamaira Hawkins Agency POC Phone Number: 410-260-7533 Agency POC Email Address: thawkins@treasurer.state.md .us Agency POC Fax: N/A A"
+        },
+        {
+          "chunk_id": "3c1a647b-3b38-5219-b3d3-a863663af05b",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "| | | | | | | | | | | | | | | | | | | Agency POC Name: | | | | Tamaira Hawkins | | | | | Agency POC | | | | | | 410-260-7533 | | | | | | | | | | | | | Phone Number: | | | | | | | | | | Agency POC Email Ad"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-15",
+      "query": "How must proposals be submitted?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "81fc9ce2-b3a2-5e4d-a19d-eb50699495d2",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "MISSION INSTRUCTIONS Purchase Order Request for Proposal (PORFP) responses will only be accepted through the State's eMaryland Marketplace Advantage (eMMA) e-Procurement system. Bids will not be accepted by email, fax, U.S. Mail"
+        },
+        {
+          "chunk_id": "489d84bd-f4c9-5e18-8f93-89db65055143",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "MISSION INSTRUCTIONS Purchase Order Request for Proposal (PORFP) responses will only be accepted through the State's eMaryland Marketplace Advantage (eMMA) e-Procurement system. Bids will not be accepted by email, fax, U.S. Mail"
+        },
+        {
+          "chunk_id": "9b56f212-2c4b-59b6-b15a-3ea1f9a87bb4",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 1,
+          "evidence": "t system. Bids will not be accepted by email, fax, U.S. Mail, or hand delivery. You must be registered and Logged in to submit a bid on eMMA. Instructions on how to submit proposals electronically can be found at: https:"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-16",
+      "query": "What software readiness is required for the laptops?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "2b9a1ba5-d998-50e7-a77c-3c3fb443aef5",
+          "file_name": "53c991c7_Dell Laptops w_Extended Warranty - Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": ".us Description 1. SI# CC7802 Dell Latitude 5550 SI# CC7802 Dell Latitude 5550 *Laptops must be Microsoft Copilot ready* SI# CC7802 30 06/10/2024 2. Dell Thunderbolt 4 Dock – WD22TB4 Dell Thunderbolt"
+        },
+        {
+          "chunk_id": "d804d2b4-5e0f-50c8-85ce-2cfc97445a0e",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Date mm/dd/yyyy 1. SI# CC7802 Dell Latitude 5550 SI# CC7802 Dell Latitude 5550 *Laptops must be Microsoft Copilot ready* SI# CC7802 30 06/10/2024 2."
+        },
+        {
+          "chunk_id": "346089c6-c0e1-5a1c-a04c-1806f6e10357",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "yy 1. SI# CC7802 Dell Latitude 5550 SI# CC7802 Dell Latitude 5550 *Laptops must be Microsoft Copilot ready* SI# CC7802 30 06/10/2024 2. Dell Thunderbolt 4 Dock – WD22TB4 Dell Thunderbolt"
+        },
+        {
+          "chunk_id": "a6fe0f8a-2891-5a99-82b7-6500f3a1d018",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "m/dd/yyyy | 1. SI# CC7802 Dell Latitude 5550 | | SI# CC7802 Dell Latitude 5550 *Laptops must be Microsoft Copilot ready* | | | | | SI# CC7802 | | | | | 30 | | | | | 06/10/2024 | | 2. Dell Thunderbolt"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-17",
+      "query": "What are the evaluation criteria for award?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "e877677b-208f-59d2-803a-55db7a9fb457",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 4,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "Purchase Order Request for Proposals (PORFP) Hardware Master Contract 4 Evaluation Criteria 1. Accuracy of Bid (Meets All Requirements) 2. Price Basis for Award Recommendation Evaluation cri"
+        },
+        {
+          "chunk_id": "32bdb375-69ea-5064-9f51-34e162dbe627",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 4,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "| | | Evaluation Criteria | | | 1. Accuracy of Bid (Meets All Requirements) | | 2. Price | | | | Basis for Award Recommendation Ev"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-18",
+      "query": "Who is the on-site delivery contact?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "86052c39-f07f-50f4-a8f8-6ede914c8dd1",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "ork Site POC Information (if different from above) Agency On-site Contact Name: James Simpson Agency On-site Phone Number: 410-260-6063 Agency On-site Email Address: jsimpso"
+        },
+        {
+          "chunk_id": "3c1a647b-3b38-5219-b3d3-a863663af05b",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": " | | | | | | | | | | | | | | | | | | | | | | | | | Agency On-site Contact | | | James Simpson | | | | | Agency On-site | | | | | | 410-260-6063 | | | | | Name: | | | | | | |"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-19",
+      "query": "What must be presented upon award for the warranty?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "346089c6-c0e1-5a1c-a04c-1806f6e10357",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": "1. Dell Limited Hardware Warranty Extended for all machines purchased - 3 Years Warranty certificate or Affidavit to be presented upon award Date of Delivery 3 years following the date of delivery Section 5 – Evaluation "
+        },
+        {
+          "chunk_id": "a6fe0f8a-2891-5a99-82b7-6500f3a1d018",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "ted Hardware Warranty Extended for all machines purchased - 3 Years | | | | | | Warranty certificate or Affidavit to be presented upon award | | | | Date of Delivery | | | | | 3 years following the date of delivery | | |"
+        }
+      ],
+      "expect_no_results": false
+    },
+    {
+      "query_id": "Bid2-20",
+      "query": "What is the PORFP type?",
+      "bid_identifier": "Bid2",
+      "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+      "relevant": [
+        {
+          "chunk_id": "5dbd4b0e-9ab6-5ea8-a541-ecbcf806f99d",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "chunk_type": "text",
+          "grade": 2,
+          "evidence": " –General Information PORFP Number: #E20P4600040 eMMA Project Number: BPM044557 PORFP Type: Fixed Price Functional Area/s (FA) for this PORFP: FA I (Printers and Associated Peripheral"
+        },
+        {
+          "chunk_id": "d36036d6-d7dd-5591-9547-d6f9a092d2c7",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "chunk_type": "table",
+          "grade": 2,
+          "evidence": "er: | | #E20P4600040 eMMA Project Number: BPM044557 | | | | | | | | | | | | | | PORFP Type: | | Fixed Price | | | | | | | | | | | | | Functional Area/s (FA) for this PORFP: | Functional A"
+        }
+      ],
+      "expect_no_results": false
+    }
+  ]
+}

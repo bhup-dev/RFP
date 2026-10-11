@@ -396,7 +396,7 @@ curl -s -X POST http://127.0.0.1:8000/api/v1/search \
 
 The response contains citation fields, distinct source scores, `fusion_score`, normalized filters, and `retrieval_mode`. With `SEARCH_ALLOW_DEGRADED=true`, one failed backend returns `semantic_only` or `keyword_only` plus a warning. Two failures return HTTP 503. An empty result from a healthy backend is different from backend failure. Set the flag to `false` when every response must be hybrid.
 
-The evaluation utility in `app.retrieval.evaluation` calculates Recall@K, Precision@K, MRR, Hit Rate@K, and nDCG@K. Ground truth can match an immutable chunk UUID or a stable source locator (`file_name`, optional page, optional section). No Bid1/Bid2 source files, registered documents, or persisted chunks were present during this task, so `evaluation/retrieval_queries.json` records that ground truth is unavailable and contains no fabricated queries or scores. Populate its `queries` from verified source documents before running an evaluation. Queries with unknown ground truth are reported separately and excluded from averages.
+The evaluation utility in `app.retrieval.evaluation` calculates Recall@K, Precision@K, MRR, Hit Rate@K, and nDCG@K. Ground truth can match an immutable chunk UUID or a stable source locator (`file_name`, optional page, optional section). `evaluation/retrieval_queries.json` holds 41 questions over the processed Bid1 (Dallas ISD JA-207652) and Bid2 (Maryland Dell laptops) documents, labelled from stored chunk text (see `evaluation/README.md`). `python -m scripts.retrieval_eval` measures every configuration and writes `deliverables/retrieval_evaluation/`. Queries with unknown ground truth are reported separately and excluded from averages.
 
 ```bash
 pytest -q tests/test_semantic_search.py tests/test_keyword_search.py \
@@ -428,7 +428,7 @@ The cross-encoder scores at most `RERANK_CANDIDATE_LIMIT` RRF candidates in batc
 
 The response remains backward-compatible and adds `rewriting_applied`, `rewritten_query_count`, `candidate_count`, `reranking_applied`, and `final_result_count`. Reranking always uses the original user question.
 
-The evaluation utility can compare four measured configurations: baseline, rewriting only, reranking only, and both. It records relevance metrics, mean latency, and mean candidate count without filling missing runs. No live quality comparison was produced because the versioned dataset has no verified Bid1/Bid2 source labels.
+The evaluation utility can compare four measured configurations: baseline, rewriting only, reranking only, and both. It records relevance metrics, mean latency, and mean candidate count without filling missing runs. The live comparison is in `deliverables/retrieval_evaluation/report.md`; reranking is reported as not run there because `sentence-transformers` is not installed.
 
 ```bash
 pytest -q tests/test_query_rewriter.py tests/test_reranker.py \
@@ -473,7 +473,7 @@ pytest -q -m integration tests/test_end_to_end_integration.py
 RUN_LIVE_E2E=1 pytest -q -s tests/test_live_end_to_end.py
 ```
 
-The live test uses generated source content, the configured PostgreSQL database and embedding provider, and an isolated temporary Qdrant collection. It removes only its `test-live-e2e-*` bid and temporary collection. `evaluation/task_2_7_report.json` records the measured validation. Retrieval quality metrics remain null until verified Bid1/Bid2 files and ground-truth labels are supplied; generated fixtures are not represented as real evaluation ground truth.
+The live test uses generated source content, the configured PostgreSQL database and embedding provider, and an isolated temporary Qdrant collection. It removes only its `test-live-e2e-*` bid and temporary collection. `evaluation/task_2_7_report.json` records the measured validation from that task; its retrieval metrics are null because it predates the labelled set. Current retrieval metrics are in `deliverables/retrieval_evaluation/`. Generated fixtures are not represented as real evaluation ground truth.
 
 ## Structured field extraction
 

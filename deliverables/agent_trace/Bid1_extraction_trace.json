@@ -1,0 +1,2260 @@
+{
+  "trace_type": "bid_workflow",
+  "note": "Built from stored records only. Prompts and raw model responses are not persisted; prompt_location names the code that defines each prompt.",
+  "workflow": {
+    "workflow_id": "461b93a3-07b3-4702-b7db-ae8c7d2d63a1",
+    "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+    "workflow_version": "1.0",
+    "status": "needs_review",
+    "current_stage": "finalize",
+    "stage_statuses": {
+      "finalize": "completed",
+      "analyze_addenda": "completed",
+      "generate_profile": "completed",
+      "human_review_gate": "skipped",
+      "extract_rfp_fields": "completed",
+      "requirements_agent": "completed",
+      "create_review_items": "completed",
+      "validate_extraction": "completed",
+      "validate_bid_context": "completed",
+      "evidence_review_agent": "completed",
+      "commercial_terms_agent": "completed",
+      "product_specification_agent": "completed",
+      "compliance_documentation_agent": "completed"
+    },
+    "document_ids": [
+      "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+      "466c0379-46ee-447a-88af-ed1bf0011d00",
+      "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+      "d1b501ad-6235-4e39-b852-58592c8fd939"
+    ],
+    "eligible_document_count": 4,
+    "requires_human_review": true,
+    "summaries": {
+      "addendum": {
+        "status": "completed",
+        "finding_count": 6,
+        "ordering_uncertain": true,
+        "relationship_uncertain": false,
+        "addendum_document_count": 2,
+        "conflict_or_ambiguity_count": 0
+      },
+      "extraction": {
+        "status": "completed",
+        "field_count": 20,
+        "fields_with_values": 9
+      },
+      "validation": {
+        "status": "partial",
+        "not_found": 11,
+        "validated": 2,
+        "conflicting": 0,
+        "unsupported": 0,
+        "needs_review": 7,
+        "total_fields": 20,
+        "low_confidence": 7,
+        "overall_status": "needs_review",
+        "high_confidence": 2,
+        "medium_confidence": 0,
+        "partially_supported": 0,
+        "addendum_check_status": "checked",
+        "unavailable_confidence": 11,
+        "critical_unresolved_conflicts": [],
+        "fields_recommended_for_review": [
+          "Due Date",
+          "Bid Submission Type",
+          "Term of Bid",
+          "Pre Bid Meeting",
+          "Installation",
+          "Bid Bond Requirement",
+          "Delivery Date",
+          "Payment Terms",
+          "Additional Documentation Required",
+          "MFG for Registration",
+          "Contract or Cooperative to use",
+          "Model_no",
+          "Part_no",
+          "Product",
+          "contact_info",
+          "company_name",
+          "Bid Summary",
+          "Product Specification"
+        ]
+      },
+      "agent_errors": [],
+      "review_status": "pending",
+      "agent_statuses": {
+        "requirements": "completed",
+        "evidence_review": "completed",
+        "commercial_terms": "completed",
+        "product_specification": "completed",
+        "compliance_documentation": "completed"
+      },
+      "agent_warnings": [
+        "Normalized 2 duplicate model-generated finding ID(s)"
+      ],
+      "profile_status": "needs_review",
+      "review_item_ids": [
+        "a4e392d4-a57d-4a0c-ab3d-5e381ee5fafe",
+        "d3ae2a8d-39e4-41b7-82b0-4613bd4d222f",
+        "ee393e1c-811b-4921-bf83-afc947eb5404",
+        "77023bf6-2122-493e-8391-1914e616cbf9",
+        "e5086266-e0af-4a8a-8e8c-7014704fccd0",
+        "2de7c152-cb44-4d10-89cc-1d1cb77df907",
+        "b1d8b50f-179c-42f8-90d4-bb26432efb33"
+      ],
+      "agent_finding_counts": {
+        "requirements": 10,
+        "evidence_review": 0,
+        "commercial_terms": 8,
+        "product_specification": 3,
+        "compliance_documentation": 4
+      }
+    },
+    "warnings": [
+      "Addendum order is uncertain; addenda were compared to base documents without assuming that one supersedes another",
+      "Normalized 2 duplicate model-generated finding ID(s)"
+    ],
+    "errors": [],
+    "started_at": "2026-10-11 11:30:07.941635+00:00",
+    "completed_at": "2026-10-11 11:31:44.251264+00:00"
+  },
+  "steps": [
+    {
+      "node": "validate_bid_context",
+      "status": "completed",
+      "started_at": "2026-10-11 11:30:07.976082+00:00",
+      "completed_at": "2026-10-11 11:30:07.989821+00:00",
+      "duration_ms": 13.756542000010086,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": null,
+        "validation_run_id": null,
+        "addendum_analysis_run_id": null
+      },
+      "requires_human_review": false,
+      "calls_model": false,
+      "prompt_location": null
+    },
+    {
+      "node": "extract_rfp_fields",
+      "status": "completed",
+      "started_at": "2026-10-11 11:30:07.996536+00:00",
+      "completed_at": "2026-10-11 11:30:22.979190+00:00",
+      "duration_ms": 14983.31645899998,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": null,
+        "addendum_analysis_run_id": null
+      },
+      "requires_human_review": false,
+      "calls_model": true,
+      "prompt_location": "backend/app/services/extraction_service.py (SYSTEM_PROMPT)"
+    },
+    {
+      "node": "analyze_addenda",
+      "status": "completed",
+      "started_at": "2026-10-11 11:30:22.986483+00:00",
+      "completed_at": "2026-10-11 11:30:51.336813+00:00",
+      "duration_ms": 28351.55054200004,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": null,
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": true,
+      "prompt_location": "backend/app/services/addendum_analysis_service.py (DISCOVERY_SYSTEM_PROMPT, COMPARISON_SYSTEM_PROMPT)"
+    },
+    {
+      "node": "requirements_agent",
+      "status": "completed",
+      "started_at": "2026-10-11 11:30:51.355795+00:00",
+      "completed_at": "2026-10-11 11:31:04.640705+00:00",
+      "duration_ms": 13285.49004099932,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": null,
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": true,
+      "prompt_location": "backend/app/agents/specialized.py (AGENT_DEFINITIONS[REQUIREMENTS])"
+    },
+    {
+      "node": "product_specification_agent",
+      "status": "completed",
+      "started_at": "2026-10-11 11:31:04.649879+00:00",
+      "completed_at": "2026-10-11 11:31:11.461865+00:00",
+      "duration_ms": 6812.263083000289,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": null,
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": true,
+      "prompt_location": "backend/app/agents/specialized.py (AGENT_DEFINITIONS[PRODUCT_SPECIFICATION])"
+    },
+    {
+      "node": "commercial_terms_agent",
+      "status": "completed",
+      "started_at": "2026-10-11 11:31:11.467580+00:00",
+      "completed_at": "2026-10-11 11:31:21.623579+00:00",
+      "duration_ms": 10156.494875000135,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": null,
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": true,
+      "prompt_location": "backend/app/agents/specialized.py (AGENT_DEFINITIONS[COMMERCIAL_TERMS])"
+    },
+    {
+      "node": "compliance_documentation_agent",
+      "status": "completed",
+      "started_at": "2026-10-11 11:31:21.632071+00:00",
+      "completed_at": "2026-10-11 11:31:28.634916+00:00",
+      "duration_ms": 7003.141582999888,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": null,
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": true,
+      "prompt_location": "backend/app/agents/specialized.py (AGENT_DEFINITIONS[COMPLIANCE_DOCUMENTATION])"
+    },
+    {
+      "node": "evidence_review_agent",
+      "status": "completed",
+      "started_at": "2026-10-11 11:31:28.639419+00:00",
+      "completed_at": "2026-10-11 11:31:28.682599+00:00",
+      "duration_ms": 43.18787499960308,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": null,
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": false,
+      "prompt_location": null
+    },
+    {
+      "node": "validate_extraction",
+      "status": "completed",
+      "started_at": "2026-10-11 11:31:28.686930+00:00",
+      "completed_at": "2026-10-11 11:31:44.142786+00:00",
+      "duration_ms": 15456.534916000237,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": "e23a98f1-a10e-45f1-a285-f2919f932bee",
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": true,
+      "prompt_location": "backend/app/services/extraction_validation_service.py (SEMANTIC_SYSTEM_PROMPT)"
+    },
+    {
+      "node": "create_review_items",
+      "status": "completed",
+      "started_at": "2026-10-11 11:31:44.154011+00:00",
+      "completed_at": "2026-10-11 11:31:44.191432+00:00",
+      "duration_ms": 37.42508300001646,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": "e23a98f1-a10e-45f1-a285-f2919f932bee",
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": false,
+      "prompt_location": null
+    },
+    {
+      "node": "human_review_gate",
+      "status": "skipped",
+      "started_at": "2026-10-11 11:31:44.196149+00:00",
+      "completed_at": "2026-10-11 11:31:44.202192+00:00",
+      "duration_ms": 6.0499580004034215,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": null,
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": "e23a98f1-a10e-45f1-a285-f2919f932bee",
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": false,
+      "prompt_location": null
+    },
+    {
+      "node": "generate_profile",
+      "status": "completed",
+      "started_at": "2026-10-11 11:31:44.206447+00:00",
+      "completed_at": "2026-10-11 11:31:44.246878+00:00",
+      "duration_ms": 40.439041999889014,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": "1264434f-4b75-5a3c-8be4-daed1dfff7e7",
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": "e23a98f1-a10e-45f1-a285-f2919f932bee",
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": false,
+      "prompt_location": null
+    },
+    {
+      "node": "finalize",
+      "status": "completed",
+      "started_at": "2026-10-11 11:31:44.251247+00:00",
+      "completed_at": "2026-10-11 11:31:44.258086+00:00",
+      "duration_ms": 6.8452500008788775,
+      "retry_count": 0,
+      "error_category": null,
+      "error_detail": null,
+      "run_references": {
+        "profile_id": "1264434f-4b75-5a3c-8be4-daed1dfff7e7",
+        "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+        "validation_run_id": "e23a98f1-a10e-45f1-a285-f2919f932bee",
+        "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2"
+      },
+      "requires_human_review": true,
+      "calls_model": false,
+      "prompt_location": null
+    }
+  ],
+  "extraction": {
+    "extraction_run_id": "a3aa537f-e932-4d12-81d9-2ad258775927",
+    "status": "completed",
+    "model_name": "gpt-4o-mini",
+    "document_ids": [
+      "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+      "466c0379-46ee-447a-88af-ed1bf0011d00",
+      "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+      "d1b501ad-6235-4e39-b852-58592c8fd939"
+    ],
+    "started_at": "2026-10-11 11:30:08.006839+00:00",
+    "completed_at": "2026-10-11 11:30:22.949246+00:00",
+    "error_message": null,
+    "fields": [
+      {
+        "field_name": "Bid Number",
+        "value": "JA-207652",
+        "confidence": "1.00000",
+        "validation_status": "supported",
+        "notes": "Bid number extracted from the document.",
+        "citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Reference Number\n00004079100\nIssuing Organization\nDallas Independent School District\nSolicitation Type\nRFP - Request for Proposal (Informal)\nSolicitation Number\nJA-207652\nTitle\nStudent and Staff Computing Devices **SOURCING #168884**\nSource ID\nSCRIBE",
+            "chunk_id": "b687ccd6-cda4-5cd9-bdf9-90461d1449d5",
+            "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+            "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+            "page_number": null,
+            "section_title": "Basic Information",
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Title",
+        "value": "Student and Staff Computing Devices",
+        "confidence": "1.00000",
+        "validation_status": "supported",
+        "notes": "Title extracted from the document.",
+        "citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Reference Number\n00004079100\nIssuing Organization\nDallas Independent School District\nSolicitation Type\nRFP - Request for Proposal (Informal)\nSolicitation Number\nJA-207652\nTitle\nStudent and Staff Computing Devices **SOURCING #168884**\nSource ID\nSCRIBE",
+            "chunk_id": "b687ccd6-cda4-5cd9-bdf9-90461d1449d5",
+            "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+            "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+            "page_number": null,
+            "section_title": "Basic Information",
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Due Date",
+        "value": "July 9, 2024 2:00 PM CST",
+        "confidence": "1.00000",
+        "validation_status": "supported",
+        "notes": "Due date extracted from the addendum.",
+        "citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Page 1 | 1 \nADDENDUM No. 2\nRFP JA-207652 Student and Staff Computing Devices \n \nThe Purpose of this Addendum is to extend the due date of this RFP. \n \nThe new due date for this RFP will be July 9, 2024 at 2:00 PM CST. \n \n \nThe information in this Addendum is hereby incorporated and made part of any contract awarded \npursuant to this solicitation. \n \nPlease sign this addendum and submit along with your copies of the proposal. ALL OTHER PROVISIONS \nAND OTHER TERMS AND CONDITIONS REMAIN UNCHANGED. BIDDERS ARE REQUIRED TO \nACKNOWLEDGE AND RETURN/SUBMIT A COPY OF THIS ADDENDUM WITH THEIR PROPOSAL. \n \n \nCompany Name: \n \nSubmitter’s Name/Title: \n \nAddress: \n \nCity, State and Zip Code: \n \nEmail Address: \n \nSubmitter’s Signature: \n \nTelephone No. \n \nFax No. \n \n800 # (if available) \n \nDate: \n \n \n \n \n \n \nEND OF ADDENDUM",
+            "chunk_id": "8b6d4aca-b0fa-53c0-b7c3-3d544776a979",
+            "file_name": "b884a54f_Addendum 2 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "466c0379-46ee-447a-88af-ed1bf0011d00",
+            "page_number": 1,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Bid Submission Type",
+        "value": "Manual and Electronic",
+        "confidence": "0.80000",
+        "validation_status": "ambiguous",
+        "notes": "Submission type inferred from the submission instructions.",
+        "citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "be delivered to the Procurement Services Department, in a \nsealed envelope by the date and time stated. No fax or email submissions will be accepted. Only one \nformat is needed. The manual submission shall consist of one (1) original hard copy.\nThe Offeror may submit a manual response by paper via mail/FedEx/UPS etc. before the cutoff date and \ntime at the following address:\nDallas ISD\nProcurement Services\n9400 N Central Expwy, Ste 1510\nAttn: Staff Member and BID NUMBER\nDallas, Tx 75231\nDoes the vendor agree and understand?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType \n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes \nNo",
+            "chunk_id": "03143832-d0e9-5ada-b611-b8248b42217c",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 9,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Term of Bid",
+        "value": "3 years with 2 one-year extensions",
+        "confidence": "1.00000",
+        "validation_status": "supported",
+        "notes": "Initial term and renewal options extracted from the document.",
+        "citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "g this RFP. Only written questions will be\nconsidered. It is highly encouraged that all potential proposers participate and attend the pre-\nproposal.\nJoin TEAMS Meeting: https://www.microsoft.com/en-us/microsoft-teams/join-a-meeting\nMeeting ID: 270 031 467 036\nPasscode: N9ndKY\n1.2 Terms\nInitial Term:\n3\nRenewal 1:\n1\nRenewal 2:\n1\nAny contract that results from this solicitation and upon Mutual Agreement of the awarded vendor and the \nDistrict, may be extended not to exceed a total of 5 years(s). If either party intends not to renew the Contract, \nthat party must give written notice to the other party no fewer than ninety (90) days prior to the expiration of the \nthen current term of the Contract. ",
+            "chunk_id": "3f87cac2-faed-55b1-9800-6cc3cd5a121b",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 2,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Pre Bid Meeting",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No information found regarding a pre-bid meeting.",
+        "citations": []
+      },
+      {
+        "field_name": "Installation",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No specific installation details provided.",
+        "citations": []
+      },
+      {
+        "field_name": "Bid Bond Requirement",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No information found regarding bid bond requirements.",
+        "citations": []
+      },
+      {
+        "field_name": "Delivery Date",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No specific delivery date mentioned.",
+        "citations": []
+      },
+      {
+        "field_name": "Payment Terms",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No payment terms specified in the document.",
+        "citations": []
+      },
+      {
+        "field_name": "Additional Documentation Required",
+        "value": "Form 1295",
+        "confidence": "1.00000",
+        "validation_status": "supported",
+        "notes": "Specific documentation required for submission.",
+        "citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "estion. \nAnswer: \nYes, the specs, more specifically the proposed make and model of the device \nbeing proposed, should be included in this field. \n11. Will DISD consider extending the submission deadline out a few more weeks to allow sufficient \ntime for vendors to complete a compliant response after the addendum(s) has been posted? \nAnswer: \nDallas ISD does not anticipate extending the submission deadline.",
+            "chunk_id": "fae9ba39-2247-5746-9cb1-422c1517aaee",
+            "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+            "page_number": 1,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "MFG for Registration",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No manufacturer registration information found.",
+        "citations": []
+      },
+      {
+        "field_name": "Contract or Cooperative to use",
+        "value": "Central Texas Purchasing Alliance (CTPA)",
+        "confidence": "1.00000",
+        "validation_status": "supported",
+        "notes": "Cooperative mentioned in the document.",
+        "citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "PROPOSAL REQUIREMENT - The following\nattributes require a response | \nindicated an interest in being included in this contract. Should these governmental entities decide to\nparticipate in this contract, would you, (the vendor) agree that all terms, conditions, specifications, and\npricing would apply?\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes\nNo | \nCENTRAL TEXAS PURCHASING ALLIANCE (CTPA)\nInterlocal Agreement - Cooperative\nDallas ISD is a member of the Central Texas Purchasing Alliance (CTPA), an alliance of school districts in\nthe central Texas area that share information, services, and contractual opportunities. In support of this\ncollaborative effort, a response of YES to CTPA indicates that the Respondent is interested in extending\nservices to other CTPA member districts. However, there is no obligation on either party to participate unless\nboth parties agree. Services would be provided under the same contract pricing and purchasing terms\nestablished by this request. A negative reply by the Respondent will not adversely affect consideration of the\nRespondent's response. The information will be provided to CTPA member listing and in the event that this\nrequest and subsequent contract may be used by the CTPA districts. If a member district chooses to utilize a\ncontract established by this request and subsequent contract, contracts will be awarded individually by those\ndistricts.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes\nNo | \nORDER REFERENCE NUMBER/INFORMATION\nIs a reference number or other information that Dallas ISD must include on the Purchase Order to receive\ncontract pricing, please state that information. If none enter N/A (not applicable) below where applicable.\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nProvide your answer below | \nPRICING INFORMATION | \nPRICE OFFER SUMMARY\nThe undersigned duly authorized representative of the Offeror offers to provide the goods and/or services\ndescribed in this solicitation document according to the terms contained in the Offer. Offerors are required to\nfully disclose any ''hidden'' or \"additional\" fees, costs, and expenses that are not reflected. The District will\nnot be liable for hidden or additional fees, costs, and expenses that are not disclosed in detail. Any proposed\nchange in the Offeror's pricing structure and/or pricing assumptions must be formally requested on the\nDistrict Deviation Attribute, which must be accepted in writing by the Buyer and thereafter approved by\nDallas ISD's Office of Legal Services. In addition, if the Offeror is proposing no-cost best-value incentives or\nvalue-adds, those items should also be disclosed in detail. The ultimate contract is anticipated to be a firm,\nfixed-price contract for the initial term. The vendor shall price based on any increase that may occur in the\ninitial term. Price adjustments at the renewal will need to be agreed upon by all parties. Awarded vendor(s) | ",
+            "chunk_id": "8ecd53a3-2955-53ff-b06e-cb1b02355942",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 20,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Model_no",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No specific model numbers provided.",
+        "citations": []
+      },
+      {
+        "field_name": "Part_no",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No part numbers mentioned.",
+        "citations": []
+      },
+      {
+        "field_name": "Product",
+        "value": "Computing Devices",
+        "confidence": "1.00000",
+        "validation_status": "supported",
+        "notes": "General product category extracted.",
+        "citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "SCOPE AND SPECIFICATIONS OF THE\nPROPOSAL | \nrequirements to procure vendors who provide goods or services purchased by Dallas ISD using federal\ndollars. This proposal may be used with local, state, federal, and grant-funded programs. | \nPURPOSE OF REQUEST FOR PROPOSAL (RFP)\nThis Request for Proposal (RFP) will be for student and staff computing devices, including laptops,\ndesktops, tablet devices, and display monitors. Vendors participating in this Request for Proposal (RFP) may\nsubmit proposals for one, several, or all categories of devices required by the District. Within each category\nof device, the District reserves the right to award contracts to a single vendor or multiple vendors.\nThe specifications listed in this RFP are the minimum hardware requirements for each tier of device required\nby Dallas ISD. Vendors responding to this RFP must have the ability to provide the District with significant\nquantities of devices as requested in the pricing lines in this RFP. Note that quantities requested by Dallas\nISD are estimates to be ordered over the five years of the contracts resulting from this RFP. Purchases may\nalso include a variety of device accessories which will be ordered in a bundle along with the devices. Such\naccessories include, but are not limited to, sleeves, cases, mice, keyboards, and cables that may not\nnecessarily come with the devices.\nEach submission must include a detailed plan as to how the vendor will track all shipped products and\nprovide deployment services. Processes and procedures are required in the response, which outlines how\ntracking will be executed and any processes for providing white glove services.\nThe awarded vendors shall provide Dallas ISD with computing devices that meet all current industry\nstandard specifications. The awarded vendors and Dallas ISD EdTech-Enterprise Support Services shall\nmeet every six months or as needed to discuss technology advancements related to computing devices to\nbe selected by Dallas ISD.\nNote: For each purchase during the term of the contracts resulting from this RFP, the District will seek\ncompetitive quotes from one or more of the awarded vendors. | \nPROPOSAL SPECIFICATIONS | \nManufacturer or Authorized Reseller Qualifications\nFor proposing vendors who are resellers, a copy of all factory-authorized repair and maintenance\ncertifications must be submitted with each proposal. Vendors must provide demonstrated competencies and\nreferences in delivering the magnitude of devices listed on the price sheet. This supporting documentation\nmay include details of past projects, statements in reference letters, and/or project plans.\nEquipment Requirements\nAll equipment must be new and of the manufacturer's current model in production at the time of each order\nexecuted over the life of the contracts resulting from this RFP. All standard or optional equipment must be as\nadvertised by the original equipment manufacturer (OEM) and must not consist of substitute or aftermarket\nequipment. Equipment attachments or parts to be installed must follow the manufacturer's recommendations\nor standard industry practices.\nDeployment Services\nAll deliveries and deployments must incorporate white glove services, which include asset decaling, asset\nreporting, etching, and delivery to varied locations.\nWarranty and Warranty Repair Work\nAwarded vendors must be responsible for all materials and accessories used in the equipment, and this\nresponsibility may not be transferred, conveyed, or assigned to any other entity without previous written\napproval of Dallas ISD. | ",
+            "chunk_id": "5b6c7c5c-163b-5019-a280-bf64a4e1e4f7",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 3,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "contact_info",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No specific contact information provided.",
+        "citations": []
+      },
+      {
+        "field_name": "company_name",
+        "value": "Dallas Independent School District",
+        "confidence": "1.00000",
+        "validation_status": "supported",
+        "notes": "Issuing organization extracted from the document.",
+        "citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Reference Number\n00004079100\nIssuing Organization\nDallas Independent School District\nSolicitation Type\nRFP - Request for Proposal (Informal)\nSolicitation Number\nJA-207652\nTitle\nStudent and Staff Computing Devices **SOURCING #168884**\nSource ID\nSCRIBE",
+            "chunk_id": "b687ccd6-cda4-5cd9-bdf9-90461d1449d5",
+            "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+            "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+            "page_number": null,
+            "section_title": "Basic Information",
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Bid Summary",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No bid summary provided in the document.",
+        "citations": []
+      },
+      {
+        "field_name": "Product Specification",
+        "value": null,
+        "confidence": null,
+        "validation_status": "missing",
+        "notes": "No specific product specifications detailed.",
+        "citations": []
+      }
+    ]
+  },
+  "addendum_analysis": {
+    "addendum_analysis_run_id": "e0e49288-a18b-4587-a55c-192d5952e8d2",
+    "status": "completed",
+    "model_name": "gpt-4o-mini",
+    "original_document_ids": [
+      "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+      "d1b501ad-6235-4e39-b852-58592c8fd939"
+    ],
+    "addendum_document_ids": [
+      "466c0379-46ee-447a-88af-ed1bf0011d00",
+      "a0e42e11-1193-4d1b-9a6e-23675a62a52b"
+    ],
+    "relationship_uncertain": false,
+    "ordering_uncertain": true,
+    "started_at": "2026-10-11 11:30:22.998602+00:00",
+    "completed_at": "2026-10-11 11:30:51.296664+00:00",
+    "error_message": null,
+    "findings": [
+      {
+        "field_name": "RFP Due Date",
+        "status": "modified_requirement",
+        "original_value": "27-JUN-2024 14:00:00",
+        "amended_value": "09-JUL-2024 14:00:00",
+        "severity": "medium",
+        "confidence": "1.00000",
+        "notes": "The addendum extends the due date for the RFP from June 27, 2024, to July 9, 2024.",
+        "impact_note": "This change affects the timeline for proposal submissions, allowing additional time for bidders.",
+        "sources": [
+          {
+            "side": "original",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Request For Proposal 168884  JA-207652 Student and Staff Computing Devices\n \nDallas ISD rev 2.0\nPage 2 of 40 \nBuyer\nALZATE, JASMINE\nEmail\nJALZATE@dallasisd.org\n1 Header Information\n1.1 General Information\nFirst Advertisement Date/Issue Date\n26-MAY-2024 08:00:00\nSecond Advertisement Date\n02-JUN-2024 08:00:00\nPre-Proposal Meeting\n10-JUN-2024 14:00:00\nQuestions Deadline\n11-JUN-2024 16:00:00\nQuestions Response from the District\n13-JUN-2024 18:00:00\nSolicitation Due\n27-JUN-2024 14:00:00\nAnticipated Evaluation & Sel\n11-JUL-2024 14:00:00\nAnticipated Approval/Award\n22-AUG-2024 18:00:00\nPre-Proposal \nA pre-proposal meeting will be held at 2:00 PM CST via TEAMS video conference on June 10, \n2024. Please submit (in writing) any questions regarding this RFP. Only written questions will be\nconsidered. It is highly encouraged that all potential proposers participate and attend the pre-\nproposal.\n",
+            "chunk_id": "d987d55d-f82a-57fb-9ac7-53a7d81a882f",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 2,
+            "section_title": null,
+            "relevance_score": null
+          },
+          {
+            "side": "addendum",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Page 1 | 1 \nADDENDUM No. 2\nRFP JA-207652 Student and Staff Computing Devices \n \nThe Purpose of this Addendum is to extend the due date of this RFP. \n \nThe new due date for this RFP will be July 9, 2024 at 2:00 PM CST. \n \n \nThe information in this Addendum is hereby incorporated and made part of any contract awarded \npursuant to this solicitation. \n \nPlease sign this addendum and submit along with your copies of the proposal. ALL OTHER PROVISIONS \nAND OTHER TERMS AND CONDITIONS REMAIN UNCHANGED. BIDDERS ARE REQUIRED TO \nACKNOWLEDGE AND RETURN/SUBMIT A COPY OF THIS ADDENDUM WITH THEIR PROPOSAL. \n \n \nCompany Name: \n \nSubmitter’s Name/Title: \n \nAddress: \n \nCity, State and Zip Code: \n \nEmail Address: \n \nSubmitter’s Signature: \n \nTelephone No. \n \nFax No. \n \n800 # (if available) \n \nDate: \n \n \n \n \n \n \nEND OF ADDENDUM",
+            "chunk_id": "8b6d4aca-b0fa-53c0-b7c3-3d544776a979",
+            "file_name": "b884a54f_Addendum 2 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "466c0379-46ee-447a-88af-ed1bf0011d00",
+            "page_number": 1,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Display Monitor - Non-Touch USB Port Requirement",
+        "status": "modified_requirement",
+        "original_value": "USB 3.1 Hub",
+        "amended_value": "USB 3.1 is a minimum requirement.",
+        "severity": "medium",
+        "confidence": "0.90000",
+        "notes": "The addendum clarifies that while USB 3.1 is the minimum requirement, a higher specification is permissible, modifying the original requirement.",
+        "impact_note": "This change allows for flexibility in vendor proposals regarding USB specifications.",
+        "sources": [
+          {
+            "side": "original",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "SCOPE AND SPECIFICATIONS OF THE\nPROPOSAL | \n• 4 GB Video card\n• Touchscreen optional\n• Warranty: 3-year minimum\nTier 1 Staff Basic Laptop Minimum Requirements\n• Enterprise Management Ready\n• Intel i5 CPU, 14th Gen or equivalent.\n• Display: Minimum 13\" diagonal screen\n• Integrated Camera: 1080p\n• Memory: Minimum 16GB DDR5 RAM\n• Wireless: 802.11AX WiFi-6E and Bluetooth 5.1\n• Power Supply: USB Type C, 65W\n• Battery Life: Minimum 10 hours\n• Ports: Minimum 1 USB 3.0;1 USB-C, 1 HDMI; 1 headphone/microphone combo\n• Storage: 512 GB NVMe SSD\n• 0/S Windows 11 or Mac OS\n• Warranty: 3-year minimum\nTier 2 Staff Laptop Minimum Requirements\n• Enterprise Management Ready\n• Intel i7 CPU, 14th Gen or equivalent.\n• Display: Minimum 13\" diagonal screen\n• Integrated Camera: 1080p\n• Resolution: 1920 X 1080 minimum\n• Memory: Minimum 32GB DDR5 RAM\n• Wireless: 802.11AX WiFi-6E and Bluetooth 5.1\n• Power Supply: USB C, 65W\n• Battery Life: Minimum 10 hours\n• Ports: Minimum 2 USB 3.0; 1 HDMI; 1 headphone/microphone combo\n• Storage: 1 TB NVMe SSD\n• 0/S: Windows 11 or Mac OS\n• Warranty: 3-year minimum\nDisplay Monitor - Touch\n• Minimum 24\" diagonal screen\n• Resolution: 1920 X 1080\n• Port: USB 3.1 Hub\n• Aspect Ratio: 16:9\n• Contrast: 3000:1\n• Warranty: 3-year minimum\nDisplay Monitor - Non-Touch\n• Minimum 24\" diagonal screen\n• Resolution: 1920 X 1080\n• Port: USB 3.1 Hub\n• Warranty: 3-year minimum | \nPROPOSAL SPECIFIC QUESTIONS | ",
+            "chunk_id": "60c10f46-9681-5c9f-b189-aae9d3034cab",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 6,
+            "section_title": null,
+            "relevance_score": null
+          },
+          {
+            "side": "addendum",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Page 1 | 5 \nADDENDUM No. 1\nRFP JA-207652 Student and Staff Computing Devices \n \nThe Purpose of this Addendum is to provide responses to the vendors’ questions related to this RFP. \n \n1. The Display monitor – non-Touch you are asking for 3.1 USB port.  Are you ok with 3.0 or do you \nneed 3.1? \nAnswer: \nUSB 3.1 is a minimum requirement. \n2. Are you ok with 3.2 USB port on the display? \nAnswer: \nA higher specification is permissible. \n3. When are you going to award this? \nAnswer: \nThis RFP is anticipated to be awarded at the August board meeting. \n4. When do you need these delivered by? \nAnswer: \nDallas ISD is anticipating requesting quotes for different projects from awarded \nvendors starting in September of 2024. \n5. What types of funds are you going to use? \nAnswer: \nDallas ISD will primarily be using bond-funded money to purchase devices. \n6. ",
+            "chunk_id": "b9cdcf85-7233-5242-b691-2ba9cb7bfb53",
+            "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+            "page_number": 1,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Warranty Requirements for Devices",
+        "status": "modified_requirement",
+        "original_value": "Warranty: 1-year minimum for student Chromebooks and 3-year minimum for staff devices",
+        "amended_value": "Dallas ISD will ask all warranties to be made by OEM.",
+        "severity": "high",
+        "confidence": "0.90000",
+        "notes": "The addendum specifies that warranties must be OEM, modifying the original warranty requirement.",
+        "impact_note": "This ensures that warranties are backed by the original manufacturers, potentially improving service quality.",
+        "sources": [
+          {
+            "side": "original",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "SCOPE AND SPECIFICATIONS OF THE\nPROPOSAL | \n• Screen Resolution 1920-1080 Non-Touch\n• Memory: Minimum 16GB RAM DDR5 Memory\n• Wireless: 802.11AX WiFi-6E and Bluetooth 5.1\n• Power Supply: Type C, 65W\n• Battery Life: Minimum 10 Hours\n• Ports, Minimum 2 USB 3.0; 1 Type C; 65HDMI; 1 headphone/microphone combo\n• Storage: 256 GB NVMe SSD\n• Windows 11 Pro\n• Warranty: 3-year minimum\nStudent Tablet Minimum Requirements\n• Enterprise Management Ready\n• Processor A13\n• Display: 10.2\" Retina\n• Integrated Camera: 8MP Wide camera\n• Screen Resolutions 2160 x 1620 Multi-touch\n• Wireless: 802.11AC and Bluetooth 4.2\n• Power Supply included\n• Battery Life: Minimum 10 Hours\n• Ports: 1 headphone or other personal audio connection\n• Storage: 64 GB\n• iOS 17\n• Warranty: 1-year minimum | \nStaff Devices\nTier 1 Staff Windows Basic Desktop Minimum Requirements\n• Enterprise Management Ready with Autopilot Enrollment\n• Processor: Intel i5 Processor, 14th Gen or equivalent\n• Display: Minimum 23.8\" diagonal screen Touch Screen\n• Memory: Minimum 16GB RAM\n• Wireless: 802.11AX WiFi-6E and Bluetooth 5.1\n• Ports: Minimum 3 USB 3.0; 2 USB-C1 HDMI; 1 headphone/microphone combo\n• Storage: 512 GB NVMe SSD\n• Windows 11 Pro\n• Warranty: 3-year minimum\nTier 2 Staff Professional Desktop Minimum Requirements\n• Enterprise Management Ready\n• Intel i7 Processor, 14th Gen or equivalent.\n• Display: Minimum 23.8\" diagonal screen Touch Screen\n• Memory: Minimum 32GB DDR5 RAM\n• Wireless: 802.11AX WiFi-6E and Bluetooth 5.1\n• Ports: Minimum 3 USB 3.0; 1 USB-C, 1 HDMI; 1 headphone/microphone combo\n• Storage: 1 TB NVMe SSD\n• Windows 11 Pro or Mac O/S | ",
+            "chunk_id": "af19cfb7-24e1-513c-9acd-787ce8adfa31",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 5,
+            "section_title": null,
+            "relevance_score": null
+          },
+          {
+            "side": "addendum",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": " different and could be close to thirty options. Example, \nfor just the Chrome requirement where Dallas is asking for the standard one-year warranty. We \ncould expand these options for this product alone to: Two year onsite, Two-year ADP (accidental \ndamage protection), Two year onsite and ADP then three-year, four year and five years.   \nHow would Dallas like us to explain this point?  Can Dallas put more boxes in Oracle so we can \nhave costs per option? \nAnswer: \nAs a minimum requirement, Dallas ISD is asking for a one-year warranty for \nstudent Chromebooks and three years for student and staff Windows laptops. The \nsystem will only take one input, additional warranty information and pricing can be \nsubmitted as an attachment.  \n8. Does Dallas prefer for the warranties to be underwritten by insurance? Example: If you pay for \nan additional warranty and that company goes under, if your warranty was not underwritten \nyou would lose your investment. ",
+            "chunk_id": "51cb8f1a-1ca5-5d00-b3d0-b462dab39cea",
+            "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+            "page_number": 1,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Hot Swap Stock for Repairs",
+        "status": "modified_requirement",
+        "original_value": "Hot swap stock for in-warranty repairs",
+        "amended_value": "Hot swap is only for when warranty work will be longer than 5 business days.",
+        "severity": "medium",
+        "confidence": "0.80000",
+        "notes": "The addendum clarifies the conditions under which hot swap stock is to be used, modifying the original requirement.",
+        "impact_note": "This limits the use of hot swap stock, potentially affecting vendor inventory management.",
+        "sources": [
+          {
+            "side": "original",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "SCOPE AND SPECIFICATIONS OF THE\nPROPOSAL | \nType\n……………………………………………………………………………………………………………………………..\nProvide your answer below | \n11. Describe your company's process for maintaining an inventory of temporary replacement or \"hot swap\"\ndevices for use by Dallas ISD while our devices are being repaired.\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nProvide your answer below | \nINSTRUCTION AND REQUIREMENTS FOR\nOFFER SUBMITTAL | \nThe Offeror shall furnish to the District all information and data requested by the District to determine the\nOfferor's qualifications and responsibilities. The requested information must be provided using the PDF\nversion of the solicitation where indicated--do not reference other parts of the Offer or other documents. All\nanswers must be complete and stand-alone. Failure to follow directions using the PDF version of the\nsolicitation may result in the Offer being disqualified or deemed non-responsive. The Offerors shall\nfamiliarize themselves with the relevant conditions in the material and labor markets prior to the submission\nof an offer. By submitting an offer, the Offeror represents that it has familiarized itself with existing and future\nmarket conditions and agrees to perform in full accordance with the Offer. The Offeror must comply with any\ninsurance, bid bond, or liability requirements of the District as noted elsewhere in this solicitation document.\nThe Offeror must include pertinent literature/documentation for the proposed products/goods or services. If\nthe Offeror requires a credit application or similar documentation to conduct business with Dallas ISD after\nawarding of any Contract, those documents must be submitted at the time of Offer submission.\nDallas ISD prefers responses to be submitted online via our electronic system. Please register with the\niSupplier portal https://www.dallasisd.org/domain/143 This process takes up to a week, Dallas ISD asks the\nvendor to please register as early as possible to allow time for electronic responses. Submissions may be\nsubmitted manually. Manual submissions must be delivered to the Procurement Services Department, in a\nsealed envelope by the date and time stated. No fax or email submissions will be accepted. Only one\nformat is needed. The manual submission shall consist of one (1) original hard copy.\nThe Offeror may submit a manual response by paper via mail/FedEx/UPS etc. before the cutoff date and\ntime at the following address:\nDallas ISD\nProcurement Services\n9400 N Central Expwy, Ste 1510\nAttn: Staff Member and BID NUMBER\nDallas, Tx 75231\nDoes the vendor agree and understand?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes\nNo | ",
+            "chunk_id": "bf71ed97-bb8d-5305-a019-0d61a88902b5",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 9,
+            "section_title": null,
+            "relevance_score": null
+          },
+          {
+            "side": "addendum",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "a value add? \nAnswer: \nYes, these can be submitted as an attachment. \n18. On page 9, question #11 of the RFP, the document asks about hot swap stock. Is this stock solely \nfor in-warranty OEM repairs or will the awarded vendor be responsible for out-of-warranty \nrepairs with supported hot swaps? \nAnswer: \nNo, hot swap is only for when warranty work will be longer than 5 business \ndays. \n19. On page 7, question #5 of the RFP, the document asks about staffing for onsite deployments. \nWill an Onsite project manager be required? \nAnswer: \nAny awarded vendor will need to coordinate a schedule of deliveries with the \nDallas ISD ED TECH department. \n20. On page 12, of the RFP, it asks for references within the Dallas/Ft Worth Area. What \nproximity/mileage range should be considered? \nAnswer: \nReferences do not solely need to come from districts/companies within the \nDallas/Fort Worth Area; there is no proximity/mileage that needs to be considered. \n21. ",
+            "chunk_id": "9ce1e010-797e-5a2f-80a9-4a9207440d5a",
+            "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+            "page_number": 2,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Delivery and Deployment Services",
+        "status": "modified_requirement",
+        "original_value": "All deliveries and deployments must incorporate white glove services",
+        "amended_value": "Dallas ISD will not ask for Accidental Damage Protection for purchased devices.",
+        "severity": "medium",
+        "confidence": "0.80000",
+        "notes": "The addendum clarifies that while white glove services are required, accidental damage protection is not, modifying the original delivery and deployment requirement.",
+        "impact_note": "This change may reduce the cost and complexity of the delivery and deployment process for vendors.",
+        "sources": [
+          {
+            "side": "original",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "ay Monitor - Touch\nNote\nAll minimum specifications for student and staff devices detailed in this RFP must be met for each \nspecific device proposed.\nGeneral\nDescription\nResponse Value\nProposed Device Make and Model\n  \n2.2.24 Line 20.02 Display Monitor - Non-Touch\nNote\nAll minimum specifications for student and staff devices detailed in this RFP must be met for each \nspecific device proposed.\nGeneral\nDescription\nResponse Value\nProposed Device Make and Model",
+            "chunk_id": "97974646-1b24-54ed-a6ec-1fa8140be880",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 40,
+            "section_title": null,
+            "relevance_score": null
+          },
+          {
+            "side": "addendum",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "estion. \nAnswer: \nYes, the specs, more specifically the proposed make and model of the device \nbeing proposed, should be included in this field. \n11. Will DISD consider extending the submission deadline out a few more weeks to allow sufficient \ntime for vendors to complete a compliant response after the addendum(s) has been posted? \nAnswer: \nDallas ISD does not anticipate extending the submission deadline.",
+            "chunk_id": "fae9ba39-2247-5746-9cb1-422c1517aaee",
+            "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+            "page_number": 1,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "References for Vendor Evaluation",
+        "status": "modified_requirement",
+        "original_value": "References must be from Dallas/Fort Worth area",
+        "amended_value": "References do not solely need to come from districts/companies within the Dallas/Fort Worth Area; there is no proximity/mileage that needs to be considered.",
+        "severity": "low",
+        "confidence": "0.70000",
+        "notes": "The addendum modifies the requirement for references, allowing for a broader range of acceptable references.",
+        "impact_note": "This change may increase the pool of potential vendors by allowing references from outside the specified area.",
+        "sources": [
+          {
+            "side": "original",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "ndor or multiple vendors.\nThe specifications listed in this RFP are the minimum hardware requirements for each tier of device required\nby Dallas ISD. Vendors responding to this RFP must have the ability to provide the District with significant \nquantities of devices as requested in the pricing lines in this RFP. Note that quantities requested by Dallas \nISD are estimates to be ordered over the five years of the contracts resulting from this RFP. Purchases may \nalso include a variety of device accessories which will be ordered in a bundle along with the devices. Such \naccessories include, but are not limited to, sleeves, cases, mice, keyboards, and cables that may not \nnecessarily come with the devices.\nEach submission must include a detailed plan as to how the vendor will track all shipped products and \nprovide deployment services. Processes and procedures are required in the response, which outlines how \ntracking will be executed and any processes for providing white glove services.\n",
+            "chunk_id": "c9c9ba1e-d739-5ad4-9d60-1dfda21f0702",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 3,
+            "section_title": null,
+            "relevance_score": null
+          },
+          {
+            "side": "addendum",
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": " not solely need to come from districts/companies within the \nDallas/Fort Worth Area; there is no proximity/mileage that needs to be considered. \n21. Are stated quantities one-time buys or spread over the first 3 years of the contract? \nAnswer: \nThe quantities will be spread over life of the contract. \n22. Does DISD have a Volume License Agreement with Microsoft? \nAnswer: \nYes.  \n23. Do the AIO Desktops require a webcam? \nAnswer: \nYes. \n24. In RFP Section 2.1 Line Information (pricing table), will you please clarify what information is \nbeing requested in the last column, “Bid Minimum Release Amount”? \nAnswer: \nThe “Bid Minimum Release Amount” is a system default field, this can be \ndisregarded.",
+            "chunk_id": "9d20c7a2-8f1a-50f3-a0e9-f53fc02bd3e9",
+            "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+            "page_number": 2,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      }
+    ]
+  },
+  "specialized_agents": [
+    {
+      "agent_run_id": "0ddc9070-c1d4-4076-99fa-bb42dac0cd30",
+      "agent_name": "requirements",
+      "status": "completed",
+      "model_name": "gpt-4o-mini",
+      "evidence_chunk_count": 12,
+      "warnings": [],
+      "errors": [],
+      "review_issues": [],
+      "started_at": "2026-10-11 11:30:51.368862+00:00",
+      "completed_at": "2026-10-11 11:31:04.584434+00:00",
+      "findings": [
+        {
+          "finding_key": "requirements:1",
+          "title": "No Deviations or Exceptions Certification",
+          "description": "Vendor must certify that there are NO deviations or exceptions from the attached specific terms, conditions, specifications, and required forms.",
+          "category": "Certification Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "---------------------------------------------------------------------------------------------\nType \n……………………………………………………………………………………………………………………………..\nProvide your answer below\nNO DEVIATIONS OR EXCEPTIONS\nI certify that there are NO deviations or exceptions from the attached specific terms, conditions, \nspecifications, and required forms.\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType \n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nI certify that there are NO deviations or exceptions from the attached specific terms, conditions, \nspecifications, and required forms \nFEDERAL REQUIREMENTS (EDGAR)\nThe following certifications and provisions are required and apply when Dallas ISD expends federal funds for\nany contract resulting from this procurement process. Pursuant to 2 C.F.R. ",
+              "chunk_id": "36617498-83f7-571a-b484-d6c50ef00a4a",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 22,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "requirements:2",
+          "title": "Compliance with Buy America Provisions",
+          "description": "Vendor certifies compliance with all applicable provisions of the Buy America Act.",
+          "category": "Certification Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "FEDERAL REQUIREMENTS (EDGAR) | \nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH BUY AMERICA PROVISIONS\nVendor certifies that Vendor is in compliance with all applicable provisions of the Buy America Act.\nPurchases made in accordance with the Buy America Act must still follow the applicable procurement rules\ncalling for free and open competition.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF NON-COLLUSION STATEMENT\nThe vendor certifies under penalty of perjury that its response to this procurement solicitation is in all\nrespects bona fide, fair, and made without collusion or fraud with any person, joint venture, partnership,\ncorporation, or other business or legal entity.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF ACCESS TO RECORDS - 2 C.F.R. 200.336\nVendor agrees that the Inspector General of the District or any of their duly authorized representatives shall\nhave access to any books, documents, papers, and records of Vendor that are directly pertinent to Vendor's\ndischarge of its obligations under the Contract for the purpose of making audits, examinations, excerpts, and\ntranscriptions. The right also includes timely and reasonable access to Vendor's personnel for the purpose\nof interviews and discussions relating to such documents.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH NEVER CONTRACT WITH THE ENEMY - 2 C.F.R. 200.215\nFederal awarding agencies and recipients are subject to the regulations implementing Never Contract with\nthe Enemy in 2 CFR part 183. The regulations in 2 CFR part 183 affect covered contracts, grants, and\ncooperative agreements that are expected to exceed $50,000 within the period of performance, are\nperformed outside the United States and its territories and are in support of a contingency operation in which\nmembers of the Armed Forces are actively engaged in hostilities.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | ",
+              "chunk_id": "3c17f9d3-984d-55d3-94c1-f5da0f4da935",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 28,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "requirements:3",
+          "title": "Certification of Non-Collusion Statement",
+          "description": "Vendor certifies that its response is bona fide, fair, and made without collusion or fraud.",
+          "category": "Certification Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "FEDERAL REQUIREMENTS (EDGAR) | \nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH BUY AMERICA PROVISIONS\nVendor certifies that Vendor is in compliance with all applicable provisions of the Buy America Act.\nPurchases made in accordance with the Buy America Act must still follow the applicable procurement rules\ncalling for free and open competition.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF NON-COLLUSION STATEMENT\nThe vendor certifies under penalty of perjury that its response to this procurement solicitation is in all\nrespects bona fide, fair, and made without collusion or fraud with any person, joint venture, partnership,\ncorporation, or other business or legal entity.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF ACCESS TO RECORDS - 2 C.F.R. 200.336\nVendor agrees that the Inspector General of the District or any of their duly authorized representatives shall\nhave access to any books, documents, papers, and records of Vendor that are directly pertinent to Vendor's\ndischarge of its obligations under the Contract for the purpose of making audits, examinations, excerpts, and\ntranscriptions. The right also includes timely and reasonable access to Vendor's personnel for the purpose\nof interviews and discussions relating to such documents.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH NEVER CONTRACT WITH THE ENEMY - 2 C.F.R. 200.215\nFederal awarding agencies and recipients are subject to the regulations implementing Never Contract with\nthe Enemy in 2 CFR part 183. The regulations in 2 CFR part 183 affect covered contracts, grants, and\ncooperative agreements that are expected to exceed $50,000 within the period of performance, are\nperformed outside the United States and its territories and are in support of a contingency operation in which\nmembers of the Armed Forces are actively engaged in hostilities.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | ",
+              "chunk_id": "3c17f9d3-984d-55d3-94c1-f5da0f4da935",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 28,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "requirements:4",
+          "title": "Access to Records Certification",
+          "description": "Vendor agrees that the Inspector General of the District shall have access to any books, documents, papers, and records of Vendor.",
+          "category": "Certification Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "FEDERAL REQUIREMENTS (EDGAR) | \nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH BUY AMERICA PROVISIONS\nVendor certifies that Vendor is in compliance with all applicable provisions of the Buy America Act.\nPurchases made in accordance with the Buy America Act must still follow the applicable procurement rules\ncalling for free and open competition.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF NON-COLLUSION STATEMENT\nThe vendor certifies under penalty of perjury that its response to this procurement solicitation is in all\nrespects bona fide, fair, and made without collusion or fraud with any person, joint venture, partnership,\ncorporation, or other business or legal entity.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF ACCESS TO RECORDS - 2 C.F.R. 200.336\nVendor agrees that the Inspector General of the District or any of their duly authorized representatives shall\nhave access to any books, documents, papers, and records of Vendor that are directly pertinent to Vendor's\ndischarge of its obligations under the Contract for the purpose of making audits, examinations, excerpts, and\ntranscriptions. The right also includes timely and reasonable access to Vendor's personnel for the purpose\nof interviews and discussions relating to such documents.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH NEVER CONTRACT WITH THE ENEMY - 2 C.F.R. 200.215\nFederal awarding agencies and recipients are subject to the regulations implementing Never Contract with\nthe Enemy in 2 CFR part 183. The regulations in 2 CFR part 183 affect covered contracts, grants, and\ncooperative agreements that are expected to exceed $50,000 within the period of performance, are\nperformed outside the United States and its territories and are in support of a contingency operation in which\nmembers of the Armed Forces are actively engaged in hostilities.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | ",
+              "chunk_id": "3c17f9d3-984d-55d3-94c1-f5da0f4da935",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 28,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "requirements:5",
+          "title": "Record Retention Requirements",
+          "description": "Vendor certifies compliance with record retention requirements detailed in 2 CFR 200.333.",
+          "category": "Certification Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "FEDERAL REQUIREMENTS (EDGAR) | \nsmall and minority businesses, and women's business enterprises; and\n5. Using the services and assistance, as appropriate, of such organizations as the Small Business\nAdministration and the Minority Business Development Agency of the Department of Commerce.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nRECORD RETENTION REQUIREMENTS FOR CONTRACTS INVOLVING FEDERAL FUNDS\nWhen federal funds are expended by DALLAS ISD for any contract resulting from this procurement process,\nthe Vendor certifies that it will comply with the record retention requirements detailed in 2 CFR 200.333. The\nVendor further certifies that Vendor will retain all records as required by 2 CFR 200.333 for a period of three\nyears after grantees or subgrantees submit final expenditure reports or quarterly or annual financial reports,\nas applicable, and all other pending matters are closed.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH EPA REGULATIONS APPLICABLE TO GRANTS,\nSUBGRANTS, COOPERATIVE AGREEMENTS, AND CONTRACTS IN EXCESS OF $100,000 OF\nFEDERAL FUNDS\nWhen federal funds are expended by Dallas ISD for any contract resulting from this procurement process in\nexcess of $100,000, the vendor certifies that the vendor is in compliance with all applicable standards,\norders, regulations, and/or requirements issued pursuant to the Clean Air Act of 1970, as amended (42\nU.S.C. 1857(h)), Section 508 of the Clean Water Act, as amended (33 U.S.C. 1368), Executive Order\n117389 and Environmental Protection Agency Regulation, 40 CFR Part 15.\nDoes Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH THE ENERGY POLICY AND CONSERVATION ACT\nWhen Dallas ISD expends federal funds for any contract resulting from this procurement process, the\nVendor certifies that it will comply with the mandatory standards and policies relating to energy efficiency\nwhich are contained in the state energy conservation plan issued in compliance with the Energy Policy and\nConservation Act (42 U.S.C. 6321 et seq.; 49 C.F.R. Part 18).\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation | ",
+              "chunk_id": "ae8f6bbb-cc0a-5bcc-b423-3cb2f47b1b41",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 27,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "requirements:6",
+          "title": "Compliance with EPA Regulations",
+          "description": "Vendor certifies compliance with applicable standards and regulations issued pursuant to the Clean Air Act and Clean Water Act.",
+          "category": "Certification Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "FEDERAL REQUIREMENTS (EDGAR) | \nsmall and minority businesses, and women's business enterprises; and\n5. Using the services and assistance, as appropriate, of such organizations as the Small Business\nAdministration and the Minority Business Development Agency of the Department of Commerce.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nRECORD RETENTION REQUIREMENTS FOR CONTRACTS INVOLVING FEDERAL FUNDS\nWhen federal funds are expended by DALLAS ISD for any contract resulting from this procurement process,\nthe Vendor certifies that it will comply with the record retention requirements detailed in 2 CFR 200.333. The\nVendor further certifies that Vendor will retain all records as required by 2 CFR 200.333 for a period of three\nyears after grantees or subgrantees submit final expenditure reports or quarterly or annual financial reports,\nas applicable, and all other pending matters are closed.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH EPA REGULATIONS APPLICABLE TO GRANTS,\nSUBGRANTS, COOPERATIVE AGREEMENTS, AND CONTRACTS IN EXCESS OF $100,000 OF\nFEDERAL FUNDS\nWhen federal funds are expended by Dallas ISD for any contract resulting from this procurement process in\nexcess of $100,000, the vendor certifies that the vendor is in compliance with all applicable standards,\norders, regulations, and/or requirements issued pursuant to the Clean Air Act of 1970, as amended (42\nU.S.C. 1857(h)), Section 508 of the Clean Water Act, as amended (33 U.S.C. 1368), Executive Order\n117389 and Environmental Protection Agency Regulation, 40 CFR Part 15.\nDoes Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH THE ENERGY POLICY AND CONSERVATION ACT\nWhen Dallas ISD expends federal funds for any contract resulting from this procurement process, the\nVendor certifies that it will comply with the mandatory standards and policies relating to energy efficiency\nwhich are contained in the state energy conservation plan issued in compliance with the Energy Policy and\nConservation Act (42 U.S.C. 6321 et seq.; 49 C.F.R. Part 18).\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation | ",
+              "chunk_id": "ae8f6bbb-cc0a-5bcc-b423-3cb2f47b1b41",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 27,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "requirements:7",
+          "title": "Compliance with Energy Policy and Conservation Act",
+          "description": "Vendor certifies compliance with mandatory standards and policies relating to energy efficiency.",
+          "category": "Certification Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "FEDERAL REQUIREMENTS (EDGAR) | \nsmall and minority businesses, and women's business enterprises; and\n5. Using the services and assistance, as appropriate, of such organizations as the Small Business\nAdministration and the Minority Business Development Agency of the Department of Commerce.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nRECORD RETENTION REQUIREMENTS FOR CONTRACTS INVOLVING FEDERAL FUNDS\nWhen federal funds are expended by DALLAS ISD for any contract resulting from this procurement process,\nthe Vendor certifies that it will comply with the record retention requirements detailed in 2 CFR 200.333. The\nVendor further certifies that Vendor will retain all records as required by 2 CFR 200.333 for a period of three\nyears after grantees or subgrantees submit final expenditure reports or quarterly or annual financial reports,\nas applicable, and all other pending matters are closed.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH EPA REGULATIONS APPLICABLE TO GRANTS,\nSUBGRANTS, COOPERATIVE AGREEMENTS, AND CONTRACTS IN EXCESS OF $100,000 OF\nFEDERAL FUNDS\nWhen federal funds are expended by Dallas ISD for any contract resulting from this procurement process in\nexcess of $100,000, the vendor certifies that the vendor is in compliance with all applicable standards,\norders, regulations, and/or requirements issued pursuant to the Clean Air Act of 1970, as amended (42\nU.S.C. 1857(h)), Section 508 of the Clean Water Act, as amended (33 U.S.C. 1368), Executive Order\n117389 and Environmental Protection Agency Regulation, 40 CFR Part 15.\nDoes Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nCERTIFICATION OF COMPLIANCE WITH THE ENERGY POLICY AND CONSERVATION ACT\nWhen Dallas ISD expends federal funds for any contract resulting from this procurement process, the\nVendor certifies that it will comply with the mandatory standards and policies relating to energy efficiency\nwhich are contained in the state energy conservation plan issued in compliance with the Energy Policy and\nConservation Act (42 U.S.C. 6321 et seq.; 49 C.F.R. Part 18).\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation | ",
+              "chunk_id": "ae8f6bbb-cc0a-5bcc-b423-3cb2f47b1b41",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 27,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "requirements:8",
+          "title": "Prohibition on Certain Telecommunications and Video Surveillance Services",
+          "description": "Recipients are prohibited from using loan or grant funds to procure certain telecommunications equipment.",
+          "category": "Regulatory Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "FEDERAL REQUIREMENTS (EDGAR) | \nPROHIBITION ON CERTAIN TELECOMMUNICATIONS AND VIDEO SURVEILLANCE SERVICES OR\nEQUIPMENT - 2 C.F.R 200.216\na. Recipients and subrecipients are prohibited from obligating or expending loan or grant funds to:\n1. Procure or obtain;\n2. Extend or renew a contract to procure or obtain; or\n3. Enter into a contract (or extend or renew a contract) to procure or obtain equipment, services, or\nsystems that uses covered telecommunications equipment or services as a substantial or essential\ncomponent of any system, or as critical technology as part of any system. As described in Public Law\n115-232, section 889, covered telecommunications equipment is telecommunications equipment\nproduced by Huawei Technologies Company or ZTE Corporation (or any subsidiary or affiliate of such\nentities).\ni. For the purpose of public safety, security of government facilities, physical security surveillance of\ncritical infrastructure, and other national security purposes, video surveillance and telecommunications\nequipment produced by Hytera Communications Corporation, Hangzhou Hikvision Digital Technology\nCompany, or Dahua Technology Company (or any subsidiary or affiliate of such entities).\nii. Telecommunications or video surveillance services provided by such entities or using such equipment.\niii. Telecommunications or video surveillance equipment or services produced or provided by an entity\nthat the Secretary of Defense, in consultation with the Director of the National Intelligence or the Director\nof the Federal Bureau of Investigation, reasonably believes to be an entity owned or controlled by, or\notherwise connected to, the government of a covered foreign country.\nb. In implementing the prohibition under Public Law 115-232, section 889, subsection (f), paragraph (1),\nheads of executive agencies administering loan, grant, or subsidy programs shall prioritize available\nfunding and technical support to assist affected businesses, institutions, and organizations as is\nreasonably necessary for those affected entities to transition from covered communications equipment\nand services, to procure replacement equipment and services, and to ensure that communications\nservice to users and customers is sustained.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nAGREEMENT TO COMPLY\nThe vendor agrees to comply with all federal, state, and local laws, rules, regulations, and ordinances, as\napplicable. It is further acknowledged that the vendor certifies compliance with all provisions, laws, acts,\nregulations, etc. as specifically noted above.\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nEVALUATION PROCESS | \nOVERVIEW\nEach Offer will be analyzed and evaluated by a panel selected by the District.\na. the District intends to award a contract to one or more responsive, responsible Offerors that provide the\nbest value to the District. Pursuant to Dallas ISD Board policy and applicable law, \"best value\" is determined\naccording to the price and non-price criteria listed in the attached Evaluation Criteria Score Sheet and\nweighted at the sole discretion of the District. By submitting an Offer, an Offeror acknowledges the District's | ",
+              "chunk_id": "53de5b82-19ed-5f80-8f57-7a7c2615e747",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 29,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "requirements:9",
+          "title": "Agreement to Comply with Laws",
+          "description": "Vendor agrees to comply with all federal, state, and local laws, rules, regulations, and ordinances.",
+          "category": "Compliance Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "FEDERAL REQUIREMENTS (EDGAR) | \nPROHIBITION ON CERTAIN TELECOMMUNICATIONS AND VIDEO SURVEILLANCE SERVICES OR\nEQUIPMENT - 2 C.F.R 200.216\na. Recipients and subrecipients are prohibited from obligating or expending loan or grant funds to:\n1. Procure or obtain;\n2. Extend or renew a contract to procure or obtain; or\n3. Enter into a contract (or extend or renew a contract) to procure or obtain equipment, services, or\nsystems that uses covered telecommunications equipment or services as a substantial or essential\ncomponent of any system, or as critical technology as part of any system. As described in Public Law\n115-232, section 889, covered telecommunications equipment is telecommunications equipment\nproduced by Huawei Technologies Company or ZTE Corporation (or any subsidiary or affiliate of such\nentities).\ni. For the purpose of public safety, security of government facilities, physical security surveillance of\ncritical infrastructure, and other national security purposes, video surveillance and telecommunications\nequipment produced by Hytera Communications Corporation, Hangzhou Hikvision Digital Technology\nCompany, or Dahua Technology Company (or any subsidiary or affiliate of such entities).\nii. Telecommunications or video surveillance services provided by such entities or using such equipment.\niii. Telecommunications or video surveillance equipment or services produced or provided by an entity\nthat the Secretary of Defense, in consultation with the Director of the National Intelligence or the Director\nof the Federal Bureau of Investigation, reasonably believes to be an entity owned or controlled by, or\notherwise connected to, the government of a covered foreign country.\nb. In implementing the prohibition under Public Law 115-232, section 889, subsection (f), paragraph (1),\nheads of executive agencies administering loan, grant, or subsidy programs shall prioritize available\nfunding and technical support to assist affected businesses, institutions, and organizations as is\nreasonably necessary for those affected entities to transition from covered communications equipment\nand services, to procure replacement equipment and services, and to ensure that communications\nservice to users and customers is sustained.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nAGREEMENT TO COMPLY\nThe vendor agrees to comply with all federal, state, and local laws, rules, regulations, and ordinances, as\napplicable. It is further acknowledged that the vendor certifies compliance with all provisions, laws, acts,\nregulations, etc. as specifically noted above.\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nEVALUATION PROCESS | \nOVERVIEW\nEach Offer will be analyzed and evaluated by a panel selected by the District.\na. the District intends to award a contract to one or more responsive, responsible Offerors that provide the\nbest value to the District. Pursuant to Dallas ISD Board policy and applicable law, \"best value\" is determined\naccording to the price and non-price criteria listed in the attached Evaluation Criteria Score Sheet and\nweighted at the sole discretion of the District. By submitting an Offer, an Offeror acknowledges the District's | ",
+              "chunk_id": "53de5b82-19ed-5f80-8f57-7a7c2615e747",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 29,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "requirements:10",
+          "title": "Insurance and/or Bonds Requirement",
+          "description": "Vendor must submit a certificate of insurance/bond that meets or exceeds the requirements of the solicitation document.",
+          "category": "Insurance Requirement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "PROPOSAL REQUIREMENT - The following\nattributes require a response | \nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nINSURANCE AND/OR BONDS\nInsurance and/or bond requirements are enumerated elsewhere in Contract documents. Submission of a\ncertificate of insurance/bond by the undersigned (or an agent/broker on behalf of the undersigned)\nrepresents that the coverages and perils covered by the insurance/bond meet or exceed the requirements of\nthe solicitation document and/or subsequent contract. The District may reasonably rely on the submitted\ncertificate of insurance/bond. The certificate of insurance/bond must accurately reflect the policy coverages\nand will become a part of the Contract Documents and incorporated by reference, but the Contract\nterms/conditions and statement of work take precedence over any and all contents of the certificate of\ninsurance/bond including, but not limited to, disclaimers, qualifications, etc. Failure to provide\ninsurance/bond under the Contract may be cause for termination for default and other remedies allowed by\nlaw and/or equity. The offeror must notify the District, in writing, by certified mail or personal delivery, within\nten (10) days after the Offeror knew or should have known of any changes that materially affect the\ninsurance/bond coverage. Please acknowledge that you have read and understood that the district can not\ndo business with your company without the submittal of this form. The insurance form must be received\nwithin ten (10) days of award. For more information please visit the Dallas ISD's terms and conditions page\nat https://www.dallasisd.org/Page/81178.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nWORKERS COMPENSATION\nOfferor acknowledges that the District will NOT provide Workers Compensation coverage to the Offeror and\nOfferor represents to the District that all employees, subcontractors, agents, representatives, etc. of the\nOfferor who will provide products, goods, or services to the District will be covered by worker's compensation\ncoverage for the duration of the Contract, that the coverage will be based on proper reporting of\nclassification codes and payroll amounts, and that all coverage agreements will be filed with the appropriate\ninsurance carrier or, in the case of a self-insured, with the Texas Department of Insurance's Self-Insurance\nRegulation Section. Providing false or misleading information may subject the contractor to administrative\npenalties, criminal penalties, civil penalties, or other civil actions.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nFIREARM ENTITY OR FIREARM TRADE ASSOCIATION\nIf the Vendor is not a sole proprietorship, has ten (10) or more employees, and the value of the Vendor's\ncontract with the Owner has a value of $100,000 or more, the Vendor warrants and represents that it does\nnot have a practice, policy, guidance, or directive that discriminates against a firearm entity or firearm trade\nassociation, as defined by Texas Government Code Ann. Chapter 2274, and will not during the term of any\ncontract with the Owner unless excepted from that law. | ",
+              "chunk_id": "577ad4d4-7393-50cd-916d-f52fadcd6d0b",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 17,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        }
+      ]
+    },
+    {
+      "agent_run_id": "ae5cdbd8-23a9-4b5b-a5e0-53ff799d7ccf",
+      "agent_name": "product_specification",
+      "status": "completed",
+      "model_name": "gpt-4o-mini",
+      "evidence_chunk_count": 12,
+      "warnings": [
+        "Normalized 2 duplicate model-generated finding ID(s)"
+      ],
+      "errors": [],
+      "review_issues": [],
+      "started_at": "2026-10-11 11:31:04.655303+00:00",
+      "completed_at": "2026-10-11 11:31:11.442536+00:00",
+      "findings": [
+        {
+          "finding_key": "product_specification:stable-reference",
+          "title": "Equipment Requirements",
+          "description": "All equipment must be new and of the manufacturer's current model in production at the time of each order executed over the life of the contracts resulting from this RFP. All standard or optional equipment must be as advertised by the original equipment manufacturer (OEM) and must not consist of substitute or aftermarket equipment.",
+          "category": "Equipment Compliance",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "or proposing vendors who are resellers, a copy of all factory-authorized repair and maintenance \ncertifications must be submitted with each proposal. Vendors must provide demonstrated competencies and \nreferences in delivering the magnitude of devices listed on the price sheet. This supporting documentation \nmay include details of past projects, statements in reference letters, and/or project plans.\nEquipment Requirements\nAll equipment must be new and of the manufacturer's current model in production at the time of each order \nexecuted over the life of the contracts resulting from this RFP. All standard or optional equipment must be as\nadvertised by the original equipment manufacturer (OEM) and must not consist of substitute or aftermarket \nequipment. Equipment attachments or parts to be installed must follow the manufacturer's recommendations\nor standard industry practices.\n",
+              "chunk_id": "f4b2ef80-ca41-57d9-84c9-7b0740d6eb2b",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 3,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "product_specification:stable-reference-2",
+          "title": "Warranty Information",
+          "description": "Details for any additional warranty that can be purchased must be provided.",
+          "category": "Warranty",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nList associated details for any additional warranty that can\nbe purchased | ",
+              "chunk_id": "106e56cc-a9ff-5f92-9189-633f31be1795",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 38,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "product_specification:stable-reference-3",
+          "title": "Proposed Device Make and Model",
+          "description": "Vendors must provide the proposed device make and model as part of their response.",
+          "category": "Device Specification",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "8141ab4f-bb77-5a70-9614-14d80d29f460",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 39,
+              "section_title": null,
+              "relevance_score": null
+            },
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "22fa28b2-7fd3-5000-8df0-38c5d5c15cfa",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 40,
+              "section_title": null,
+              "relevance_score": null
+            },
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "4fdfb1d0-2618-5055-a779-1d217e3629da",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 40,
+              "section_title": null,
+              "relevance_score": null
+            },
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "0a9d9c41-3ce4-5aae-af9a-4cd132ab03ce",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 38,
+              "section_title": null,
+              "relevance_score": null
+            },
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "e5e3fa3d-0567-5552-b864-24647599382f",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 40,
+              "section_title": null,
+              "relevance_score": null
+            },
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "4960455e-883d-5151-a890-ae497fe694e7",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 40,
+              "section_title": null,
+              "relevance_score": null
+            },
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "a976e8e1-5ad5-59b4-abd5-1698fd574f48",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 39,
+              "section_title": null,
+              "relevance_score": null
+            },
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "0c478f49-34b1-5942-ab35-433ae006c5c7",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 37,
+              "section_title": null,
+              "relevance_score": null
+            },
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "5ba33861-5717-56dc-b681-96d83278bedd",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 39,
+              "section_title": null,
+              "relevance_score": null
+            },
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Description | Response Value\nProposed Device Make and Model | ",
+              "chunk_id": "474902df-1815-5be8-8ad4-0f9359d38db5",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 39,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        }
+      ]
+    },
+    {
+      "agent_run_id": "ff1449d0-27eb-4523-8a32-cdeecdfd5a0b",
+      "agent_name": "commercial_terms",
+      "status": "completed",
+      "model_name": "gpt-4o-mini",
+      "evidence_chunk_count": 12,
+      "warnings": [],
+      "errors": [],
+      "review_issues": [],
+      "started_at": "2026-10-11 11:31:11.476380+00:00",
+      "completed_at": "2026-10-11 11:31:21.596289+00:00",
+      "findings": [
+        {
+          "finding_key": "commercial_terms:1",
+          "title": "Publication Date",
+          "description": "The publication date for the bid is 05/29/2024 at 11:16 AM EDT.",
+          "category": "Dates",
+          "classification": "mandatory",
+          "attributes": {
+            "value": "05/29/2024 11:16 AM EDT",
+            "term_type": "publication"
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Publication\n05/29/2024 11:16 AM EDT\nClosing Date\n07/09/2024 03:00 PM EDT\nPrebid Conference\n06/10/2024 03:00 PM EDT\nQuestions Due By\n06/11/2024 05:00 PM EDT",
+              "chunk_id": "8a12d7a6-c1f2-54c2-b25f-dcd91bc2b99c",
+              "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+              "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+              "page_number": null,
+              "section_title": "Dates",
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "commercial_terms:2",
+          "title": "Closing Date",
+          "description": "The closing date for the bid is 07/09/2024 at 03:00 PM EDT.",
+          "category": "Dates",
+          "classification": "mandatory",
+          "attributes": {
+            "value": "07/09/2024 03:00 PM EDT",
+            "term_type": "closing_date"
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Publication\n05/29/2024 11:16 AM EDT\nClosing Date\n07/09/2024 03:00 PM EDT\nPrebid Conference\n06/10/2024 03:00 PM EDT\nQuestions Due By\n06/11/2024 05:00 PM EDT",
+              "chunk_id": "8a12d7a6-c1f2-54c2-b25f-dcd91bc2b99c",
+              "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+              "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+              "page_number": null,
+              "section_title": "Dates",
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "commercial_terms:3",
+          "title": "Prebid Conference Date",
+          "description": "The prebid conference is scheduled for 06/10/2024 at 03:00 PM EDT.",
+          "category": "Dates",
+          "classification": "mandatory",
+          "attributes": {
+            "value": "06/10/2024 03:00 PM EDT",
+            "term_type": "prebid_conference"
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Publication\n05/29/2024 11:16 AM EDT\nClosing Date\n07/09/2024 03:00 PM EDT\nPrebid Conference\n06/10/2024 03:00 PM EDT\nQuestions Due By\n06/11/2024 05:00 PM EDT",
+              "chunk_id": "8a12d7a6-c1f2-54c2-b25f-dcd91bc2b99c",
+              "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+              "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+              "page_number": null,
+              "section_title": "Dates",
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "commercial_terms:4",
+          "title": "Questions Due Date",
+          "description": "Questions are due by 06/11/2024 at 05:00 PM EDT.",
+          "category": "Dates",
+          "classification": "mandatory",
+          "attributes": {
+            "value": "06/11/2024 05:00 PM EDT",
+            "term_type": "questions_due"
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Publication\n05/29/2024 11:16 AM EDT\nClosing Date\n07/09/2024 03:00 PM EDT\nPrebid Conference\n06/10/2024 03:00 PM EDT\nQuestions Due By\n06/11/2024 05:00 PM EDT",
+              "chunk_id": "8a12d7a6-c1f2-54c2-b25f-dcd91bc2b99c",
+              "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+              "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+              "page_number": null,
+              "section_title": "Dates",
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "commercial_terms:5",
+          "title": "Insurance/Bond Requirement",
+          "description": "The offeror must provide a certificate of insurance/bond that meets the requirements of the solicitation document.",
+          "category": "Bond Requirement",
+          "classification": "mandatory",
+          "attributes": {
+            "trigger_event": "Failure to provide insurance/bond may be cause for termination for default.",
+            "bond_requirement": "The certificate of insurance/bond must accurately reflect the policy coverages and will become a part of the Contract Documents."
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "quirements of\nthe solicitation document and/or subsequent contract. The District may reasonably rely on the submitted \ncertificate of insurance/bond. The certificate of insurance/bond must accurately reflect the policy coverages \nand will become a part of the Contract Documents and incorporated by reference, but the Contract \nterms/conditions and statement of work take precedence over any and all contents of the certificate of \ninsurance/bond including, but not limited to, disclaimers, qualifications, etc. Failure to provide \ninsurance/bond under the Contract may be cause for termination for default and other remedies allowed by \nlaw and/or equity. The offeror must notify the District, in writing, by certified mail or personal delivery, within \nten (10) days after the Offeror knew or should have known of any changes that materially affect the \ninsurance/bond coverage. ",
+              "chunk_id": "140e42eb-42d0-5ee6-a230-6228dd504040",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 17,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "commercial_terms:6",
+          "title": "Submission Method",
+          "description": "Bid responses must be submitted in a sealed envelope; no fax or email submissions will be accepted.",
+          "category": "Submission Terms",
+          "classification": "mandatory",
+          "attributes": {
+            "trigger_event": "Responses must be delivered by the closing date and time.",
+            "initial_duration": "One original hard copy required."
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "be delivered to the Procurement Services Department, in a \nsealed envelope by the date and time stated. No fax or email submissions will be accepted. Only one \nformat is needed. The manual submission shall consist of one (1) original hard copy.\nThe Offeror may submit a manual response by paper via mail/FedEx/UPS etc. before the cutoff date and \ntime at the following address:\nDallas ISD\nProcurement Services\n9400 N Central Expwy, Ste 1510\nAttn: Staff Member and BID NUMBER\nDallas, Tx 75231\nDoes the vendor agree and understand?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType \n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes \nNo",
+              "chunk_id": "03143832-d0e9-5ada-b611-b8248b42217c",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 9,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "commercial_terms:7",
+          "title": "Vendor Agreement Requirement",
+          "description": "The vendor must agree to the terms outlined in the proposal requirements, including insurance and bond requirements.",
+          "category": "Vendor Agreement",
+          "classification": "mandatory",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "PROPOSAL REQUIREMENT - The following\nattributes require a response | \nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nINSURANCE AND/OR BONDS\nInsurance and/or bond requirements are enumerated elsewhere in Contract documents. Submission of a\ncertificate of insurance/bond by the undersigned (or an agent/broker on behalf of the undersigned)\nrepresents that the coverages and perils covered by the insurance/bond meet or exceed the requirements of\nthe solicitation document and/or subsequent contract. The District may reasonably rely on the submitted\ncertificate of insurance/bond. The certificate of insurance/bond must accurately reflect the policy coverages\nand will become a part of the Contract Documents and incorporated by reference, but the Contract\nterms/conditions and statement of work take precedence over any and all contents of the certificate of\ninsurance/bond including, but not limited to, disclaimers, qualifications, etc. Failure to provide\ninsurance/bond under the Contract may be cause for termination for default and other remedies allowed by\nlaw and/or equity. The offeror must notify the District, in writing, by certified mail or personal delivery, within\nten (10) days after the Offeror knew or should have known of any changes that materially affect the\ninsurance/bond coverage. Please acknowledge that you have read and understood that the district can not\ndo business with your company without the submittal of this form. The insurance form must be received\nwithin ten (10) days of award. For more information please visit the Dallas ISD's terms and conditions page\nat https://www.dallasisd.org/Page/81178.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nWORKERS COMPENSATION\nOfferor acknowledges that the District will NOT provide Workers Compensation coverage to the Offeror and\nOfferor represents to the District that all employees, subcontractors, agents, representatives, etc. of the\nOfferor who will provide products, goods, or services to the District will be covered by worker's compensation\ncoverage for the duration of the Contract, that the coverage will be based on proper reporting of\nclassification codes and payroll amounts, and that all coverage agreements will be filed with the appropriate\ninsurance carrier or, in the case of a self-insured, with the Texas Department of Insurance's Self-Insurance\nRegulation Section. Providing false or misleading information may subject the contractor to administrative\npenalties, criminal penalties, civil penalties, or other civil actions.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes - I agree\nNo - I Do not agree . The District shall consider a NO response a basis for non-award and/or cancellation\nand/or termination of any award | \nFIREARM ENTITY OR FIREARM TRADE ASSOCIATION\nIf the Vendor is not a sole proprietorship, has ten (10) or more employees, and the value of the Vendor's\ncontract with the Owner has a value of $100,000 or more, the Vendor warrants and represents that it does\nnot have a practice, policy, guidance, or directive that discriminates against a firearm entity or firearm trade\nassociation, as defined by Texas Government Code Ann. Chapter 2274, and will not during the term of any\ncontract with the Owner unless excepted from that law. | ",
+              "chunk_id": "577ad4d4-7393-50cd-916d-f52fadcd6d0b",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 17,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "commercial_terms:8",
+          "title": "No Extension of Deadline",
+          "description": "Dallas ISD does not anticipate extending the submission deadline.",
+          "category": "Deadline",
+          "classification": "informational",
+          "attributes": {},
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "estion. \nAnswer: \nYes, the specs, more specifically the proposed make and model of the device \nbeing proposed, should be included in this field. \n11. Will DISD consider extending the submission deadline out a few more weeks to allow sufficient \ntime for vendors to complete a compliant response after the addendum(s) has been posted? \nAnswer: \nDallas ISD does not anticipate extending the submission deadline.",
+              "chunk_id": "fae9ba39-2247-5746-9cb1-422c1517aaee",
+              "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+              "document_id": "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+              "page_number": 1,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        }
+      ]
+    },
+    {
+      "agent_run_id": "fe373986-2e78-47ba-bdbc-6b248d29e8b4",
+      "agent_name": "compliance_documentation",
+      "status": "completed",
+      "model_name": "gpt-4o-mini",
+      "evidence_chunk_count": 12,
+      "warnings": [],
+      "errors": [],
+      "review_issues": [],
+      "started_at": "2026-10-11 11:31:21.640109+00:00",
+      "completed_at": "2026-10-11 11:31:28.615250+00:00",
+      "findings": [
+        {
+          "finding_key": "compliance_documentation:1",
+          "title": "MWBE Forms Requirement",
+          "description": "MWBE Forms must be completed and attached regardless of MWBE status.",
+          "category": "Compliance",
+          "classification": "mandatory",
+          "attributes": {
+            "document_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "requirement_type": "MWBE Forms",
+            "submission_channel": "Response Attachments"
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Name | Data Type | Description\nMWBE Forms | File | MWBE Forms must be completed and attached\nregardless if you are MWBE status\nW9 Form | File | W9 Form completed, signed and attached to the\nsubmission\nPunch Out Process -\nOPTIONAL | File | Punch Out Process - OPTIONAL",
+              "chunk_id": "de0159d7-a322-5d60-b665-c61b55d1e00d",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 33,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "compliance_documentation:2",
+          "title": "W9 Form Requirement",
+          "description": "W9 Form must be completed, signed, and attached to the submission.",
+          "category": "Compliance",
+          "classification": "mandatory",
+          "attributes": {
+            "document_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "requirement_type": "W9 Form",
+            "submission_channel": "Response Attachments"
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Name | Data Type | Description\nMWBE Forms | File | MWBE Forms must be completed and attached\nregardless if you are MWBE status\nW9 Form | File | W9 Form completed, signed and attached to the\nsubmission\nPunch Out Process -\nOPTIONAL | File | Punch Out Process - OPTIONAL",
+              "chunk_id": "de0159d7-a322-5d60-b665-c61b55d1e00d",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 33,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "compliance_documentation:3",
+          "title": "Form 1295 Submission Requirement",
+          "description": "Form 1295 must be submitted with the RFP response.",
+          "category": "Compliance",
+          "classification": "mandatory",
+          "attributes": {
+            "document_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "requirement_type": "Form 1295",
+            "submission_channel": "Response Attachments"
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "Page 4 | 5 \nADDENDUM No. 1\nRFP JA-207652 Student and Staff Computing Devices \n \n31. FORM 1295 - CERTIFICATE OF INTERESTED PARTIES: The RFP states that \"This form must then be \nsigned and attached to the Response Attachments, prior to any business transaction.\" Referring \nto \"Response Attachments,\" does Form 1295 have to be submitted with the RFP response or \nafter award, \"prior to any business transaction\"?  \nAnswer: \nThe Form 1295 should be submitted with the RFP response. \n32. INSTRUCTIONS AND REQUIREMENTS FOR OFFER SUBMITTAL: The RFP states that \"the requested \ninformation must be provided using the PDF version of the solicitation.\"  Some of the attributes, \nhowever, require a response that exceeds the space available in the PDF version of the \nsolicitation. ",
+              "chunk_id": "06453109-4c62-551f-9f2e-afc6bb352ddb",
+              "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+              "document_id": "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+              "page_number": 4,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        },
+        {
+          "finding_key": "compliance_documentation:4",
+          "title": "Signature and Declaration of Compliance",
+          "description": "A signature is required for the declaration of compliance.",
+          "category": "Compliance",
+          "classification": "mandatory",
+          "attributes": {
+            "document_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "requirement_type": "Signature and Declaration",
+            "signature_required": "true"
+          },
+          "confidence": "1.00000",
+          "citations": [
+            {
+              "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+              "excerpt": "SIGNATURE AND DECLARATION OF\nCOMPLIANCE | \nType\n……………………………………………………………………………………………………………………………..\nProvide your answer below | ",
+              "chunk_id": "cbfbc581-5493-5729-a089-739a4045196c",
+              "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+              "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+              "page_number": 33,
+              "section_title": null,
+              "relevance_score": null
+            }
+          ],
+          "unresolved_questions": [],
+          "requires_human_review": false
+        }
+      ]
+    },
+    {
+      "agent_run_id": "cb0e66ca-7402-4d47-b69f-a4aefb17b3ab",
+      "agent_name": "evidence_review",
+      "status": "completed",
+      "model_name": null,
+      "evidence_chunk_count": 34,
+      "warnings": [],
+      "errors": [],
+      "review_issues": [],
+      "started_at": "2026-10-11 11:31:28.644353+00:00",
+      "completed_at": "2026-10-11 11:31:28.672705+00:00",
+      "findings": []
+    }
+  ],
+  "validation": {
+    "validation_run_id": "e23a98f1-a10e-45f1-a285-f2919f932bee",
+    "status": "partial",
+    "overall_status": "needs_review",
+    "model_name": "gpt-4o-mini",
+    "thresholds": {
+      "high": 0.8,
+      "medium": 0.55
+    },
+    "addendum_check_status": "checked",
+    "started_at": "2026-10-11 11:31:28.717284+00:00",
+    "completed_at": "2026-10-11 11:31:44.094982+00:00",
+    "error_message": null,
+    "fields": [
+      {
+        "field_name": "Bid Number",
+        "extracted_value": "JA-207652",
+        "status": "validated",
+        "confidence_score": "1.00000",
+        "confidence_category": "high",
+        "reasons": [
+          "Deterministic literal and citation checks completed."
+        ],
+        "deterministic_checks": {
+          "literal_values": [
+            "JA-207652"
+          ],
+          "valid_citations": 1,
+          "claimed_citations": 1,
+          "malformed_citations": 0,
+          "exact_identifier_check": true,
+          "literal_values_matched": [
+            "JA-207652"
+          ],
+          "literal_support_fraction": 1.0
+        },
+        "recommended_action": "Eligible for routine downstream use, subject to the documented heuristic limits.",
+        "supporting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Reference Number\n00004079100\nIssuing Organization\nDallas Independent School District\nSolicitation Type\nRFP - Request for Proposal (Informal)\nSolicitation Number\nJA-207652\nTitle\nStudent and Staff Computing Devices **SOURCING #168884**\nSource ID\nSCRIBE",
+            "chunk_id": "b687ccd6-cda4-5cd9-bdf9-90461d1449d5",
+            "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+            "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+            "page_number": null,
+            "section_title": "Basic Information",
+            "relevance_score": null
+          }
+        ],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Title",
+        "extracted_value": "Student and Staff Computing Devices",
+        "status": "validated",
+        "confidence_score": "1.00000",
+        "confidence_category": "high",
+        "reasons": [
+          "Deterministic literal and citation checks completed."
+        ],
+        "deterministic_checks": {
+          "literal_values": [
+            "Student and Staff Computing Devices"
+          ],
+          "valid_citations": 1,
+          "claimed_citations": 1,
+          "malformed_citations": 0,
+          "exact_identifier_check": false,
+          "literal_values_matched": [
+            "Student and Staff Computing Devices"
+          ],
+          "literal_support_fraction": 1.0
+        },
+        "recommended_action": "Eligible for routine downstream use, subject to the documented heuristic limits.",
+        "supporting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Reference Number\n00004079100\nIssuing Organization\nDallas Independent School District\nSolicitation Type\nRFP - Request for Proposal (Informal)\nSolicitation Number\nJA-207652\nTitle\nStudent and Staff Computing Devices **SOURCING #168884**\nSource ID\nSCRIBE",
+            "chunk_id": "b687ccd6-cda4-5cd9-bdf9-90461d1449d5",
+            "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+            "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+            "page_number": null,
+            "section_title": "Basic Information",
+            "relevance_score": null
+          }
+        ],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Due Date",
+        "extracted_value": "July 9, 2024 2:00 PM CST",
+        "status": "needs_review",
+        "confidence_score": "0.38000",
+        "confidence_category": "low",
+        "reasons": [
+          "Semantic verification failed or returned malformed evidence references."
+        ],
+        "deterministic_checks": {
+          "literal_values": [
+            "July 9, 2024 2:00 PM CST"
+          ],
+          "valid_citations": 1,
+          "claimed_citations": 1,
+          "malformed_citations": 0,
+          "exact_identifier_check": false,
+          "literal_values_matched": [],
+          "literal_support_fraction": 0.0
+        },
+        "recommended_action": "Review this field manually using the validated citations.",
+        "supporting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Page 1 | 1 \nADDENDUM No. 2\nRFP JA-207652 Student and Staff Computing Devices \n \nThe Purpose of this Addendum is to extend the due date of this RFP. \n \nThe new due date for this RFP will be July 9, 2024 at 2:00 PM CST. \n \n \nThe information in this Addendum is hereby incorporated and made part of any contract awarded \npursuant to this solicitation. \n \nPlease sign this addendum and submit along with your copies of the proposal. ALL OTHER PROVISIONS \nAND OTHER TERMS AND CONDITIONS REMAIN UNCHANGED. BIDDERS ARE REQUIRED TO \nACKNOWLEDGE AND RETURN/SUBMIT A COPY OF THIS ADDENDUM WITH THEIR PROPOSAL. \n \n \nCompany Name: \n \nSubmitter’s Name/Title: \n \nAddress: \n \nCity, State and Zip Code: \n \nEmail Address: \n \nSubmitter’s Signature: \n \nTelephone No. \n \nFax No. \n \n800 # (if available) \n \nDate: \n \n \n \n \n \n \nEND OF ADDENDUM",
+            "chunk_id": "8b6d4aca-b0fa-53c0-b7c3-3d544776a979",
+            "file_name": "b884a54f_Addendum 2 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "466c0379-46ee-447a-88af-ed1bf0011d00",
+            "page_number": 1,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ],
+        "contradicting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Request For Proposal 168884  JA-207652 Student and Staff Computing Devices\n \nDallas ISD rev 2.0\nPage 2 of 40 \nBuyer\nALZATE, JASMINE\nEmail\nJALZATE@dallasisd.org\n1 Header Information\n1.1 General Information\nFirst Advertisement Date/Issue Date\n26-MAY-2024 08:00:00\nSecond Advertisement Date\n02-JUN-2024 08:00:00\nPre-Proposal Meeting\n10-JUN-2024 14:00:00\nQuestions Deadline\n11-JUN-2024 16:00:00\nQuestions Response from the District\n13-JUN-2024 18:00:00\nSolicitation Due\n27-JUN-2024 14:00:00\nAnticipated Evaluation & Sel\n11-JUL-2024 14:00:00\nAnticipated Approval/Award\n22-AUG-2024 18:00:00\nPre-Proposal \nA pre-proposal meeting will be held at 2:00 PM CST via TEAMS video conference on June 10, \n2024. Please submit (in writing) any questions regarding this RFP. Only written questions will be\nconsidered. It is highly encouraged that all potential proposers participate and attend the pre-\nproposal.\n",
+            "chunk_id": "d987d55d-f82a-57fb-9ac7-53a7d81a882f",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 2,
+            "section_title": null,
+            "relevance_score": null
+          },
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Page 1 | 1 \nADDENDUM No. 2\nRFP JA-207652 Student and Staff Computing Devices \n \nThe Purpose of this Addendum is to extend the due date of this RFP. \n \nThe new due date for this RFP will be July 9, 2024 at 2:00 PM CST. \n \n \nThe information in this Addendum is hereby incorporated and made part of any contract awarded \npursuant to this solicitation. \n \nPlease sign this addendum and submit along with your copies of the proposal. ALL OTHER PROVISIONS \nAND OTHER TERMS AND CONDITIONS REMAIN UNCHANGED. BIDDERS ARE REQUIRED TO \nACKNOWLEDGE AND RETURN/SUBMIT A COPY OF THIS ADDENDUM WITH THEIR PROPOSAL. \n \n \nCompany Name: \n \nSubmitter’s Name/Title: \n \nAddress: \n \nCity, State and Zip Code: \n \nEmail Address: \n \nSubmitter’s Signature: \n \nTelephone No. \n \nFax No. \n \n800 # (if available) \n \nDate: \n \n \n \n \n \n \nEND OF ADDENDUM",
+            "chunk_id": "8b6d4aca-b0fa-53c0-b7c3-3d544776a979",
+            "file_name": "b884a54f_Addendum 2 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "466c0379-46ee-447a-88af-ed1bf0011d00",
+            "page_number": 1,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ]
+      },
+      {
+        "field_name": "Bid Submission Type",
+        "extracted_value": "Manual and Electronic",
+        "status": "needs_review",
+        "confidence_score": "0.38000",
+        "confidence_category": "low",
+        "reasons": [
+          "Semantic verification failed or returned malformed evidence references."
+        ],
+        "deterministic_checks": {
+          "literal_values": [
+            "Manual and Electronic"
+          ],
+          "valid_citations": 1,
+          "claimed_citations": 1,
+          "malformed_citations": 0,
+          "exact_identifier_check": false,
+          "literal_values_matched": [],
+          "literal_support_fraction": 0.0
+        },
+        "recommended_action": "Review this field manually using the validated citations.",
+        "supporting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "be delivered to the Procurement Services Department, in a \nsealed envelope by the date and time stated. No fax or email submissions will be accepted. Only one \nformat is needed. The manual submission shall consist of one (1) original hard copy.\nThe Offeror may submit a manual response by paper via mail/FedEx/UPS etc. before the cutoff date and \ntime at the following address:\nDallas ISD\nProcurement Services\n9400 N Central Expwy, Ste 1510\nAttn: Staff Member and BID NUMBER\nDallas, Tx 75231\nDoes the vendor agree and understand?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType \n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes \nNo",
+            "chunk_id": "03143832-d0e9-5ada-b611-b8248b42217c",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 9,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Term of Bid",
+        "extracted_value": "3 years with 2 one-year extensions",
+        "status": "needs_review",
+        "confidence_score": "0.38000",
+        "confidence_category": "low",
+        "reasons": [
+          "Semantic verification failed or returned malformed evidence references."
+        ],
+        "deterministic_checks": {
+          "literal_values": [
+            "3 years with 2 one-year extensions"
+          ],
+          "valid_citations": 1,
+          "claimed_citations": 1,
+          "malformed_citations": 0,
+          "exact_identifier_check": false,
+          "literal_values_matched": [],
+          "literal_support_fraction": 0.0
+        },
+        "recommended_action": "Review this field manually using the validated citations.",
+        "supporting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "g this RFP. Only written questions will be\nconsidered. It is highly encouraged that all potential proposers participate and attend the pre-\nproposal.\nJoin TEAMS Meeting: https://www.microsoft.com/en-us/microsoft-teams/join-a-meeting\nMeeting ID: 270 031 467 036\nPasscode: N9ndKY\n1.2 Terms\nInitial Term:\n3\nRenewal 1:\n1\nRenewal 2:\n1\nAny contract that results from this solicitation and upon Mutual Agreement of the awarded vendor and the \nDistrict, may be extended not to exceed a total of 5 years(s). If either party intends not to renew the Contract, \nthat party must give written notice to the other party no fewer than ninety (90) days prior to the expiration of the \nthen current term of the Contract. ",
+            "chunk_id": "3f87cac2-faed-55b1-9800-6cc3cd5a121b",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 2,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Pre Bid Meeting",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Installation",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Bid Bond Requirement",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Delivery Date",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Payment Terms",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Additional Documentation Required",
+        "extracted_value": "Form 1295",
+        "status": "needs_review",
+        "confidence_score": "0.38000",
+        "confidence_category": "low",
+        "reasons": [
+          "Semantic verification failed or returned malformed evidence references."
+        ],
+        "deterministic_checks": {
+          "literal_values": [
+            "Form 1295"
+          ],
+          "valid_citations": 1,
+          "claimed_citations": 1,
+          "malformed_citations": 0,
+          "exact_identifier_check": false,
+          "literal_values_matched": [],
+          "literal_support_fraction": 0.0
+        },
+        "recommended_action": "Review this field manually using the validated citations.",
+        "supporting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "estion. \nAnswer: \nYes, the specs, more specifically the proposed make and model of the device \nbeing proposed, should be included in this field. \n11. Will DISD consider extending the submission deadline out a few more weeks to allow sufficient \ntime for vendors to complete a compliant response after the addendum(s) has been posted? \nAnswer: \nDallas ISD does not anticipate extending the submission deadline.",
+            "chunk_id": "fae9ba39-2247-5746-9cb1-422c1517aaee",
+            "file_name": "7962684f_Addendum 1 RFP JA-207652 Student and Staff Computing Devices.pdf",
+            "document_id": "a0e42e11-1193-4d1b-9a6e-23675a62a52b",
+            "page_number": 1,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "MFG for Registration",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Contract or Cooperative to use",
+        "extracted_value": "Central Texas Purchasing Alliance (CTPA)",
+        "status": "needs_review",
+        "confidence_score": "0.54000",
+        "confidence_category": "low",
+        "reasons": [
+          "Semantic verification failed or returned malformed evidence references."
+        ],
+        "deterministic_checks": {
+          "literal_values": [
+            "Central Texas Purchasing Alliance (CTPA)"
+          ],
+          "valid_citations": 1,
+          "claimed_citations": 1,
+          "malformed_citations": 0,
+          "exact_identifier_check": false,
+          "literal_values_matched": [
+            "Central Texas Purchasing Alliance (CTPA)"
+          ],
+          "literal_support_fraction": 1.0
+        },
+        "recommended_action": "Review this field manually using the validated citations.",
+        "supporting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "PROPOSAL REQUIREMENT - The following\nattributes require a response | \nindicated an interest in being included in this contract. Should these governmental entities decide to\nparticipate in this contract, would you, (the vendor) agree that all terms, conditions, specifications, and\npricing would apply?\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes\nNo | \nCENTRAL TEXAS PURCHASING ALLIANCE (CTPA)\nInterlocal Agreement - Cooperative\nDallas ISD is a member of the Central Texas Purchasing Alliance (CTPA), an alliance of school districts in\nthe central Texas area that share information, services, and contractual opportunities. In support of this\ncollaborative effort, a response of YES to CTPA indicates that the Respondent is interested in extending\nservices to other CTPA member districts. However, there is no obligation on either party to participate unless\nboth parties agree. Services would be provided under the same contract pricing and purchasing terms\nestablished by this request. A negative reply by the Respondent will not adversely affect consideration of the\nRespondent's response. The information will be provided to CTPA member listing and in the event that this\nrequest and subsequent contract may be used by the CTPA districts. If a member district chooses to utilize a\ncontract established by this request and subsequent contract, contracts will be awarded individually by those\ndistricts.\nDoes the Vendor agree?\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nCircle one from the response values below:\nYes\nNo | \nORDER REFERENCE NUMBER/INFORMATION\nIs a reference number or other information that Dallas ISD must include on the Purchase Order to receive\ncontract pricing, please state that information. If none enter N/A (not applicable) below where applicable.\n-----------------------------------------------------------------------------------------------------------------------------------------------\nType\n……………………………………………………………………………………………………………………………..\nProvide your answer below | \nPRICING INFORMATION | \nPRICE OFFER SUMMARY\nThe undersigned duly authorized representative of the Offeror offers to provide the goods and/or services\ndescribed in this solicitation document according to the terms contained in the Offer. Offerors are required to\nfully disclose any ''hidden'' or \"additional\" fees, costs, and expenses that are not reflected. The District will\nnot be liable for hidden or additional fees, costs, and expenses that are not disclosed in detail. Any proposed\nchange in the Offeror's pricing structure and/or pricing assumptions must be formally requested on the\nDistrict Deviation Attribute, which must be accepted in writing by the Buyer and thereafter approved by\nDallas ISD's Office of Legal Services. In addition, if the Offeror is proposing no-cost best-value incentives or\nvalue-adds, those items should also be disclosed in detail. The ultimate contract is anticipated to be a firm,\nfixed-price contract for the initial term. The vendor shall price based on any increase that may occur in the\ninitial term. Price adjustments at the renewal will need to be agreed upon by all parties. Awarded vendor(s) | ",
+            "chunk_id": "8ecd53a3-2955-53ff-b06e-cb1b02355942",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 20,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Model_no",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Part_no",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Product",
+        "extracted_value": "Computing Devices",
+        "status": "needs_review",
+        "confidence_score": "0.54000",
+        "confidence_category": "low",
+        "reasons": [
+          "Semantic verification failed or returned malformed evidence references."
+        ],
+        "deterministic_checks": {
+          "literal_values": [
+            "Computing Devices"
+          ],
+          "valid_citations": 1,
+          "claimed_citations": 1,
+          "malformed_citations": 0,
+          "exact_identifier_check": false,
+          "literal_values_matched": [
+            "Computing Devices"
+          ],
+          "literal_support_fraction": 1.0
+        },
+        "recommended_action": "Review this field manually using the validated citations.",
+        "supporting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "SCOPE AND SPECIFICATIONS OF THE\nPROPOSAL | \nrequirements to procure vendors who provide goods or services purchased by Dallas ISD using federal\ndollars. This proposal may be used with local, state, federal, and grant-funded programs. | \nPURPOSE OF REQUEST FOR PROPOSAL (RFP)\nThis Request for Proposal (RFP) will be for student and staff computing devices, including laptops,\ndesktops, tablet devices, and display monitors. Vendors participating in this Request for Proposal (RFP) may\nsubmit proposals for one, several, or all categories of devices required by the District. Within each category\nof device, the District reserves the right to award contracts to a single vendor or multiple vendors.\nThe specifications listed in this RFP are the minimum hardware requirements for each tier of device required\nby Dallas ISD. Vendors responding to this RFP must have the ability to provide the District with significant\nquantities of devices as requested in the pricing lines in this RFP. Note that quantities requested by Dallas\nISD are estimates to be ordered over the five years of the contracts resulting from this RFP. Purchases may\nalso include a variety of device accessories which will be ordered in a bundle along with the devices. Such\naccessories include, but are not limited to, sleeves, cases, mice, keyboards, and cables that may not\nnecessarily come with the devices.\nEach submission must include a detailed plan as to how the vendor will track all shipped products and\nprovide deployment services. Processes and procedures are required in the response, which outlines how\ntracking will be executed and any processes for providing white glove services.\nThe awarded vendors shall provide Dallas ISD with computing devices that meet all current industry\nstandard specifications. The awarded vendors and Dallas ISD EdTech-Enterprise Support Services shall\nmeet every six months or as needed to discuss technology advancements related to computing devices to\nbe selected by Dallas ISD.\nNote: For each purchase during the term of the contracts resulting from this RFP, the District will seek\ncompetitive quotes from one or more of the awarded vendors. | \nPROPOSAL SPECIFICATIONS | \nManufacturer or Authorized Reseller Qualifications\nFor proposing vendors who are resellers, a copy of all factory-authorized repair and maintenance\ncertifications must be submitted with each proposal. Vendors must provide demonstrated competencies and\nreferences in delivering the magnitude of devices listed on the price sheet. This supporting documentation\nmay include details of past projects, statements in reference letters, and/or project plans.\nEquipment Requirements\nAll equipment must be new and of the manufacturer's current model in production at the time of each order\nexecuted over the life of the contracts resulting from this RFP. All standard or optional equipment must be as\nadvertised by the original equipment manufacturer (OEM) and must not consist of substitute or aftermarket\nequipment. Equipment attachments or parts to be installed must follow the manufacturer's recommendations\nor standard industry practices.\nDeployment Services\nAll deliveries and deployments must incorporate white glove services, which include asset decaling, asset\nreporting, etching, and delivery to varied locations.\nWarranty and Warranty Repair Work\nAwarded vendors must be responsible for all materials and accessories used in the equipment, and this\nresponsibility may not be transferred, conveyed, or assigned to any other entity without previous written\napproval of Dallas ISD. | ",
+            "chunk_id": "5b6c7c5c-163b-5019-a280-bf64a4e1e4f7",
+            "file_name": "ad3c8efc_JA-207652 Student and Staff Computing Devices FINAL.pdf",
+            "document_id": "90fe7507-9c87-41f2-99ea-83283f3ca33f",
+            "page_number": 3,
+            "section_title": null,
+            "relevance_score": null
+          }
+        ],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "contact_info",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "company_name",
+        "extracted_value": "Dallas Independent School District",
+        "status": "needs_review",
+        "confidence_score": "0.54000",
+        "confidence_category": "low",
+        "reasons": [
+          "Semantic verification failed or returned malformed evidence references."
+        ],
+        "deterministic_checks": {
+          "literal_values": [
+            "Dallas Independent School District"
+          ],
+          "valid_citations": 1,
+          "claimed_citations": 1,
+          "malformed_citations": 0,
+          "exact_identifier_check": false,
+          "literal_values_matched": [
+            "Dallas Independent School District"
+          ],
+          "literal_support_fraction": 1.0
+        },
+        "recommended_action": "Review this field manually using the validated citations.",
+        "supporting_citations": [
+          {
+            "bid_id": "e5cee25c-acb3-494f-8879-e2cd6a84de4f",
+            "excerpt": "Reference Number\n00004079100\nIssuing Organization\nDallas Independent School District\nSolicitation Type\nRFP - Request for Proposal (Informal)\nSolicitation Number\nJA-207652\nTitle\nStudent and Staff Computing Devices **SOURCING #168884**\nSource ID\nSCRIBE",
+            "chunk_id": "b687ccd6-cda4-5cd9-bdf9-90461d1449d5",
+            "file_name": "52550ccc_Student and Staff Computing Devices_SOURCING_168884_- Bid Information -_3_BidNet Direct.html",
+            "document_id": "d1b501ad-6235-4e39-b852-58592c8fd939",
+            "page_number": null,
+            "section_title": "Basic Information",
+            "relevance_score": null
+          }
+        ],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Bid Summary",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      },
+      {
+        "field_name": "Product Specification",
+        "extracted_value": null,
+        "status": "not_found",
+        "confidence_score": null,
+        "confidence_category": "unavailable",
+        "reasons": [
+          "Extracted value is null; no factual claim was available to validate."
+        ],
+        "deterministic_checks": {
+          "null_value": true
+        },
+        "recommended_action": "No action unless this field is required; inspect source documents manually.",
+        "supporting_citations": [],
+        "contradicting_citations": []
+      }
+    ]
+  },
+  "review_items": [
+    {
+      "review_item_id": "a4e392d4-a57d-4a0c-ab3d-5e381ee5fafe",
+      "source_stage": "validate_extraction",
+      "category": "other",
+      "severity": "medium",
+      "status": "pending",
+      "field_name": "Due Date",
+      "proposed_value": "July 9, 2024 2:00 PM CST",
+      "validation_status": "needs_review",
+      "reason": "Semantic verification failed or returned malformed evidence references.; confidence is below 0.55"
+    },
+    {
+      "review_item_id": "d3ae2a8d-39e4-41b7-82b0-4613bd4d222f",
+      "source_stage": "validate_extraction",
+      "category": "other",
+      "severity": "medium",
+      "status": "pending",
+      "field_name": "Bid Submission Type",
+      "proposed_value": "Manual and Electronic",
+      "validation_status": "needs_review",
+      "reason": "Semantic verification failed or returned malformed evidence references.; confidence is below 0.55"
+    },
+    {
+      "review_item_id": "ee393e1c-811b-4921-bf83-afc947eb5404",
+      "source_stage": "validate_extraction",
+      "category": "other",
+      "severity": "medium",
+      "status": "pending",
+      "field_name": "Term of Bid",
+      "proposed_value": "3 years with 2 one-year extensions",
+      "validation_status": "needs_review",
+      "reason": "Semantic verification failed or returned malformed evidence references.; confidence is below 0.55"
+    },
+    {
+      "review_item_id": "77023bf6-2122-493e-8391-1914e616cbf9",
+      "source_stage": "validate_extraction",
+      "category": "other",
+      "severity": "medium",
+      "status": "pending",
+      "field_name": "Additional Documentation Required",
+      "proposed_value": "Form 1295",
+      "validation_status": "needs_review",
+      "reason": "Semantic verification failed or returned malformed evidence references.; confidence is below 0.55"
+    },
+    {
+      "review_item_id": "e5086266-e0af-4a8a-8e8c-7014704fccd0",
+      "source_stage": "validate_extraction",
+      "category": "other",
+      "severity": "medium",
+      "status": "pending",
+      "field_name": "Contract or Cooperative to use",
+      "proposed_value": "Central Texas Purchasing Alliance (CTPA)",
+      "validation_status": "needs_review",
+      "reason": "Semantic verification failed or returned malformed evidence references.; confidence is below 0.55"
+    },
+    {
+      "review_item_id": "2de7c152-cb44-4d10-89cc-1d1cb77df907",
+      "source_stage": "validate_extraction",
+      "category": "uncertain_product_specification",
+      "severity": "medium",
+      "status": "pending",
+      "field_name": "Product",
+      "proposed_value": "Computing Devices",
+      "validation_status": "needs_review",
+      "reason": "Semantic verification failed or returned malformed evidence references.; confidence is below 0.55"
+    },
+    {
+      "review_item_id": "b1d8b50f-179c-42f8-90d4-bb26432efb33",
+      "source_stage": "validate_extraction",
+      "category": "other",
+      "severity": "medium",
+      "status": "pending",
+      "field_name": "company_name",
+      "proposed_value": "Dallas Independent School District",
+      "validation_status": "needs_review",
+      "reason": "Semantic verification failed or returned malformed evidence references.; confidence is below 0.55"
+    }
+  ],
+  "profile_id": "1264434f-4b75-5a3c-8be4-daed1dfff7e7"
+}
