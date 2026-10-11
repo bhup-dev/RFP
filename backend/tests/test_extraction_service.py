@@ -3,7 +3,7 @@
 import asyncio
 import json
 from datetime import UTC, datetime
-from uuid import UUID, uuid4
+from uuid import uuid4
 
 import pytest
 
@@ -15,7 +15,7 @@ from app.schemas.extraction import (
 )
 from app.schemas.retrieval import RetrievalResponse, RetrievedChunk
 from app.services.extraction_service import (
-    FIELD_GROUP_QUERIES,
+    FIELD_GROUPS,
     BidNotFound,
     BidNotReady,
     EligibleBid,
@@ -194,13 +194,28 @@ def test_extracts_exact_fields_preserves_identifiers_dates_and_explicit_negative
     assert serialized["Payment Terms"]["value"] is None
     assert serialized["Payment Terms"]["validation_status"] == "missing"
     assert output.status == ExtractionRunStatus.COMPLETED
-    assert len(retriever.requests) == len(FIELD_GROUP_QUERIES)
+    assert len(retriever.requests) == sum(len(group.queries) for group in FIELD_GROUPS)
     assert all(request.bid_id == context.id for request in retriever.requests)
     assert all(request.document_ids == list(context.document_ids) for request in retriever.requests)
     assert all(request.top_k == 7 for request in retriever.requests)
-    assert len(llm.calls) == 1
-    assert "sk-" not in llm.calls[0][0]
-    assert "untrusted document content" in llm.calls[0][1]["system"]
+    assert len(llm.calls) == len(FIELD_GROUPS)
+    assert all("sk-" not in prompt for prompt, _ in llm.calls)
+    assert all("untrusted document content" in kwargs["system"] for _, kwargs in llm.calls)
+
+
+def test_field_groups_cover_every_field_once_and_prompts_request_only_their_group() -> None:
+    grouped = [name for group in FIELD_GROUPS for name in group.fields]
+    assert sorted(grouped) == sorted(ASSIGNMENT_FIELD_NAMES)
+    assert len(grouped) == len(set(grouped))
+
+    context, result, citation = _fixture()
+    llm = LLM(_payload())
+    asyncio.run(_service(Store(context, [citation]), Retriever([result]), llm).extract(context.id))
+
+    prompts = [prompt for prompt, _ in llm.calls]
+    for group in FIELD_GROUPS:
+        requested = json.dumps(list(group.fields), ensure_ascii=False)
+        assert sum(requested in prompt for prompt in prompts) == 1
 
 
 def test_invalid_or_cross_bid_citation_rejects_only_that_field() -> None:
@@ -290,7 +305,6 @@ def test_conflicting_evidence_is_retained_with_both_authoritative_citations() ->
     [
         "not json",
         json.dumps({"Bid Number": _claim()}),
-        _payload(Title={"value": "x", "status": "extracted"}),
     ],
 )
 def test_malformed_provider_output_fails_and_records_failed_run(raw: str) -> None:
@@ -303,6 +317,60 @@ def test_malformed_provider_output_fails_and_records_failed_run(raw: str) -> Non
     assert len(store.started) == 1
     assert len(store.failed) == 1
     assert store.completed == []
+
+
+def test_invalid_field_claim_rejects_only_that_field() -> None:
+    context, result, citation = _fixture()
+    store = Store(context, [citation])
+    raw = _payload(
+        Title={"value": "x", "status": "extracted"},
+        **{
+            "Bid Number": _claim(
+                value="JA-207652",
+                confidence=0.9,
+                chunk_ids=(result.chunk_id,),
+                status="extracted",
+            )
+        },
+    )
+
+    output = asyncio.run(_service(store, Retriever([result]), LLM(raw)).extract(context.id))
+
+    assert output.status == ExtractionRunStatus.PARTIAL
+    assert output.fields.title.value is None
+    assert output.fields.title.validation_status == FieldValidationStatus.UNSUPPORTED
+    assert "extraction contract" in output.fields.title.notes
+    assert output.fields.bid_number.validation_status == FieldValidationStatus.SUPPORTED
+    assert len(store.completed) == 1
+    assert store.failed == []
+
+
+def test_contract_breaking_group_is_retried_once_with_the_errors() -> None:
+    context, result, citation = _fixture()
+    fixed_title = _claim(
+        value="Student and Staff Computing Devices",
+        confidence=0.9,
+        chunk_ids=(result.chunk_id,),
+        status="extracted",
+    )
+
+    class RepairingLLM(LLM):
+        async def generate_response(self, prompt, **kwargs):
+            self.calls.append((prompt, kwargs))
+            if "broke the output contract" in prompt:
+                return _payload(Title=fixed_title)
+            return _payload(Title={"value": "x", "status": "extracted"})
+
+    llm = RepairingLLM("")
+    output = asyncio.run(
+        _service(Store(context, [citation]), Retriever([result]), llm).extract(context.id)
+    )
+
+    repairs = [prompt for prompt, _ in llm.calls if "broke the output contract" in prompt]
+    assert len(repairs) == 1
+    assert '"Title"' in repairs[0]
+    assert output.fields.title.value == "Student and Staff Computing Devices"
+    assert output.fields.title.validation_status == FieldValidationStatus.SUPPORTED
 
 
 def test_unknown_and_not_ready_bids_do_not_create_runs() -> None:

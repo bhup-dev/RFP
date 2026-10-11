@@ -3,12 +3,12 @@
     "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
     "bid_identifier": "Bid2",
     "solicitation_number": null,
-    "profile_id": "adfe9802-c632-51fc-be82-55f0f505a61e",
+    "profile_id": "a62c3e4c-1888-56c2-9322-af7b11199cf5",
     "profile_version": 1,
-    "generated_at": "2026-10-11T13:57:54.123310Z",
-    "extraction_run_id": "cc5c5328-0fc1-48d1-add0-c679cee08140",
+    "generated_at": "2026-10-11T14:31:30.318292Z",
+    "extraction_run_id": "0ada18d2-d078-4edf-809b-bfe5f8bac9d6",
     "addendum_analysis_run_id": null,
-    "validation_run_id": "5f03788d-a3d5-4273-a8b2-1c6cea5da26a",
+    "validation_run_id": "3dd506c1-6e39-47eb-b48e-958c49cf0217",
     "source_document_count": 5,
     "source_document_ids": [
       "0c876860-e265-417a-85ac-057c60b02f0d",
@@ -21,14 +21,7 @@
     "review_required": true,
     "warnings": [],
     "unresolved_issues": [
-      "Bid Submission Type: needs_review",
-      "MFG for Registration: needs_review",
-      "Contract or Cooperative to use: needs_review",
-      "Product: needs_review",
-      "contact_info: needs_review",
-      "company_name: needs_review",
-      "Bid Summary: needs_review",
-      "Product Specification: needs_review"
+      "Payment Terms: unsupported"
     ]
   },
   "fields": {
@@ -49,7 +42,7 @@
         }
       ],
       "contradicting_citations": [],
-      "extraction_notes": "Bid number for the Purchase Order Request for Proposals (PORFP).",
+      "extraction_notes": "Extracted from the general information section.",
       "review_recommendation": "Eligible for routine downstream use, subject to the documented heuristic limits.",
       "addendum_changes": []
     },
@@ -70,7 +63,7 @@
         }
       ],
       "contradicting_citations": [],
-      "extraction_notes": "Title of the bid.",
+      "extraction_notes": "Title of the solicitation.",
       "review_recommendation": "Eligible for routine downstream use, subject to the documented heuristic limits.",
       "addendum_changes": []
     },
@@ -78,139 +71,6 @@
       "value": "06/10/2024 02:00 PM EDT",
       "validation_status": "validated",
       "confidence_score": 1.0,
-      "supporting_citations": [
-        {
-          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
-          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
-          "chunk_id": "d8c131c8-4443-561a-a193-2c36f1a2a679",
-          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
-          "page_number": 2,
-          "section_title": null,
-          "excerpt": " |  | Questions Due (Closing) Date and Time:\n06/01/2024 at 2:00 PM EDT\nQuestions must be submitted in writing to\nthawkins@treasurer.state.md.us with the subject line,\n“QUESTION for Dell Laptop #E20P4600040”, and be\nsubmitted in writing via e-mail to the Procurement Officer no later\nthan the date and time specified. | \nSecurity Requirements (if\napplicable): |  | 1. The Department reserves the right to purchase more or less\nthan the specified quantity to the extent limited by funding.\n2. The Master Contractor must provide the estimated ship\ndate/lead time for each item listed in the PORFP FA I\n3. Please allow proposals/quotes provided in response to this\nPORFP to be valid for at least 90 days after the set due date\nabove.\n4. The Master Contractor must be an authorized reseller for Dell.\nThe state reserves the right to request a Letter of Authorization\n(LOA) from the Manufacturer or Distributor.\n5. Purchase new and unused equipment.\n6. The Master Contractor shall not impose a restocking fee if an\nitem is returned due to damage or incorrect product shipped.\n7. ENERGY STAR certified product\n8. The Master Contractor must provide a Mercury Affidavit:\nhttps://doit.maryland.gov/contracts/Documents/hardware co\n_\nntract/hwmercury affidavit.pdf\n_\n9. Delivery within 45 days of Award. | \nInvoicing Instructions: |  | 1. Email invoices to:\nSTOaccountspayable@treasurer.state.md.us\n2. Invoice(s) shall be submitted within 10 days of delivering the\nequipment and shall include at a minimum the following:\n• Contractor name, mailing address, social security number\nor Federal Tax ID number, and phone number.\n• Reference the States assigned PORFP number.\n• Date, invoice number and amount due.\n3. Proof of delivery including packing slip or delivery\nconfirmation, and equipment serial numbers. | \n |  |  | \n | Section 2 – Agency Point of Contact (POC) Information |  | \n |  |  | \nAgency / Division Name: | Agency / Division Name: | State Treasurer's Office/ Information Technology | ",
-          "relevance_score": null
-        },
-        {
-          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
-          "document_id": "efb0ae5b-b569-4b0f-8647-c6335faeb6dd",
-          "chunk_id": "29f9e202-a79d-5d7a-a40a-e6411104f7c0",
-          "file_name": "53c991c7_Dell Laptops w_Extended Warranty - Bid Information -_3_BidNet Direct.html",
-          "page_number": null,
-          "section_title": "Dates",
-          "excerpt": "Publication\n05/28/2024 11:47 AM EDT\nClosing Date\n06/10/2024 02:00 PM EDT",
-          "relevance_score": null
-        }
-      ],
-      "contradicting_citations": [],
-      "extraction_notes": "Due date and time for bid submission.",
-      "review_recommendation": "Eligible for routine downstream use, subject to the documented heuristic limits.",
-      "addendum_changes": []
-    },
-    "Bid Submission Type": {
-      "value": "eMaryland Marketplace Advantage (eMMA)",
-      "validation_status": "needs_review",
-      "confidence_score": 0.38,
-      "supporting_citations": [
-        {
-          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
-          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
-          "chunk_id": "489d84bd-f4c9-5e18-8f93-89db65055143",
-          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
-          "page_number": 1,
-          "section_title": null,
-          "excerpt": "Special Instructions: |  |  | LIMITED TO MASTER CONTRACTORS\nOnly Master Contractors that are awarded a contract under the\nDesktop, Laptop and Tablet 2015 Master Contract,\n060B5400007, are eligible to submit a bid in response to this\nsecondary competition Purchase Order Request for Proposal\n(PORFP).\nSMALL BUSINESS RESERVE (SBR) PROCUREMENT\nThis is a Small Business Reserve Procurement for which award\nwill be limited to certified small business vendors. Only\nbusinesses that meet the statutory requirements set forth in\nState Finance and Procurement Article, §§14-501—14-505,\nAnnotated Code of Maryland, and that are certified by GOSBA\nSmall Business Reserve Program are eligible for award of a\ncontract.\nBID SUBMISSION INSTRUCTIONS\nPurchase Order Request for Proposal (PORFP) responses will only\nbe accepted through the State's eMaryland Marketplace Advantage\n(eMMA) e-Procurement system. Bids will not be accepted by email,\nfax, U.S. Mail, or hand delivery. You must be registered and Logged\nin to submit a bid on eMMA.\nInstructions on how to submit proposals electronically can be found\nat: https://procurement.maryland.gov/emma-qrgs/\nRefer to Vendor QRG 4 – eMMA QRG Responding to Solicitations\n(IFB) |  |  |  |  | ",
-          "relevance_score": null
-        }
-      ],
-      "contradicting_citations": [],
-      "extraction_notes": "Bids must be submitted electronically via eMMA.",
-      "review_recommendation": "Review this field manually using the validated citations.",
-      "addendum_changes": []
-    },
-    "Term of Bid": {
-      "value": null,
-      "validation_status": "not_found",
-      "confidence_score": null,
-      "supporting_citations": [],
-      "contradicting_citations": [],
-      "extraction_notes": "Term of bid not specified.",
-      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
-      "addendum_changes": []
-    },
-    "Pre Bid Meeting": {
-      "value": null,
-      "validation_status": "not_found",
-      "confidence_score": null,
-      "supporting_citations": [],
-      "contradicting_citations": [],
-      "extraction_notes": "No pre-bid meeting mentioned.",
-      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
-      "addendum_changes": []
-    },
-    "Installation": {
-      "value": null,
-      "validation_status": "not_found",
-      "confidence_score": null,
-      "supporting_citations": [],
-      "contradicting_citations": [],
-      "extraction_notes": "Installation details not provided.",
-      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
-      "addendum_changes": []
-    },
-    "Bid Bond Requirement": {
-      "value": null,
-      "validation_status": "not_found",
-      "confidence_score": null,
-      "supporting_citations": [],
-      "contradicting_citations": [],
-      "extraction_notes": "No bid bond requirement mentioned.",
-      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
-      "addendum_changes": []
-    },
-    "Delivery Date": {
-      "value": "06/10/2024",
-      "validation_status": "validated",
-      "confidence_score": 1.0,
-      "supporting_citations": [
-        {
-          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
-          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
-          "chunk_id": "a6fe0f8a-2891-5a99-82b7-6500f3a1d018",
-          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
-          "page_number": 3,
-          "section_title": null,
-          "excerpt": " | Business Need / Required Functionality field*) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n*Business Need /\nRequired Functionality | *Business Need / |  |  | Office is in need of a refresh of laptops and must acquire enough\nlaptops to accommodate MD529 employees who have been\nincluded in our staff as of June 1, 2023. |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Required Functionality |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \nProduct Name |  | Product Description |  |  |  |  | Model # |  |  |  |  |  | Qty |  |  |  |  | Due Date | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | mm/dd/yyyy | \n1. SI# CC7802 Dell\nLatitude 5550 |  | SI# CC7802 Dell Latitude\n5550\n*Laptops must be\nMicrosoft Copilot ready* |  |  |  |  | SI# CC7802 |  |  |  |  | 30 |  |  |  |  | 06/10/2024 |  | \n2. Dell Thunderbolt 4\nDock – WD22TB4 |  | Dell Thunderbolt 4 Dock –\nWD22TB4 |  |  |  |  | WD22TB4 |  |  |  |  | 30 |  |  |  |  | 06/10/2024 |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | FA V - Manufacturer’s Extended Warranty |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | (Provide a detailed description of warranty requirements and deliverables) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  |  |  |  |  | Deliverables |  |  |  |  |  |  |  |  |  |  |  |  | \n | Warranty Requirements |  |  |  |  |  |  |  |  |  | Start Date |  |  |  |  | End Date |  |  | \n |  |  |  |  |  |  |  |  |  |  | mm/dd/yyyy |  |  |  |  | mm/dd/yyyy |  |  | \n1. Dell Limited Hardware Warranty\nExtended for all machines\npurchased - 3 Years |  |  |  |  |  | Warranty\ncertificate or\nAffidavit to be\npresented upon\naward |  |  |  | Date of\nDelivery |  |  |  |  | 3 years\nfollowing the\ndate of delivery |  |  |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Section 5 – Evaluation Criteria – Technical Proposal |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | (Provide a list of evaluation criteria in descending order of importance) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
-          "relevance_score": null
-        }
-      ],
-      "contradicting_citations": [],
-      "extraction_notes": "Delivery date for the products.",
-      "review_recommendation": "Eligible for routine downstream use, subject to the documented heuristic limits.",
-      "addendum_changes": []
-    },
-    "Payment Terms": {
-      "value": null,
-      "validation_status": "not_found",
-      "confidence_score": null,
-      "supporting_citations": [],
-      "contradicting_citations": [],
-      "extraction_notes": "Payment terms not specified.",
-      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
-      "addendum_changes": []
-    },
-    "Additional Documentation Required": {
-      "value": null,
-      "validation_status": "not_found",
-      "confidence_score": null,
-      "supporting_citations": [],
-      "contradicting_citations": [],
-      "extraction_notes": "No additional documentation requirements mentioned.",
-      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
-      "addendum_changes": []
-    },
-    "MFG for Registration": {
-      "value": "Dell",
-      "validation_status": "needs_review",
-      "confidence_score": 0.54,
       "supporting_citations": [
         {
           "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
@@ -224,14 +84,189 @@
         }
       ],
       "contradicting_citations": [],
-      "extraction_notes": "Manufacturer for registration.",
-      "review_recommendation": "Review this field manually using the validated citations.",
+      "extraction_notes": "Extracted from the proposal due date section.",
+      "review_recommendation": "Confirm the due date as stated.",
+      "addendum_changes": []
+    },
+    "Bid Submission Type": {
+      "value": "eMaryland Marketplace Advantage (eMMA)",
+      "validation_status": "validated",
+      "confidence_score": 1.0,
+      "supporting_citations": [
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "9b56f212-2c4b-59b6-b15a-3ea1f9a87bb4",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "section_title": null,
+          "excerpt": "t system. Bids will not be accepted by email, \nfax, U.S. Mail, or hand delivery. You must be registered and Logged \nin \nto \nsubmit \na \nbid \non \neMMA. \n \nInstructions on how to submit proposals electronically can be found \nat: https://procurement.maryland.gov/emma-qrgs/ \nRefer to Vendor QRG 4 – eMMA QRG Responding to Solicitations \n(IFB)",
+          "relevance_score": null
+        },
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "489d84bd-f4c9-5e18-8f93-89db65055143",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "section_title": null,
+          "excerpt": "Special Instructions: |  |  | LIMITED TO MASTER CONTRACTORS\nOnly Master Contractors that are awarded a contract under the\nDesktop, Laptop and Tablet 2015 Master Contract,\n060B5400007, are eligible to submit a bid in response to this\nsecondary competition Purchase Order Request for Proposal\n(PORFP).\nSMALL BUSINESS RESERVE (SBR) PROCUREMENT\nThis is a Small Business Reserve Procurement for which award\nwill be limited to certified small business vendors. Only\nbusinesses that meet the statutory requirements set forth in\nState Finance and Procurement Article, §§14-501—14-505,\nAnnotated Code of Maryland, and that are certified by GOSBA\nSmall Business Reserve Program are eligible for award of a\ncontract.\nBID SUBMISSION INSTRUCTIONS\nPurchase Order Request for Proposal (PORFP) responses will only\nbe accepted through the State's eMaryland Marketplace Advantage\n(eMMA) e-Procurement system. Bids will not be accepted by email,\nfax, U.S. Mail, or hand delivery. You must be registered and Logged\nin to submit a bid on eMMA.\nInstructions on how to submit proposals electronically can be found\nat: https://procurement.maryland.gov/emma-qrgs/\nRefer to Vendor QRG 4 – eMMA QRG Responding to Solicitations\n(IFB) |  |  |  |  | ",
+          "relevance_score": null
+        }
+      ],
+      "contradicting_citations": [],
+      "extraction_notes": "Bids must be submitted electronically through eMMA.",
+      "review_recommendation": "No further action needed.",
+      "addendum_changes": []
+    },
+    "Term of Bid": {
+      "value": "90 days after the set due date",
+      "validation_status": "validated",
+      "confidence_score": 1.0,
+      "supporting_citations": [
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "e81b8f57-324d-5cb3-ab66-fa73de19ea75",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "section_title": null,
+          "excerpt": "e to this \nPORFP to be valid for at least 90 days after the set due date \nabove. \n \n4. The Master Contractor must be an authorized reseller for Dell. \nThe state reserves the right to request a Letter of Authorization \n(LOA) from the Manufacturer or Distributor. \n \n5. Purchase new and unused equipment. \n \n6. The Master Contractor shall not impose a restocking fee if an \nitem is returned due to damage or incorrect product shipped. \n \n7. ENERGY STAR certified product \n \n8. The Master Contractor must provide a Mercury Affidavit: \nhttps://doit.maryland.gov/contracts/Documents/hardware_co\nntract/hwmercury_affidavit.pdf \n \n9. Delivery within 45 days of Award. \n \nInvoicing Instructions: \n \n1. Email invoices to:  \nSTOaccountspayable@treasurer.state.md.us \n \n2. Invoice(s) shall be submitted within 10 days of delivering the \nequipment and shall include at a minimum the following:  \n• Contractor name, mailing address, social security number \nor Federal Tax ID number, and phone number. ",
+          "relevance_score": null
+        }
+      ],
+      "contradicting_citations": [],
+      "extraction_notes": "Bid responses must be valid for at least 90 days after the due date.",
+      "review_recommendation": "No further action needed.",
+      "addendum_changes": []
+    },
+    "Pre Bid Meeting": {
+      "value": null,
+      "validation_status": "not_found",
+      "confidence_score": null,
+      "supporting_citations": [],
+      "contradicting_citations": [],
+      "extraction_notes": "No information found regarding a pre-bid meeting.",
+      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
+      "addendum_changes": []
+    },
+    "Installation": {
+      "value": null,
+      "validation_status": "not_found",
+      "confidence_score": null,
+      "supporting_citations": [],
+      "contradicting_citations": [],
+      "extraction_notes": "No information on installation provided.",
+      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
+      "addendum_changes": []
+    },
+    "Bid Bond Requirement": {
+      "value": null,
+      "validation_status": "not_found",
+      "confidence_score": null,
+      "supporting_citations": [],
+      "contradicting_citations": [],
+      "extraction_notes": "No information found regarding bid bond requirements.",
+      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
+      "addendum_changes": []
+    },
+    "Delivery Date": {
+      "value": "within 45 days of Award",
+      "validation_status": "validated",
+      "confidence_score": 1.0,
+      "supporting_citations": [
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "e81b8f57-324d-5cb3-ab66-fa73de19ea75",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "section_title": null,
+          "excerpt": "e to this \nPORFP to be valid for at least 90 days after the set due date \nabove. \n \n4. The Master Contractor must be an authorized reseller for Dell. \nThe state reserves the right to request a Letter of Authorization \n(LOA) from the Manufacturer or Distributor. \n \n5. Purchase new and unused equipment. \n \n6. The Master Contractor shall not impose a restocking fee if an \nitem is returned due to damage or incorrect product shipped. \n \n7. ENERGY STAR certified product \n \n8. The Master Contractor must provide a Mercury Affidavit: \nhttps://doit.maryland.gov/contracts/Documents/hardware_co\nntract/hwmercury_affidavit.pdf \n \n9. Delivery within 45 days of Award. \n \nInvoicing Instructions: \n \n1. Email invoices to:  \nSTOaccountspayable@treasurer.state.md.us \n \n2. Invoice(s) shall be submitted within 10 days of delivering the \nequipment and shall include at a minimum the following:  \n• Contractor name, mailing address, social security number \nor Federal Tax ID number, and phone number. ",
+          "relevance_score": null
+        },
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "d8c131c8-4443-561a-a193-2c36f1a2a679",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "section_title": null,
+          "excerpt": " |  | Questions Due (Closing) Date and Time:\n06/01/2024 at 2:00 PM EDT\nQuestions must be submitted in writing to\nthawkins@treasurer.state.md.us with the subject line,\n“QUESTION for Dell Laptop #E20P4600040”, and be\nsubmitted in writing via e-mail to the Procurement Officer no later\nthan the date and time specified. | \nSecurity Requirements (if\napplicable): |  | 1. The Department reserves the right to purchase more or less\nthan the specified quantity to the extent limited by funding.\n2. The Master Contractor must provide the estimated ship\ndate/lead time for each item listed in the PORFP FA I\n3. Please allow proposals/quotes provided in response to this\nPORFP to be valid for at least 90 days after the set due date\nabove.\n4. The Master Contractor must be an authorized reseller for Dell.\nThe state reserves the right to request a Letter of Authorization\n(LOA) from the Manufacturer or Distributor.\n5. Purchase new and unused equipment.\n6. The Master Contractor shall not impose a restocking fee if an\nitem is returned due to damage or incorrect product shipped.\n7. ENERGY STAR certified product\n8. The Master Contractor must provide a Mercury Affidavit:\nhttps://doit.maryland.gov/contracts/Documents/hardware co\n_\nntract/hwmercury affidavit.pdf\n_\n9. Delivery within 45 days of Award. | \nInvoicing Instructions: |  | 1. Email invoices to:\nSTOaccountspayable@treasurer.state.md.us\n2. Invoice(s) shall be submitted within 10 days of delivering the\nequipment and shall include at a minimum the following:\n• Contractor name, mailing address, social security number\nor Federal Tax ID number, and phone number.\n• Reference the States assigned PORFP number.\n• Date, invoice number and amount due.\n3. Proof of delivery including packing slip or delivery\nconfirmation, and equipment serial numbers. | \n |  |  | \n | Section 2 – Agency Point of Contact (POC) Information |  | \n |  |  | \nAgency / Division Name: | Agency / Division Name: | State Treasurer's Office/ Information Technology | ",
+          "relevance_score": null
+        }
+      ],
+      "contradicting_citations": [],
+      "extraction_notes": "Delivery must occur within 45 days of the award.",
+      "review_recommendation": "No further action needed.",
+      "addendum_changes": []
+    },
+    "Payment Terms": {
+      "value": "Invoices shall be submitted within 10 days of delivering the equipment.",
+      "validation_status": "unsupported",
+      "confidence_score": 0.3,
+      "supporting_citations": [
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "e53f924d-8762-5f53-9329-9a8f8eaa95d4",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "section_title": null,
+          "excerpt": "d shall include at a minimum the following:  \n• Contractor name, mailing address, social security number \nor Federal Tax ID number, and phone number.  \n• Reference the States assigned PORFP number. \n• Date, invoice number and amount due. \n \n3. Proof of delivery including packing slip or delivery \nconfirmation, and equipment serial numbers. \n \n \nSection 2 – Agency Point of Contact (POC) Information \n \nAgency / Division Name: \nState Treasurer's Office/ Information Technology",
+          "relevance_score": null
+        }
+      ],
+      "contradicting_citations": [],
+      "extraction_notes": "Payment terms specify invoicing within 10 days post-delivery.",
+      "review_recommendation": "Review the evidence for relevant payment terms.",
+      "addendum_changes": []
+    },
+    "Additional Documentation Required": {
+      "value": [
+        {
+          "notes": "The Master Contractor must provide a Mercury Affidavit.",
+          "status": "extracted",
+          "document": "Mercury Affidavit",
+          "chunk_ids": [
+            "e81b8f57-324d-5cb3-ab66-fa73de19ea75"
+          ],
+          "confidence": 1
+        }
+      ],
+      "validation_status": "validated",
+      "confidence_score": 1.0,
+      "supporting_citations": [
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "e81b8f57-324d-5cb3-ab66-fa73de19ea75",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 2,
+          "section_title": null,
+          "excerpt": "e to this \nPORFP to be valid for at least 90 days after the set due date \nabove. \n \n4. The Master Contractor must be an authorized reseller for Dell. \nThe state reserves the right to request a Letter of Authorization \n(LOA) from the Manufacturer or Distributor. \n \n5. Purchase new and unused equipment. \n \n6. The Master Contractor shall not impose a restocking fee if an \nitem is returned due to damage or incorrect product shipped. \n \n7. ENERGY STAR certified product \n \n8. The Master Contractor must provide a Mercury Affidavit: \nhttps://doit.maryland.gov/contracts/Documents/hardware_co\nntract/hwmercury_affidavit.pdf \n \n9. Delivery within 45 days of Award. \n \nInvoicing Instructions: \n \n1. Email invoices to:  \nSTOaccountspayable@treasurer.state.md.us \n \n2. Invoice(s) shall be submitted within 10 days of delivering the \nequipment and shall include at a minimum the following:  \n• Contractor name, mailing address, social security number \nor Federal Tax ID number, and phone number. ",
+          "relevance_score": null
+        }
+      ],
+      "contradicting_citations": [],
+      "extraction_notes": "The Master Contractor must provide a Mercury Affidavit.",
+      "review_recommendation": "No further action needed.",
+      "addendum_changes": []
+    },
+    "MFG for Registration": {
+      "value": null,
+      "validation_status": "not_found",
+      "confidence_score": null,
+      "supporting_citations": [],
+      "contradicting_citations": [],
+      "extraction_notes": "No specific manufacturer registration information found.",
+      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
       "addendum_changes": []
     },
     "Contract or Cooperative to use": {
       "value": "060B5400007",
-      "validation_status": "needs_review",
-      "confidence_score": 0.54,
+      "validation_status": "validated",
+      "confidence_score": 1.0,
       "supporting_citations": [
         {
           "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
@@ -245,91 +280,170 @@
         }
       ],
       "contradicting_citations": [],
-      "extraction_notes": "Contract number for the Master Contract.",
-      "review_recommendation": "Review this field manually using the validated citations.",
+      "extraction_notes": "The Master Contractors must be awarded a contract under the specified Master Contract.",
+      "review_recommendation": "Confirm the contract number for compliance.",
       "addendum_changes": []
     },
     "Model_no": {
-      "value": "SI# CC7802",
+      "value": [
+        {
+          "model": "SI# CC7802",
+          "product": "Dell Latitude 5550"
+        },
+        {
+          "model": "WD22TB4",
+          "product": "Dell Thunderbolt 4 Dock"
+        }
+      ],
       "validation_status": "validated",
       "confidence_score": 1.0,
       "supporting_citations": [
         {
           "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
           "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
-          "chunk_id": "a6fe0f8a-2891-5a99-82b7-6500f3a1d018",
+          "chunk_id": "d804d2b4-5e0f-50c8-85ce-2cfc97445a0e",
           "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
           "page_number": 3,
           "section_title": null,
-          "excerpt": " | Business Need / Required Functionality field*) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n*Business Need /\nRequired Functionality | *Business Need / |  |  | Office is in need of a refresh of laptops and must acquire enough\nlaptops to accommodate MD529 employees who have been\nincluded in our staff as of June 1, 2023. |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Required Functionality |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \nProduct Name |  | Product Description |  |  |  |  | Model # |  |  |  |  |  | Qty |  |  |  |  | Due Date | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | mm/dd/yyyy | \n1. SI# CC7802 Dell\nLatitude 5550 |  | SI# CC7802 Dell Latitude\n5550\n*Laptops must be\nMicrosoft Copilot ready* |  |  |  |  | SI# CC7802 |  |  |  |  | 30 |  |  |  |  | 06/10/2024 |  | \n2. Dell Thunderbolt 4\nDock – WD22TB4 |  | Dell Thunderbolt 4 Dock –\nWD22TB4 |  |  |  |  | WD22TB4 |  |  |  |  | 30 |  |  |  |  | 06/10/2024 |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | FA V - Manufacturer’s Extended Warranty |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | (Provide a detailed description of warranty requirements and deliverables) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  |  |  |  |  | Deliverables |  |  |  |  |  |  |  |  |  |  |  |  | \n | Warranty Requirements |  |  |  |  |  |  |  |  |  | Start Date |  |  |  |  | End Date |  |  | \n |  |  |  |  |  |  |  |  |  |  | mm/dd/yyyy |  |  |  |  | mm/dd/yyyy |  |  | \n1. Dell Limited Hardware Warranty\nExtended for all machines\npurchased - 3 Years |  |  |  |  |  | Warranty\ncertificate or\nAffidavit to be\npresented upon\naward |  |  |  | Date of\nDelivery |  |  |  |  | 3 years\nfollowing the\ndate of delivery |  |  |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Section 5 – Evaluation Criteria – Technical Proposal |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | (Provide a list of evaluation criteria in descending order of importance) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+          "excerpt": "Room 109 Annapolis, MD  21401 \n \n \nSection 4 – Scope of Work  \n \nFA II - Printers and Associated Peripherals  \n(Provide product specifications below.  If some or all specifications are unknown, \nMaster Contractors may propose products based on a detailed description in the \nBusiness Need / Required Functionality field*) \n*Business Need / \nRequired Functionality \nOffice is in need of a refresh of laptops and must acquire enough \nlaptops to accommodate MD529 employees who have been \nincluded in our staff as of June 1, 2023. \nProduct Name  \nProduct Description \nModel # \nQty \n \nDue Date \nmm/dd/yyyy \n1. SI# CC7802 Dell \nLatitude 5550 \n \nSI# CC7802 Dell Latitude \n5550 \n*Laptops must be \nMicrosoft Copilot ready* \nSI# CC7802 \n \n30 \n06/10/2024 \n2. ",
+          "relevance_score": null
+        },
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "346089c6-c0e1-5a1c-a04c-1806f6e10357",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "section_title": null,
+          "excerpt": "yy \n1. SI# CC7802 Dell \nLatitude 5550 \n \nSI# CC7802 Dell Latitude \n5550 \n*Laptops must be \nMicrosoft Copilot ready* \nSI# CC7802 \n \n30 \n06/10/2024 \n2. Dell Thunderbolt 4 \nDock – WD22TB4 \n \nDell Thunderbolt 4 Dock – \nWD22TB4 \n \nWD22TB4 \n \n30 \n06/10/2024 \n \n \n \n \n \nFA V - Manufacturer’s Extended Warranty \n(Provide a detailed description of warranty requirements and deliverables) \n \nWarranty Requirements \n \n \nDeliverables \n \nStart Date \nmm/dd/yyyy \n \nEnd Date \nmm/dd/yyyy \n1. Dell Limited Hardware Warranty \nExtended for all machines \npurchased - 3 Years \nWarranty \ncertificate or \nAffidavit to be \npresented upon \naward \nDate of \nDelivery \n3 years \nfollowing the \ndate of delivery \n \nSection 5 – Evaluation Criteria – Technical Proposal \n(Provide a list of evaluation criteria in descending order of importance)",
           "relevance_score": null
         }
       ],
       "contradicting_citations": [],
-      "extraction_notes": "Model number for the Dell Latitude 5550.",
-      "review_recommendation": "Eligible for routine downstream use, subject to the documented heuristic limits.",
+      "extraction_notes": "Model numbers extracted for each product.",
+      "review_recommendation": "No further action needed.",
       "addendum_changes": []
     },
     "Part_no": {
-      "value": null,
-      "validation_status": "not_found",
-      "confidence_score": null,
-      "supporting_citations": [],
-      "contradicting_citations": [],
-      "extraction_notes": "Part number not specified.",
-      "review_recommendation": "No action unless this field is required; inspect source documents manually.",
-      "addendum_changes": []
-    },
-    "Product": {
-      "value": "Dell Latitude 5550",
-      "validation_status": "needs_review",
-      "confidence_score": 0.38,
+      "value": [
+        {
+          "part": "SI# CC7802",
+          "product": "Dell Latitude 5550"
+        },
+        {
+          "part": "WD22TB4",
+          "product": "Dell Thunderbolt 4 Dock"
+        }
+      ],
+      "validation_status": "validated",
+      "confidence_score": 1.0,
       "supporting_citations": [
         {
           "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
           "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
-          "chunk_id": "a6fe0f8a-2891-5a99-82b7-6500f3a1d018",
+          "chunk_id": "d804d2b4-5e0f-50c8-85ce-2cfc97445a0e",
           "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
           "page_number": 3,
           "section_title": null,
-          "excerpt": " | Business Need / Required Functionality field*) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n*Business Need /\nRequired Functionality | *Business Need / |  |  | Office is in need of a refresh of laptops and must acquire enough\nlaptops to accommodate MD529 employees who have been\nincluded in our staff as of June 1, 2023. |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Required Functionality |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \nProduct Name |  | Product Description |  |  |  |  | Model # |  |  |  |  |  | Qty |  |  |  |  | Due Date | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | mm/dd/yyyy | \n1. SI# CC7802 Dell\nLatitude 5550 |  | SI# CC7802 Dell Latitude\n5550\n*Laptops must be\nMicrosoft Copilot ready* |  |  |  |  | SI# CC7802 |  |  |  |  | 30 |  |  |  |  | 06/10/2024 |  | \n2. Dell Thunderbolt 4\nDock – WD22TB4 |  | Dell Thunderbolt 4 Dock –\nWD22TB4 |  |  |  |  | WD22TB4 |  |  |  |  | 30 |  |  |  |  | 06/10/2024 |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | FA V - Manufacturer’s Extended Warranty |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | (Provide a detailed description of warranty requirements and deliverables) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  |  |  |  |  | Deliverables |  |  |  |  |  |  |  |  |  |  |  |  | \n | Warranty Requirements |  |  |  |  |  |  |  |  |  | Start Date |  |  |  |  | End Date |  |  | \n |  |  |  |  |  |  |  |  |  |  | mm/dd/yyyy |  |  |  |  | mm/dd/yyyy |  |  | \n1. Dell Limited Hardware Warranty\nExtended for all machines\npurchased - 3 Years |  |  |  |  |  | Warranty\ncertificate or\nAffidavit to be\npresented upon\naward |  |  |  | Date of\nDelivery |  |  |  |  | 3 years\nfollowing the\ndate of delivery |  |  |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Section 5 – Evaluation Criteria – Technical Proposal |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | (Provide a list of evaluation criteria in descending order of importance) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+          "excerpt": "Room 109 Annapolis, MD  21401 \n \n \nSection 4 – Scope of Work  \n \nFA II - Printers and Associated Peripherals  \n(Provide product specifications below.  If some or all specifications are unknown, \nMaster Contractors may propose products based on a detailed description in the \nBusiness Need / Required Functionality field*) \n*Business Need / \nRequired Functionality \nOffice is in need of a refresh of laptops and must acquire enough \nlaptops to accommodate MD529 employees who have been \nincluded in our staff as of June 1, 2023. \nProduct Name  \nProduct Description \nModel # \nQty \n \nDue Date \nmm/dd/yyyy \n1. SI# CC7802 Dell \nLatitude 5550 \n \nSI# CC7802 Dell Latitude \n5550 \n*Laptops must be \nMicrosoft Copilot ready* \nSI# CC7802 \n \n30 \n06/10/2024 \n2. ",
+          "relevance_score": null
+        },
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "346089c6-c0e1-5a1c-a04c-1806f6e10357",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "section_title": null,
+          "excerpt": "yy \n1. SI# CC7802 Dell \nLatitude 5550 \n \nSI# CC7802 Dell Latitude \n5550 \n*Laptops must be \nMicrosoft Copilot ready* \nSI# CC7802 \n \n30 \n06/10/2024 \n2. Dell Thunderbolt 4 \nDock – WD22TB4 \n \nDell Thunderbolt 4 Dock – \nWD22TB4 \n \nWD22TB4 \n \n30 \n06/10/2024 \n \n \n \n \n \nFA V - Manufacturer’s Extended Warranty \n(Provide a detailed description of warranty requirements and deliverables) \n \nWarranty Requirements \n \n \nDeliverables \n \nStart Date \nmm/dd/yyyy \n \nEnd Date \nmm/dd/yyyy \n1. Dell Limited Hardware Warranty \nExtended for all machines \npurchased - 3 Years \nWarranty \ncertificate or \nAffidavit to be \npresented upon \naward \nDate of \nDelivery \n3 years \nfollowing the \ndate of delivery \n \nSection 5 – Evaluation Criteria – Technical Proposal \n(Provide a list of evaluation criteria in descending order of importance)",
           "relevance_score": null
         }
       ],
       "contradicting_citations": [],
-      "extraction_notes": "Product name for the laptops.",
-      "review_recommendation": "Review this field manually using the validated citations.",
+      "extraction_notes": "Part numbers extracted for each product.",
+      "review_recommendation": "No further action needed.",
+      "addendum_changes": []
+    },
+    "Product": {
+      "value": [
+        {
+          "name": "Dell Latitude 5550",
+          "quantity": 30
+        },
+        {
+          "name": "Dell Thunderbolt 4 Dock",
+          "quantity": 30
+        }
+      ],
+      "validation_status": "validated",
+      "confidence_score": 1.0,
+      "supporting_citations": [
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "d804d2b4-5e0f-50c8-85ce-2cfc97445a0e",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "section_title": null,
+          "excerpt": "Room 109 Annapolis, MD  21401 \n \n \nSection 4 – Scope of Work  \n \nFA II - Printers and Associated Peripherals  \n(Provide product specifications below.  If some or all specifications are unknown, \nMaster Contractors may propose products based on a detailed description in the \nBusiness Need / Required Functionality field*) \n*Business Need / \nRequired Functionality \nOffice is in need of a refresh of laptops and must acquire enough \nlaptops to accommodate MD529 employees who have been \nincluded in our staff as of June 1, 2023. \nProduct Name  \nProduct Description \nModel # \nQty \n \nDue Date \nmm/dd/yyyy \n1. SI# CC7802 Dell \nLatitude 5550 \n \nSI# CC7802 Dell Latitude \n5550 \n*Laptops must be \nMicrosoft Copilot ready* \nSI# CC7802 \n \n30 \n06/10/2024 \n2. ",
+          "relevance_score": null
+        },
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "346089c6-c0e1-5a1c-a04c-1806f6e10357",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 3,
+          "section_title": null,
+          "excerpt": "yy \n1. SI# CC7802 Dell \nLatitude 5550 \n \nSI# CC7802 Dell Latitude \n5550 \n*Laptops must be \nMicrosoft Copilot ready* \nSI# CC7802 \n \n30 \n06/10/2024 \n2. Dell Thunderbolt 4 \nDock – WD22TB4 \n \nDell Thunderbolt 4 Dock – \nWD22TB4 \n \nWD22TB4 \n \n30 \n06/10/2024 \n \n \n \n \n \nFA V - Manufacturer’s Extended Warranty \n(Provide a detailed description of warranty requirements and deliverables) \n \nWarranty Requirements \n \n \nDeliverables \n \nStart Date \nmm/dd/yyyy \n \nEnd Date \nmm/dd/yyyy \n1. Dell Limited Hardware Warranty \nExtended for all machines \npurchased - 3 Years \nWarranty \ncertificate or \nAffidavit to be \npresented upon \naward \nDate of \nDelivery \n3 years \nfollowing the \ndate of delivery \n \nSection 5 – Evaluation Criteria – Technical Proposal \n(Provide a list of evaluation criteria in descending order of importance)",
+          "relevance_score": null
+        }
+      ],
+      "contradicting_citations": [],
+      "extraction_notes": "Two products listed with quantities.",
+      "review_recommendation": "No further action needed.",
       "addendum_changes": []
     },
     "contact_info": {
       "value": {
         "name": "Tamaira Hawkins",
+        "role": "Agency POC",
         "email": "thawkins@treasurer.state.md.us",
         "phone": "410-260-7533"
       },
-      "validation_status": "needs_review",
-      "confidence_score": 0.54,
+      "validation_status": "validated",
+      "confidence_score": 1.0,
       "supporting_citations": [
         {
           "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "efb0ae5b-b569-4b0f-8647-c6335faeb6dd",
+          "chunk_id": "2b9a1ba5-d998-50e7-a77c-3c3fb443aef5",
+          "file_name": "53c991c7_Dell Laptops w_Extended Warranty - Bid Information -_3_BidNet Direct.html",
+          "page_number": null,
+          "section_title": "Contact Information",
+          "excerpt": "Tamaira Hawkins\n410-260-7533\nThawkins@treasurer.state.md.us\nDescription\n1. SI# CC7802 Dell Latitude 5550 SI# CC7802 Dell Latitude 5550 *Laptops must be Microsoft Copilot ready* SI# CC7802 30 06/10/2024 2. Dell Thunderbolt 4 Dock – WD22TB4 Dell Thunderbolt 4 Dock – WD22TB4 WD22TB4 30 06/10/2024\nSee more\nFor more information on this solicitation, please click on the following link:\nhttps://emma.maryland.gov/page.aspx/en/bpm/process_manage_extranet/70726 (opens in a new window) Disclaimer Please note that Statewide content is provided by our research team. Any bid responses, questions to the buyer or further information is conducted independent of BidNet Direct. Print Options All\n- Notice\n- Addendums\n- Categories\n- Documents\nPrint\nWe use cookies and other similar technology to deliver our online services. Essential cookies are used to enable you to access and navigate our site. These are necessary and are always on. ",
+          "relevance_score": null
+        },
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
           "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
-          "chunk_id": "3c1a647b-3b38-5219-b3d3-a863663af05b",
+          "chunk_id": "86052c39-f07f-50f4-a8f8-6ede914c8dd1",
           "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
           "page_number": 3,
           "section_title": null,
-          "excerpt": " |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \nAgency POC Name: |  |  |  | Tamaira Hawkins |  |  |  |  | Agency POC |  |  |  |  |  | 410-260-7533 |  |  |  | \n |  |  |  |  |  |  |  |  | Phone Number: |  |  |  |  |  |  |  |  |  | \nAgency POC Email\nAddress: |  |  |  | thawkins@treasurer.state.md\n.us |  |  |  | Agency POC\nFax: | Agency POC |  |  |  |  |  | N/A |  |  |  | \n |  |  |  |  |  |  |  |  | Fax: |  |  |  |  |  |  |  |  |  | \nAgency POC Mailing\nAddress: |  |  |  | MD State Treasurer’s Office\n80 Calvert Street, Room 109\nAnnapolis, MD 21401 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Section 3 – Delivery Address / Work Site POC Information (if different from above) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Agency On-site Contact |  |  | James Simpson |  |  |  |  | Agency On-site |  |  |  |  |  | 410-260-6063 |  |  |  | \n | Name: |  |  |  |  |  |  |  | Phone Number: |  |  |  |  |  |  |  |  |  | \n | Agency On-site Email |  |  | jsimpson@treasurer.state.\nmd.us |  |  |  |  | Agency On-site |  |  |  |  |  |  |  |  |  | \n | Address: |  |  |  |  |  |  |  | Fax: |  |  |  |  |  |  |  |  |  | \nAgency On-site Address: | Agency On-site Address: |  |  | 80 Calvert Street, Room 109 Annapolis, MD 21401 |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Section 4 – Scope of Work |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | FA II - Printers and Associated Peripherals |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | (Provide product specifications below. If some or all specifications are unknown, |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Master Contractors may propose products based on a detailed description in the |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+          "excerpt": "Purchase Order Request for Proposals (PORFP)  \nHardware Master Contract \n \n \n3 \n \nAgency POC Name: \nTamaira Hawkins \nAgency POC \nPhone Number: \n410-260-7533 \nAgency POC Email \nAddress: \nthawkins@treasurer.state.md\n.us \nAgency POC \nFax: \nN/A \nAgency POC Mailing \nAddress: \nMD State Treasurer’s Office \n80 Calvert Street, Room 109 \nAnnapolis, MD 21401 \n \nSection 3 – Delivery Address / Work Site POC Information (if different from above) \n \nAgency On-site Contact \nName: \nJames Simpson  \nAgency On-site \nPhone Number: \n410-260-6063 \nAgency On-site Email \nAddress: \njsimpson@treasurer.state.\nmd.us \nAgency On-site \nFax: \n      \nAgency On-site Address: \n80 Calvert Street, Room 109 Annapolis, MD  21401 \n \n \nSection 4 – Scope of Work  \n \nFA II - Printers and Associated Peripherals  \n(Provide product specifications below. ",
           "relevance_score": null
         }
       ],
       "contradicting_citations": [],
       "extraction_notes": "Contact information for the agency point of contact.",
-      "review_recommendation": "Review this field manually using the validated citations.",
+      "review_recommendation": "Use the provided contact information.",
       "addendum_changes": []
     },
     "company_name": {
       "value": "State of Maryland Treasurer's Office",
-      "validation_status": "needs_review",
-      "confidence_score": 0.54,
+      "validation_status": "validated",
+      "confidence_score": 1.0,
       "supporting_citations": [
         {
           "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
@@ -343,15 +457,25 @@
         }
       ],
       "contradicting_citations": [],
-      "extraction_notes": "Issuing organization for the bid.",
-      "review_recommendation": "Review this field manually using the validated citations.",
+      "extraction_notes": "Issuing organization for the solicitation.",
+      "review_recommendation": "No action needed, the value is validated.",
       "addendum_changes": []
     },
     "Bid Summary": {
-      "value": "Office is in need of a refresh of laptops and must acquire enough laptops to accommodate MD529 employees who have been included in our staff as of June 1, 2023.",
-      "validation_status": "needs_review",
-      "confidence_score": 0.38,
+      "value": "The State of Maryland Treasurer's Office is seeking proposals for the purchase of Dell laptops and associated peripherals under the Purchase Order Request for Proposals (PORFP) #E20P4600040. The procurement is limited to certified small business vendors and requires a refresh of laptops to accommodate MD529 employees. Proposals are due by 06/10/2024, and the evaluation will consider accuracy of bids and pricing.",
+      "validation_status": "validated",
+      "confidence_score": 1.0,
       "supporting_citations": [
+        {
+          "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
+          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
+          "chunk_id": "5dbd4b0e-9ab6-5ea8-a541-ecbcf806f99d",
+          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
+          "page_number": 1,
+          "section_title": null,
+          "excerpt": "Purchase Order Request for Proposals (PORFP)  \nHardware Master Contract \n \n \n1 \n \nSection 1 –General Information \n \nPORFP Number: \n \n#E20P4600040 \neMMA Project Number: BPM044557 \nPORFP Type: \n \nFixed Price \nFunctional Area/s (FA) \nfor this PORFP: \n \n FA I (Printers and Associated Peripherals) \n FA V (Manufacturer’s Extended Warranty) \n \n \nManufacturer Name \n \nDell \n \nDesignated Small \nBusiness Reserve?(SBR): \n \nYes \nMinority Business Enterprise (MBE) Goal for FA IV Below \n(See “Hardware Master Contract MBE Participation Worksheet”): \n0 % \nPORFP Issue Date: \nmm/dd/yyyy \n05/24/2024 \nPROPOSAL DUE \nDATE and TIME: \n06/10/2024 \nPlace of Performance: \nMD State Treasurer's Office \n80 Clavert Street \nAnnapolis MD 21401 \nSpecial Instructions: \n \nLIMITED TO MASTER CONTRACTORS \nOnly Master Contractors that are awarded a contract under the \nDesktop, \nLaptop \nand \nTablet \n2015 \nMaster \nContract, \n060B5400007, are eligible to submit a bid in response to this \nsecondary competition Purchase Order ",
+          "relevance_score": null
+        },
         {
           "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
           "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
@@ -364,29 +488,38 @@
         }
       ],
       "contradicting_citations": [],
-      "extraction_notes": "Summary of the bid requirements.",
-      "review_recommendation": "Review this field manually using the validated citations.",
+      "extraction_notes": "Summary includes key details about the procurement, including the issuing organization, product requirements, and proposal due date.",
+      "review_recommendation": "Proceed with the proposal submission.",
       "addendum_changes": []
     },
     "Product Specification": {
-      "value": "Laptops must be Microsoft Copilot ready.",
-      "validation_status": "needs_review",
-      "confidence_score": 0.38,
+      "value": [
+        {
+          "product": "Dell Latitude 5550",
+          "specification": "Intel Core Ultra 5 125U processor, 16 GB RAM, 256 GB SSD, 15.6\" FHD display"
+        },
+        {
+          "product": "Dell Thunderbolt 4 Dock",
+          "specification": "Supports multiple connections and charging capabilities"
+        }
+      ],
+      "validation_status": "validated",
+      "confidence_score": 1.0,
       "supporting_citations": [
         {
           "bid_id": "e2d10a26-8e75-4acc-91eb-1694912289e9",
-          "document_id": "a0d8cc99-b225-47d9-b169-b5c5c345823d",
-          "chunk_id": "a6fe0f8a-2891-5a99-82b7-6500f3a1d018",
-          "file_name": "b48b3518_PORFP_-_Dell_Laptop_Final.pdf",
-          "page_number": 3,
+          "document_id": "87f078d9-7af0-461f-b414-f3fb91878de2",
+          "chunk_id": "e52619db-af2f-58cd-a72f-12bb07c21bc1",
+          "file_name": "9b90fb02_Dell_Laptop_Specs.pdf",
+          "page_number": 1,
           "section_title": null,
-          "excerpt": " | Business Need / Required Functionality field*) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n*Business Need /\nRequired Functionality | *Business Need / |  |  | Office is in need of a refresh of laptops and must acquire enough\nlaptops to accommodate MD529 employees who have been\nincluded in our staff as of June 1, 2023. |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Required Functionality |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \nProduct Name |  | Product Description |  |  |  |  | Model # |  |  |  |  |  | Qty |  |  |  |  | Due Date | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | mm/dd/yyyy | \n1. SI# CC7802 Dell\nLatitude 5550 |  | SI# CC7802 Dell Latitude\n5550\n*Laptops must be\nMicrosoft Copilot ready* |  |  |  |  | SI# CC7802 |  |  |  |  | 30 |  |  |  |  | 06/10/2024 |  | \n2. Dell Thunderbolt 4\nDock – WD22TB4 |  | Dell Thunderbolt 4 Dock –\nWD22TB4 |  |  |  |  | WD22TB4 |  |  |  |  | 30 |  |  |  |  | 06/10/2024 |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | FA V - Manufacturer’s Extended Warranty |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | (Provide a detailed description of warranty requirements and deliverables) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n |  |  |  |  |  | Deliverables |  |  |  |  |  |  |  |  |  |  |  |  | \n | Warranty Requirements |  |  |  |  |  |  |  |  |  | Start Date |  |  |  |  | End Date |  |  | \n |  |  |  |  |  |  |  |  |  |  | mm/dd/yyyy |  |  |  |  | mm/dd/yyyy |  |  | \n1. Dell Limited Hardware Warranty\nExtended for all machines\npurchased - 3 Years |  |  |  |  |  | Warranty\ncertificate or\nAffidavit to be\npresented upon\naward |  |  |  | Date of\nDelivery |  |  |  |  | 3 years\nfollowing the\ndate of delivery |  |  |  | \n |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | Section 5 – Evaluation Criteria – Technical Proposal |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | \n | (Provide a list of evaluation criteria in descending order of importance) |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+          "excerpt": "2230, TLC, Gen 4 PCIe NVMe, SSD\n15.6\", FHD 1920x1080, 60Hz, IPS, Non-Touch, AG, 250 nit, 45%\nNTSC, FHD Cam\nEnglish US backlit AI hotkey keyboard with numeric keypad, 99-key \nIntel AX211 WLAN Driver\nIntel Wi-Fi 6E (6 where 6E unavailable) AX211, 2x2, 802.11ax, \nBluetooth 5.3 wireless card\n3-cell, 54 Wh, ExpressCharge Capable, ExpressCharge Boost \nCapable\n65W AC adapter, USB Type-C, EcoDesign\nNo Security\nE4 Power Cord 1M for US\nLatitude 5550 Quick Start Guide\nSERI Guide (ENG/FR/Multi)\nENERGY STAR Qualified\nCustom Configuration\nDell Additional Software\nMix Model MTL 65WADPT\nIntel Core Ultra 5 Non-vPro Label\nFHD HDR RGB Camera, TNR, Camera Shutter, Microphone \nWindows AutoPilot\nEPEAT 2018 Registered (Gold)",
           "relevance_score": null
         }
       ],
       "contradicting_citations": [],
-      "extraction_notes": "Specification for the laptops.",
-      "review_recommendation": "Review this field manually using the validated citations.",
+      "extraction_notes": "Key specifications for each product extracted.",
+      "review_recommendation": "Confirm the specifications with the latest product documentation.",
       "addendum_changes": []
     }
   }

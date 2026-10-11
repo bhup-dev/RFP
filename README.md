@@ -169,6 +169,10 @@ The graph runs 13 nodes in this order:
 
 A separate graph compares bids.
 
+**Field extraction in groups.** The 20 fields are split into seven groups (identity, schedule, terms, delivery, documents, products, summary). Each group has its own search queries and evidence budget and its own model call, and the calls run concurrently. The first version used one evidence pool and one call for all 20 fields. Its sequential searches filled the 60-chunk budget before the contact and summary queries ran, so the buyer contact, pre-bid meeting and Bid Summary were missed even though the documents state them. If a group's claim breaks the output contract (for example a value marked `not_found`), the group is retried once with the errors listed. A claim that still breaks it fails only that field, not the whole run.
+
+**Validation with a typed verdict.** The semantic validator prompt states the exact JSON keys, types and allowed status words. Without them, gpt-4o-mini returned words such as `"supported"` and `"direct"` where the schema expects an enum and numbers, so every semantic check failed and fell back to `needs_review`. Date, submission-type and identifier fields are also checked semantically, because a literal match only proves that the string appears in the source, not that it answers the field. For example, a line-item date is not a delivery date. The fix was measured on the same two bids: validated fields went from 2 to 13 (Bid1) and from 5 to 15 (Bid2).
+
 **How the agents communicate.** Agents never call each other. Each node writes its run and findings to PostgreSQL and passes the run id through the graph state, and later nodes load earlier results by id. This gives every result a durable, queryable history, and lets a trace be rebuilt after the fact (see [`deliverables/architecture.md`](deliverables/architecture.md)). Every node also writes a `workflow_node_events` row with its timing, status, error category and run ids.
 
 ### Prompts
@@ -209,4 +213,5 @@ Confidence is a transparent heuristic, not a calibrated probability:
 - **No OCR.** Image-only PDFs are flagged and not read.
 - **No user authentication** on the API, apart from a shared token for review endpoints. Run it on a trusted network.
 - **The LLM is not deterministic.** Re-running extraction can give different values, and every run is kept as history.
+- **Semantic validation is only as good as the model.** In the Bid1 output, gpt-4o-mini extracted and validated a prime-to-subcontractor payment clause as "Payment Terms" despite an explicit prompt rule (see the known issues in [`deliverables/README.md`](deliverables/README.md)). "Validated" means the model and the deterministic checks agreed, not that a human checked the value.
 - **Model used for the deliverables.** They were produced with `gpt-4o-mini` (the local `.env`), while `.env.example` suggests `gpt-5.5`.

@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from decimal import Decimal
-from typing import Protocol
+from typing import Any, Protocol
 from uuid import UUID
 
 from pydantic import ValidationError
@@ -30,7 +31,6 @@ from app.schemas.extraction import (
     ExtractionRunStatus,
     FieldValidationStatus,
     LLMExtractedField,
-    LLMExtractionPayload,
     LLMFieldStatus,
 )
 from app.schemas.retrieval import RetrievalRequest, RetrievedChunk
@@ -39,19 +39,85 @@ logger = logging.getLogger(__name__)
 
 ELIGIBLE_DOCUMENT_STATUSES = ("indexed", "partial", "completed")
 
-FIELD_GROUP_QUERIES: tuple[str, ...] = (
-    '"bid number" OR "solicitation number" OR "reference number" OR title OR agency',
-    '"due date" OR deadline OR "pre bid" OR term OR renewal OR submission',
-    '"bid bond" OR installation OR delivery OR "payment terms" OR cooperative OR contract',
-    '"required form" OR attachment OR certification OR registration OR documentation',
-    '"model number" OR "part number" OR product OR manufacturer OR specification OR warranty',
-    'contact OR email OR phone OR company OR summary OR scope OR requirements OR addendum',
+@dataclass(frozen=True)
+class FieldGroup:
+    """Fields extracted together from evidence retrieved by their own queries."""
+
+    name: str
+    fields: tuple[str, ...]
+    queries: tuple[str, ...]
+
+
+FIELD_GROUPS: tuple[FieldGroup, ...] = (
+    FieldGroup(
+        "identity",
+        ("Bid Number", "Title", "company_name", "contact_info"),
+        (
+            "solicitation number, bid number, RFP number and title",
+            "issuing organization or agency that issued the solicitation",
+            "buyer or procurement officer contact name, email address and phone number",
+        ),
+    ),
+    FieldGroup(
+        "schedule",
+        ("Due Date", "Bid Submission Type", "Pre Bid Meeting"),
+        (
+            "proposal due date, closing date and time, including addenda that change it",
+            "how responses must be submitted: electronic portal, email, sealed envelope or mail",
+            "pre-bid or pre-proposal conference or meeting date, time and location",
+        ),
+    ),
+    FieldGroup(
+        "terms",
+        ("Term of Bid", "Contract or Cooperative to use", "Payment Terms", "Bid Bond Requirement"),
+        (
+            "contract term, initial period, renewal options and extensions",
+            "cooperative purchasing agreement or existing master contract to be used",
+            "payment terms, invoicing instructions and when invoices are paid",
+            "bid bond, proposal guarantee, performance bond or insurance requirement",
+        ),
+    ),
+    FieldGroup(
+        "delivery",
+        ("Delivery Date", "Installation"),
+        (
+            "delivery deadline or delivery timeframe after award",
+            "installation, deployment, configuration, imaging or white glove services",
+        ),
+    ),
+    FieldGroup(
+        "documents",
+        ("Additional Documentation Required", "MFG for Registration"),
+        (
+            "required forms, affidavits, certifications and documents to submit with the response",
+            "manufacturer registration, authorized reseller or manufacturer certification requirement",
+        ),
+    ),
+    FieldGroup(
+        "products",
+        ("Product", "Model_no", "Part_no", "Product Specification"),
+        (
+            "line item table: product name, description, model number and quantity of each item",
+            "model number and part number of each requested item",
+            "minimum technical specifications: processor, memory, storage, display, warranty",
+        ),
+    ),
+    FieldGroup(
+        "summary",
+        ("Bid Summary",),
+        (
+            "purpose and scope of this solicitation and what is being purchased",
+            "background and business need for the purchase",
+        ),
+    ),
 )
 
 SYSTEM_PROMPT = UNTRUSTED_DOCUMENT_POLICY + """You extract structured procurement data only from supplied evidence.
-Return one JSON object with exactly the 20 requested field names and no other keys.
-Each field value must be an object with: value, confidence, chunk_ids, notes, status.
+Return one JSON object with exactly the requested field names and no other keys.
+Each field value must be an object with exactly: value, confidence, chunk_ids, notes, status.
 status must be extracted, not_found, ambiguous, or conflicting.
+When a value is a list, its items are plain strings or objects describing the item; status,
+confidence, and chunk_ids belong only on the field object, never inside the items.
 
 Rules:
 - Never use general knowledge or invent a value. Use null with not_found when unsupported.
@@ -61,12 +127,28 @@ Rules:
 - Keep solicitation, portal reference, and header numbers distinct when the source does.
 - Distinguish initial contract term, renewals, and maximum duration.
 - Do not infer a pre-bid meeting, bond, installation, manufacturer registration, or payment term.
+- Payment Terms are when and how the buyer pays the vendor (for example net 30 or payment after
+  acceptance). Invoicing instructions alone and prime-to-subcontractor payment obligations are not
+  payment terms.
 - Distinguish delivery, installation, deployment, and configuration.
+- Delivery Date is when goods must be delivered, either a date or a period such as "within 45 days of award".
+  Never reuse the proposal due date as the delivery date. When a line-item table date and a delivery
+  clause both give delivery timing, report both with their citations and use status ambiguous.
 - Distinguish mandatory documents from optional or informational attachments.
+- Additional Documentation Required lists every form, affidavit, certificate, or document the bidder
+  must submit or provide, including items due at award, each as a separate entry.
+- Product lists every requested line item with its quantity when stated, not only the first one.
 - Keep product identifiers and specifications associated with the correct product.
+- Model_no lists the model number of every requested item as written in the source (for example a
+  "Model #" column), each paired with its product. Part_no lists manufacturer part or SKU codes only.
+- Product Specification lists the key required specifications for each product.
 - Distinguish buyer, contact, vendor, manufacturer, and issuing organization.
+- company_name is the organization that issued the solicitation (agency, district, or office),
+  never the manufacturer of the requested products or a prospective vendor.
+- contact_info is an object with the name, role, email and phone that the source states.
 - Report conflicting source statements instead of silently selecting one.
-- Keep the bid summary concise and cite every chunk supporting its material claims.
+- Bid Summary is two to four sentences on what is purchased, by whom, and the key requirements,
+  citing every chunk that supports its claims.
 - confidence is a number from 0 to 1 or null. notes must be brief and factual.
 - not_found requires value=null and chunk_ids=[].
 Return raw JSON only, without Markdown fences or commentary."""
@@ -308,11 +390,19 @@ class ExtractionService:
         )
         token = bind_operation_id(str(run.id))
         try:
-            evidence = await self._retrieve_evidence(context)
+            evidence_by_group = {
+                group.name: await self._retrieve_evidence(context, group)
+                for group in FIELD_GROUPS
+            }
+            evidence = {
+                item.chunk_id: item
+                for items in evidence_by_group.values()
+                for item in items
+            }
             fields = (
                 _missing_extraction("No relevant source chunks were retrieved.")
                 if not evidence
-                else await self._extract_fields(context, evidence)
+                else await self._extract_fields(context, evidence_by_group)
             )
             status = (
                 ExtractionRunStatus.PARTIAL
@@ -360,9 +450,12 @@ class ExtractionService:
         finally:
             reset_operation_id(token)
 
-    async def _retrieve_evidence(self, context: EligibleBid) -> list[RetrievedChunk]:
-        found: dict[UUID, RetrievedChunk] = {}
-        for query in FIELD_GROUP_QUERIES:
+    async def _retrieve_evidence(
+        self, context: EligibleBid, group: FieldGroup
+    ) -> list[RetrievedChunk]:
+        """Search each of the group's queries and interleave results so every query is represented."""
+        ranked: list[list[RetrievedChunk]] = []
+        for query in group.queries:
             response = await self._retriever.search(
                 RetrievalRequest(
                     query=query,
@@ -373,12 +466,19 @@ class ExtractionService:
                     keyword_candidates=max(30, self._query_top_k),
                 )
             )
-            for result in response.results:
-                if result.bid_id != context.id:
-                    continue
-                if result.document_id not in context.document_ids:
-                    continue
-                found.setdefault(result.chunk_id, result)
+            ranked.append(
+                [
+                    result
+                    for result in response.results
+                    if result.bid_id == context.id
+                    and result.document_id in context.document_ids
+                ]
+            )
+        found: dict[UUID, RetrievedChunk] = {}
+        for position in range(max((len(items) for items in ranked), default=0)):
+            for items in ranked:
+                if position < len(items):
+                    found.setdefault(items[position].chunk_id, items[position])
                 if len(found) >= self._max_evidence_chunks:
                     return list(found.values())
         return list(found.values())
@@ -386,46 +486,135 @@ class ExtractionService:
     async def _extract_fields(
         self,
         context: EligibleBid,
-        evidence: list[RetrievedChunk],
+        evidence_by_group: dict[str, list[RetrievedChunk]],
     ) -> BidExtraction:
-        prompt = _build_prompt(evidence)
-        try:
-            raw = await self._llm.generate_response(
-                prompt,
-                system=SYSTEM_PROMPT,
-                temperature=0.0,
-                max_output_tokens=self._max_output_tokens,
+        groups = [group for group in FIELD_GROUPS if evidence_by_group[group.name]]
+        responses = await asyncio.gather(
+            *[
+                self._extract_group(group, evidence_by_group[group.name])
+                for group in groups
+            ]
+        )
+        claims: dict[str, dict[str, Any]] = {}
+        evidence_for_field: dict[str, set[UUID]] = {}
+        for group, group_claims in zip(groups, responses, strict=True):
+            evidence_ids = {item.chunk_id for item in evidence_by_group[group.name]}
+            for name in group.fields:
+                claims[name] = group_claims[name]
+                evidence_for_field[name] = evidence_ids
+        for group in FIELD_GROUPS:
+            if group.name not in {item.name for item in groups}:
+                for name in group.fields:
+                    claims[name] = _NOT_FOUND_CLAIM
+                    evidence_for_field[name] = set()
+        parsed: dict[str, LLMExtractedField] = {}
+        rejected: dict[str, list[str]] = {}
+        for name in ASSIGNMENT_FIELD_NAMES:
+            try:
+                parsed[name] = LLMExtractedField.model_validate(claims[name])
+            except ValidationError as exc:
+                rejected[name] = sorted({error["msg"] for error in exc.errors()})[:3]
+        if rejected:
+            logger.warning(
+                "Extraction rejected invalid field claims bid_id=%s fields=%s",
+                context.id,
+                sorted(rejected),
             )
-            payload = LLMExtractionPayload.model_validate_json(_strip_json_fence(raw))
-        except (ValidationError, ValueError) as exc:
-            raise InvalidExtractionResponse(
-                "LLM returned malformed structured extraction data"
-            ) from exc
 
-        claims = payload.claims_by_external_name()
         requested_ids = {
             chunk_id
-            for claim in claims.values()
+            for name, claim in parsed.items()
             for chunk_id in claim.chunk_ids
+            if chunk_id in evidence_for_field[name]
         }
-        evidence_ids = {item.chunk_id for item in evidence}
         authoritative = await self._store.resolve_citations(
             context.id,
             context.document_ids,
-            requested_ids & evidence_ids,
+            requested_ids,
         )
         normalized = {
             name: _normalize_claim(
                 claim,
-                evidence_ids=evidence_ids,
+                evidence_ids=evidence_for_field[name],
                 authoritative=authoritative,
             )
-            for name, claim in claims.items()
+            for name, claim in parsed.items()
         }
+        for name, reasons in rejected.items():
+            normalized[name] = ExtractedField(
+                value=None,
+                confidence=None,
+                citations=[],
+                notes="The model returned a claim that broke the extraction contract: "
+                + "; ".join(reasons),
+                validation_status=FieldValidationStatus.UNSUPPORTED,
+            )
         return BidExtraction.model_validate(normalized)
 
+    async def _extract_group(
+        self, group: FieldGroup, evidence: list[RetrievedChunk]
+    ) -> dict[str, Any]:
+        """Return the raw claims for the group's fields; other keys in the response are ignored.
 
-def _build_prompt(evidence: list[RetrievedChunk]) -> str:
+        A response whose claims break the field contract is retried once with the errors listed;
+        claims that still break it are rejected per field by the caller.
+        """
+        prompt = _build_prompt(evidence, group.fields)
+        claims = await self._request_group(prompt, group)
+        errors = _contract_errors(claims)
+        if not errors:
+            return claims
+        repair = (
+            prompt
+            + "\nYour previous answer broke the output contract for these fields: "
+            + json.dumps(errors, ensure_ascii=False)
+            + "\nReturn the complete JSON object again with those fields corrected."
+        )
+        retried = await self._request_group(repair, group)
+        return retried if len(_contract_errors(retried)) <= len(errors) else claims
+
+    async def _request_group(self, prompt: str, group: FieldGroup) -> dict[str, Any]:
+        raw = await self._llm.generate_response(
+            prompt,
+            system=SYSTEM_PROMPT,
+            temperature=0.0,
+            max_output_tokens=self._max_output_tokens,
+        )
+        try:
+            body = json.loads(_strip_json_fence(raw))
+        except ValueError as exc:
+            raise InvalidExtractionResponse(
+                "LLM returned malformed structured extraction data"
+            ) from exc
+        if not isinstance(body, dict) or any(name not in body for name in group.fields):
+            raise InvalidExtractionResponse(
+                "LLM returned malformed structured extraction data"
+            )
+        return {name: body[name] for name in group.fields}
+
+
+def _contract_errors(claims: dict[str, Any]) -> dict[str, list[str]]:
+    errors: dict[str, list[str]] = {}
+    for name, claim in claims.items():
+        try:
+            LLMExtractedField.model_validate(claim)
+        except ValidationError as exc:
+            errors[name] = sorted(
+                {f"{'.'.join(map(str, error['loc'])) or 'field'}: {error['msg']}" for error in exc.errors()}
+            )[:3]
+    return errors
+
+
+_NOT_FOUND_CLAIM: dict[str, Any] = {
+    "value": None,
+    "confidence": None,
+    "chunk_ids": [],
+    "notes": "No relevant source chunks were retrieved for this field.",
+    "status": "not_found",
+}
+
+
+def _build_prompt(evidence: list[RetrievedChunk], field_names: tuple[str, ...]) -> str:
     chunks = [
         {
             "chunk_id": str(item.chunk_id),
@@ -440,8 +629,8 @@ def _build_prompt(evidence: list[RetrievedChunk]) -> str:
     ]
     return (
         UNTRUSTED_DOCUMENT_POLICY
-        + "Extract all requested fields from this evidence. The exact field names are:\n"
-        + json.dumps(list(ASSIGNMENT_FIELD_NAMES), ensure_ascii=False)
+        + "Extract the requested fields from this evidence. The exact field names are:\n"
+        + json.dumps(list(field_names), ensure_ascii=False)
         + "\nEvidence chunks:\n"
         + json.dumps(chunks, ensure_ascii=False)
     )

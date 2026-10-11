@@ -15,10 +15,14 @@ Every file here was produced by running the code in this repository against the 
 
 ## Bids covered
 
-| Bid | Documents | Workflow status | Fields with a value | Validated / needs review / not found |
+| Bid | Documents | Workflow status | Fields with a value | Validated / flagged for review / not found |
 |---|---|---|---|---|
-| **Bid1** | Dallas ISD Purchasing Department, Request For Proposal 168884, **JA-207652 Student and Staff Computing Devices** (RFP plus Addenda 1 and 2 and the BidNet page) | needs_review | 9 of 20 | 2 / 7 / 11 |
-| **Bid2** | Maryland State Treasurer PORFP **#E20P4600040**, Dell Latitude 5550 laptops with extended warranty and WD22TB4 docks | needs_review | 13 of 20 | 5 / 8 / 7 |
+| **Bid1** | Dallas ISD Purchasing Department, Request For Proposal 168884, **JA-207652 Student and Staff Computing Devices** (RFP plus Addenda 1 and 2 and the BidNet page) | needs_review | 15 of 20 | 13 / 2 / 5 |
+| **Bid2** | Maryland State Treasurer PORFP **#E20P4600040**, Dell Latitude 5550 laptops with extended warranty and WD22TB4 docks | needs_review | 16 of 20 | 15 / 1 / 4 |
+
+"Flagged for review" counts fields the validator marked conflicting, partially supported, or unsupported. "Not found" fields have no value because the retrieved evidence did not state one; for Bid1, the bid bond, delivery date, manufacturer registration, and model and part numbers are genuinely absent from the RFP (vendors propose the devices).
+
+An earlier run of the same bids, before the extraction and validation changes described in the root README, had 9 and 13 fields with values and only 2 and 5 validated fields.
 
 **Bid ids.** `metadata.bid_identifier` in each JSON file is the bid's internal name (`Bid1`, `Bid2`). It is a grouping name, not the solicitation number; the solicitation number is the "Bid Number" field. The database ids are:
 
@@ -39,12 +43,14 @@ Each bid JSON is the stored intelligence profile. For each of the 20 fields it g
 
 These are reported as found, not corrected:
 
-- **Wrong Bid2 delivery date.** Bid2 "Delivery Date" is stored as `06/10/2024` with status `validated` and confidence 1.0, but the source says delivery is within 45 days of award. The validator accepted it because the date string appears in the cited table. This shows the limit of literal-match validation.
-- **Bid1 validation was weak in this run.** The semantic check failed for all 7 Bid1 fields that it was asked to verify, so they are `needs_review` with confidence 0.38 to 0.54 and became the 7 review items in the trace.
-- **A mismatched Bid1 addendum finding.** One Bid1 finding pairs "white glove services" (original) with the addendum's statement about accidental damage protection (amended). The comparison model matched these two statements wrongly.
+- **Wrong Bid1 payment terms, validated anyway.** Bid1 "Payment Terms" is the M/WBE clause saying prime vendors must pay their subcontractors within 10 days of being paid by the district. That is not the district's payment terms, which the RFP does not state. Both the extraction and validator prompts say so explicitly, but gpt-4o-mini still extracted and validated it. The same rule did work for Bid2, where invoicing instructions were marked `unsupported`.
+- **Bid1 due date flagged as conflicting.** The extracted value is `07/09/2024 03:00 PM EDT` (BidNet page); Addendum 2 states 09-JUL-2024 14:00 CST. These are probably the same moment in two timezones, but the validator could not confirm it and flagged it for review, which is the intended behaviour.
+- **Bid2 model and part numbers overlap.** The source's "Model #" column gives `SI# CC7802` for the laptop and `WD22TB4` for the dock, and the same values were also reported as part numbers. No separate manufacturer part numbers are listed in the PORFP.
+- **Item-level metadata inside list values.** Some list values (for example Additional Documentation Required) carry per-item `chunk_id`, `status` or `notes` keys written by the model. Field-level status and citations are still authoritative.
+- **Rejected agent findings.** The Bid1 run warns that two domain-agent findings were rejected as malformed. They were dropped, not stored.
 
 ## Highlights
 
 - **Retrieval:** 41 questions (21 for Bid1, 20 for Bid2), labelled from the stored chunk text by the Cursor agent (an AI assistant), not by a human expert. Hybrid RRF scored Recall@5 0.804 and MRR 0.764. Keyword search alone scored very low, and LLM query rewriting did not help. Reranking was not run because `sentence-transformers` is not installed. Details and per-question ranks are in the report.
-- **Q&A:** 71 questions, with Bid1 as the main bid and Bid2 as the comparison bid. They include follow-up conversations, Bid1-versus-Bid2 comparisons and adversarial prompts. 51 answers came with citations; 20 were declined as not supported by the documents (`found: false`). Some declined answers still cite the stored records that show a field is missing.
-- **Trace:** a full 13-node run for Bid1 (96 s). It covers 20 extracted fields, 6 addendum changes, findings from the four domain agents (10, 3, 8 and 4) plus 0 from the deterministic evidence-review agent, 20 validation results and 7 review items.
+- **Q&A:** 71 questions, with Bid1 as the main bid and Bid2 as the comparison bid. They include follow-up conversations, Bid1-versus-Bid2 comparisons and adversarial prompts. 54 answers came with citations; 17 were declined as not supported by the documents (`found: false`). Some declined answers still cite the stored records that show a field is missing.
+- **Trace:** a full 13-node run for Bid1 (123 s). It covers 20 extracted fields, 3 addendum changes (including the due date moving from 27 June to 9 July 2024), findings from the four domain agents (9, 3, 6 and 4) plus 0 from the deterministic evidence-review agent, 20 validation results and 2 review items.

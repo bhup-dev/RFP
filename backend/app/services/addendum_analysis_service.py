@@ -76,12 +76,14 @@ _ORIGINAL_CONTENT = re.compile(
 
 DISCOVERY_SYSTEM_PROMPT = UNTRUSTED_DOCUMENT_POLICY + """Identify only explicit requirement-level statements in one addendum.
 Return raw JSON: {"topics":[{"topic":"...", "retrieval_query":"...", "addendum_chunk_ids":["..."]}]}.
+Return at most 20 topics, most important first. topic is a short label under 100 characters,
+retrieval_query is under 400 characters, and every topic cites one to twenty addendum chunk IDs.
 Use only supplied addendum chunks and only their chunk IDs.
 Create concise retrieval queries that can find the corresponding earlier requirement, preserving exact
 dates, quantities, model numbers, part numbers, contract clauses, forms, and units.
 Include explicit additions, revisions, deletions, clarifications, conflicts, and statements of no change.
 Absence from the addendum is not a deletion. Do not infer changes from filenames or general knowledge.
-Return at most 20 topics and no Markdown."""
+Do not use Markdown."""
 
 COMPARISON_SYSTEM_PROMPT = UNTRUSTED_DOCUMENT_POLICY + """Compare addendum statements with supplied earlier source evidence at requirement level.
 Return raw JSON: {"findings":[{...}]} where every finding contains:

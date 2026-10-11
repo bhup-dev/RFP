@@ -42,6 +42,11 @@ logger = logging.getLogger(__name__)
 
 _EXACT_FIELDS = {"Bid Number", "Model_no", "Part_no"}
 _SEMANTIC_FIELDS = {
+    "Due Date",
+    "Bid Submission Type",
+    "Delivery Date",
+    "Model_no",
+    "Part_no",
     "Term of Bid",
     "Pre Bid Meeting",
     "Installation",
@@ -57,9 +62,18 @@ _SEMANTIC_FIELDS = {
     "Product Specification",
 }
 SEMANTIC_SYSTEM_PROMPT = UNTRUSTED_DOCUMENT_POLICY + """Validate one extracted field against only the supplied persisted evidence.
-Return raw JSON with status, directness, completeness, supporting_chunk_ids,
-contradicting_chunk_ids, reasons, recommended_action.
-status must be validated, partially_supported, unsupported, conflicting, not_found, or needs_review.
+Return one raw JSON object with exactly these keys and types:
+{"status": "validated" | "partially_supported" | "unsupported" | "conflicting" | "not_found" | "needs_review",
+ "directness": number from 0 to 1 (1 = the evidence states the value directly),
+ "completeness": number from 0 to 1 (1 = the value includes everything the evidence requires),
+ "supporting_chunk_ids": [chunk_id strings from the supplied evidence],
+ "contradicting_chunk_ids": [chunk_id strings from the supplied evidence],
+ "reasons": [one to ten short strings],
+ "recommended_action": "one short sentence"}
+Use only those status words; "validated" and "partially_supported" need at least one supporting chunk id.
+Check that the value answers this field, not a different one: a proposal due date is not a delivery
+date, a quote or solicitation reference is not a model number unless the source labels it so, and a
+prime-to-subcontractor payment obligation is not the buyer's payment terms.
 Do not re-extract or invent evidence. Preserve identifiers, dates, times, timezones, quantities,
 units, triggering events, mandatory/optional distinctions, product associations, and explicit negatives.
 Use only supplied chunk IDs. A summary is supported only to the extent that all material claims appear
@@ -597,7 +611,12 @@ class ExtractionValidationService:
                     verdict.recommended_action,
                     checks,
                 )
-            except Exception:
+            except Exception as exc:  # noqa: BLE001 - any verifier failure means human review
+                logger.warning(
+                    "Semantic validation failed field=%s error_type=%s",
+                    stored.field_name,
+                    type(exc).__name__,
+                )
                 score = min(
                     self._medium - 0.01,
                     _score(integrity, literal_fraction, literal_fraction, 0.4),

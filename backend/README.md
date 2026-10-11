@@ -480,11 +480,13 @@ The live test uses generated source content, the configured PostgreSQL database 
 Task 3.1 extracts the assignment's 20 fields from an ingested bid through:
 
 1. eligible documents with status `indexed`, `partial`, or `completed` and persisted chunks
-2. six bounded, bid/document-scoped evidence searches covering identity, dates, terms, forms, products, contacts, and addenda
-3. one structured call through the existing `LLMService`
-4. strict Pydantic validation of all 20 exact external names
-5. authoritative PostgreSQL resolution of every claimed chunk id
+2. seven field groups (`FIELD_GROUPS`: identity, schedule, terms, delivery, documents, products, summary), each with its own bid/document-scoped searches; results are interleaved across the group's queries and capped at `EXTRACTION_MAX_EVIDENCE_CHUNKS` per group, so one topic cannot use up the evidence budget of another
+3. one structured call per group through the existing `LLMService`, run concurrently, asking only for that group's fields; a group with no evidence gets `missing` fields without a model call
+4. per-field Pydantic validation; if a group's claims break the field contract, that group is retried once with the errors listed, and any claim that still breaks it is stored as `unsupported` with the reason, without failing the other 19 fields
+5. authoritative PostgreSQL resolution of every claimed chunk id, accepted only if the chunk was supplied to that field's group
 6. an append-only `extraction_runs` record and 20 `extracted_fields` records
+
+A response that is not JSON, or that omits one of the group's field names, is still a malformed response and fails the run.
 
 The extraction retrieval path deliberately disables query rewriting and reranking. This avoids an extra LLM call and optional model load while preserving hybrid semantic/keyword retrieval and citation validation. If only one retrieval backend is available, existing degraded-mode policy applies. A non-null model claim is rejected when any cited chunk was not supplied to the model, does not exist, belongs to another bid, or is outside the eligible document set.
 
